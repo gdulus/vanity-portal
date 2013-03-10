@@ -29,7 +29,7 @@ class SearchController {
     private def getAsArticleLinkParams(ArticleSearchResult result){
         return [
             id:result.id,
-            title: result.title.encodeAsURL(),
+            title: result.title.encodeAsPrettyUrl(),
             source: result.source
         ]
     }
