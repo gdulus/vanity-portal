@@ -75,7 +75,7 @@ body {
 
 .top .logo {
 	display: block;
-	background-image: url("../images/logo.jpg");
+	background-image: url("../../images/vanity/logo.jpg");
 	width: 406px;
 	height: 110px;
 	background-repeat: no-repeat;
@@ -164,6 +164,55 @@ div#footer .row {
 	margin-left: 20px;	
 }
 
-.icons p a{
+.search {
+    position: relative;
+    height: 80px;
+}
+.search button {
+    position: absolute;
+    right: 150px;
+}
 
+#search-field {
+    z-index: 1;
+}
+
+#search-field-input {
+    z-index: 2;
+}
+
+#search-field,
+#search-field-input {
+    position: absolute;
+    left:160px;
+}
+
+#search-field.ui-autocomplete-loading {
+    background-image: url("../../images/vanity/loader_big.gif");
+    background-position: 510px center;
+    background-repeat: no-repeat;
+}
+
+.ui-autocomplete .ui-menu-item a {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    cursor: pointer;
+}
+
+.ui-menu .ui-menu-item a.ui-state-focus {
+    margin: 0;
+}
+
+.ui-autocomplete .ui-menu-item .ui-state-focus {
+    background-color: #cccccc;
+    background-image: none;
+    border: none;
+}
+
+.ui-widget-content a {
+    color: #0088cc;
+}
+
+.ui-widget-content a:hover {
+    color: #005580;
 }

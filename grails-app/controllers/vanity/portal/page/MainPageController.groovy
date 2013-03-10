@@ -1,4 +1,4 @@
-package vanity.portal
+package vanity.portal.page
 
 class MainPageController {
 
