@@ -10,6 +10,7 @@ class PrettyUrlCodec {
         'ć': 'c',
         'ż': 'z',
         'ź': 'z',
+        'ó': 'o',
         '\'': '*',
         '"': '*',
         '\\(': '',
@@ -20,6 +21,7 @@ class PrettyUrlCodec {
         '\\?': '',
         ',': '',
         '\\.': '',
+        ':': '',
     ]
 
     static encode = { String str ->
