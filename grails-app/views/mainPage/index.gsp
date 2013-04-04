@@ -24,8 +24,7 @@
     <div class="search row">
         <div class="span12 search">
             <form>
-                <input autofocus="true" id="search-field-input" type="text" class="input-xxlarge" placeholder="${g.message(code:'portal.searchForm.searchPlaceholder')}"/>
-                <input href="${createLink(controller: 'search', action: 'ajaxSearchResults')}" id="search-field" type="text" class="input-xxlarge" placeholder="${g.message(code:'portal.searchForm.searchPlaceholder')}"/>
+                <input autocomplete="off" href="${createLink(controller: 'search', action: 'ajaxSearchResults')}" id="search-field" type="text" class="input-xxlarge" placeholder="${g.message(code:'portal.searchForm.searchPlaceholder')}"/>
                 <button type="submit" class="btn btn-primary"><g:message code="portal.searchForm.searchButton" /></button>
             </form>
         </div>
