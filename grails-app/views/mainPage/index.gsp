@@ -56,11 +56,9 @@
         <div class="span8  offset2">
             <h4 class="title muted"><g:message code="portal.mainPage.ourIconsSectionTitle" /></h4>
             <p>
-                <a href="#Joanna+Horodynska" class="tag-scale1">Joanna Horodyńska</a>
-                <a href="#Kasia+Tusk" class="tag-scale1">Kasia Tusk</a>
-                <a href="#Krzychu+Kachel" class="tag-scale1">Krzychu Kachel</a>
-                <a href="#Joanna+Horodynska" class="tag-scale1">Joanna Horodyńska</a>
-                <a href="#Kasia+Tusk" class="tag-scale1">Kasia Tusk</a>
+                <g:each in="${promotedTags}" var="tag">
+                    <a href="${createLink(controller: 'resultPage', action: 'showTag', id: tag.id, params: [tagName:tag.name.encodeAsPrettyUrl()])}" class="tag-scale1" title="${tag.name}">${tag.name}</a>
+                </g:each>
             </p>
         </div>
     </div>

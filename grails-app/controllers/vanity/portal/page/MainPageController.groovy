@@ -2,7 +2,9 @@ package vanity.portal.page
 
 class MainPageController {
 
-    def index() {
+    def tagPromotionService
 
+    def index() {
+        [promotedTags:tagPromotionService.promotedTags]
     }
 }

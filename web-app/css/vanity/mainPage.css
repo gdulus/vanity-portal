@@ -102,6 +102,10 @@ div#footer .row {
 	text-align: left;
 }
 
+div.icons.row a {
+    text-transform: capitalize;
+}
+
 .tag-cloud .tag {
 	line-height: 30px;
 	padding: 0px 5px;
