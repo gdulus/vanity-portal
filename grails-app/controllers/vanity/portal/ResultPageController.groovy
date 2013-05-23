@@ -1,14 +1,14 @@
-package vanity.portal.page
+package vanity.portal
 
 class ResultPageController {
 
-    def showTagService
+    def tagSearchService
 
     def showArticle() {
 
     }
 
     def showTag(final Long id, final String tagName){
-        [articles:showTagService.findRelatedArticles(id)]
+        [articles:tagSearchService.findRelatedArticles(id)]
     }
 }

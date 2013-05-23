@@ -1,4 +1,4 @@
-package vanity.portal.error
+package vanity.portal
 
 class ErrorController {
 

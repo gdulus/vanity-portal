@@ -1,12 +1,10 @@
-package vanity.portal.page
+package vanity.portal.article
 
 import org.springframework.transaction.annotation.Transactional
 import vanity.article.Article
 import vanity.article.Status
 
-class ShowTagService {
-
-    static transactional = false
+class TagSearchService {
 
     @Transactional(readOnly = true)
     public List<Article> findRelatedArticles(final Long tagId){
@@ -33,6 +31,5 @@ class ShowTagService {
                 tagOpenStatuses: Status.Tag.OPEN_STATUSES,
             ]
         )
-
     }
 }

@@ -1,4 +1,4 @@
-package vanity.portal.search
+package vanity.portal
 
 import grails.converters.JSON
 import org.codehaus.groovy.grails.web.mapping.LinkGenerator
@@ -30,7 +30,7 @@ class SearchController {
         return [
             id:result.id,
             title: result.title.encodeAsPrettyUrl(),
-            source: result.source
+            contentSourceTarget: result.contentSourceTarget
         ]
     }
 }

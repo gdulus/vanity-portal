@@ -1,3 +1,3 @@
 /**
- * externalized to "${userHome}/.grails/vanity/${ENV}/portal-config.properties"
+ * externalized to "${userHome}/.vanity/${ENV}/portal-config.properties"
  */
