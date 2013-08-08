@@ -82,7 +82,7 @@ V.Search = (function(){
         init: function(elementId){
             if (!$element){
                 $element = $(elementId);
-                $apiUrl = $element.attr('href');
+                $apiUrl = $element.parent('form').attr('target');
                 elementHeight = $element.outerHeight();
                 $resultContainer = $('<ul id="search-result"></ul>')
                 $resultContainer.hide();

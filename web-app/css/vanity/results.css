@@ -1,0 +1,39 @@
+#wrap {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+header {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+header h1,
+header form {
+    float: left;
+}
+
+header form input[type=search]{
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+header form button[type=submit]{
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+header nav {
+    position: absolute;
+    top: 60px;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0px;
+}
+
+header nav ul li {
+    float: left;
+    margin-right: 20px;
+}

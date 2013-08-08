@@ -1,8 +1,8 @@
 <html>
 <head>
     <title></title>
-    <meta name="layout" content="portal"/>
-    <r:require module="mainPage"/>
+    <meta name="layout" content="home"/>
+    <r:require module="home"/>
 </head>
 <body>
     <!--
@@ -23,8 +23,8 @@
     -->
     <div class="search row">
         <div class="span12 search">
-            <form>
-                <input autocomplete="off" href="${createLink(controller: 'search', action: 'ajaxSearchResults')}" id="search-field" type="text" class="input-xxlarge" placeholder="${g.message(code:'portal.searchForm.searchPlaceholder')}"/>
+            <form target="${createLink(controller: 'api', action: 'searchByTerm')}">
+                <input autocomplete="off" id="search-field" type="search" class="input-xxlarge" placeholder="${g.message(code:'portal.searchForm.searchPlaceholder')}"/>
                 <button type="submit" class="btn btn-primary"><g:message code="portal.searchForm.searchButton" /></button>
             </form>
         </div>
@@ -57,7 +57,7 @@
             <h4 class="title muted"><g:message code="portal.mainPage.ourIconsSectionTitle" /></h4>
             <p>
                 <g:each in="${promotedTags}" var="tag">
-                    <a href="${createLink(controller: 'resultPage', action: 'showTag', id: tag.id, params: [tagName:tag.name.encodeAsPrettyUrl()])}" class="tag-scale1" title="${tag.name}">${tag.name}</a>
+                    <a href="${createLink(controller:'result', action:'showTag', params: [hash:tag.hash, tagName:tag.name.encodeAsPrettyUrl()])}" class="tag-scale1" title="${tag.name}">${tag.name}</a>
                 </g:each>
             </p>
         </div>

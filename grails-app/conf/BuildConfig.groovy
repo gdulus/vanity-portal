@@ -28,6 +28,7 @@ grails.project.dependency.resolution = {
 
     dependencies {
         compile('postgresql:postgresql:9.1-901.jdbc4')
+        compile('commons-lang:commons-lang:2.6')
     }
 
     plugins {

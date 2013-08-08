@@ -11,13 +11,31 @@
     </head>
     <body>
         <div id="wrap">
-            <div class="container">
+            <header>
+                <h1><a href="${createLink(controller: 'home')}">TaniLans</a></h1>
+                <form role="search" target="${createLink(controller: 'search', action: 'ajaxSearchResults')}">
+                    <input autocomplete="off" id="search-field" type="search" class="input-xxlarge" placeholder="${g.message(code:'portal.searchForm.searchPlaceholder')}"/>
+                    <button type="submit" class="btn btn-primary"><g:message code="portal.searchForm.searchButton" /></button>
+                </form>
+
+                <div class="clearfix"></div>
+                <nav>
+                    <ul>
+                        <li><a href="#"><g:message code="portal.menu.newestArticles" /></a></li>
+                        <li><a href="#"><g:message code="portal.menu.mostPopularCelebrities" /></a></li>
+                        <li><a href="#"><g:message code="portal.menu.mostImportantArticles" /></a></li>
+                    </ul>
+                </nav>
+
+                <div class="clearfix"></div>
+            </header>
+            <div role="main">
                 <g:layoutBody/>
             </div>
             <div id="push"></div>
         </div>
 
-        <div id="footer">
+        <footer id="footer">
             <div class="container">
                 <div class="row credit">
                     <div class="span2 offset2">
@@ -30,7 +48,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </footer>
         <r:layoutResources />
     </body>
 </html>
