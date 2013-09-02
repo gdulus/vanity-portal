@@ -41,7 +41,7 @@ V.Search = (function(){
                 // clear previous results
                 $resultContainer.empty();
                 // populate new one
-                $.each(results, function(index, result) {$resultContainer.append('<li><a href="' + result.value + '">' + result.label + '</a></li>')});
+                $.each(results, function(index, result) {$resultContainer.append('<li><a href="' + result.link + '">' + result.label + '</a></li>')});
                 // adjust position
                 var offset = $element.offset();
                 $resultContainer.offset({left:offset.left, top:offset.top + elementHeight});
@@ -72,7 +72,9 @@ V.Search = (function(){
               }
         });
 
-        $element.blur(function(){
+
+
+        $resultContainer.mouseout(function(){
             $resultContainer.empty();
             $resultContainer.hide();
         })

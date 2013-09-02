@@ -11,9 +11,18 @@ class UrlMappings {
          * Portal
          */
         "/"(controller: 'home', action: 'index')
-        "/a/$hash/$articleTitle"(controller: 'result', action: 'showArticle')
-        "/a/$hash/$tag/$title"(controller: 'result', action: 'showArticle')
-        "/t/$hash/$tagName"(controller: 'result', action: 'showTag')
+        "/a/$hash/$title"(controller: 'result', action: 'showArticle')
+        "/a/$hash/$tag/$title"(controller: 'result', action: 'showArticle'){
+            constraints {
+                hash(blank: false, nullable: false)
+            }
+        }
+        "/t/$hash/$tagName"(controller: 'result', action: 'showTag'){
+            constraints {
+                hash(blank: false, nullable: false)
+                tagName(blank: false, nullable: false)
+            }
+        }
 
         "500"(controller: 'error', action: 'http500')
         "404"(controller: 'error', action: 'http404')

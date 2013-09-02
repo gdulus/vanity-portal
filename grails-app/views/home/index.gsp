@@ -49,32 +49,37 @@
             </p>
         </div>
     </div>
+
     <!--
       our icons
     -->
-    <div class="section icons row">
-        <div class="span8  offset2">
-            <h4 class="title muted"><g:message code="portal.mainPage.ourIconsSectionTitle" /></h4>
-            <p>
-                <g:each in="${promotedTags}" var="tag">
-                    <a href="${createLink(controller:'result', action:'showTag', params: [hash:tag.hash, tagName:tag.name.encodeAsPrettyUrl()])}" class="tag-scale1" title="${tag.name}">${tag.name}</a>
-                </g:each>
-            </p>
+    <g:if test="${promotedTags}">
+        <div class="section icons row">
+            <div class="span8  offset2">
+                <h4 class="title muted"><g:message code="portal.mainPage.ourIconsSectionTitle" /></h4>
+                <p>
+                    <g:each in="${promotedTags}" var="tag">
+                        <a href="${createLink(controller:'result', action:'showTag', params: [hash:tag.hash, tagName:tag.name.encodeAsPrettyUrl()])}" class="tag-scale1" title="${tag.name}">${tag.name}</a>
+                    </g:each>
+                </p>
+            </div>
         </div>
-    </div>
+    </g:if>
     <!--
       news
     -->
     <div class="section news row">
         <div class="span4  offset2">
             <h4 class="title muted"><g:message code="portal.mainPage.newestArticlesSectionTitle" /></h4>
-            <ol>
-                <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-                <li><a href="#">Curabitur vestibulum porttitor augue, vitae fermentum nibh fringilla non. Duis quam sapien, pharetra vel consectetur id.</a></li>
-                <li><a href="#">Phasellus at augue lorem. Integer arcu ipsum, dignissim vel consectetur bibendum, dictum in diam.</a></li>
-                <li><a href="#">Aliquam suscipit libero ullamcorper sem faucibus eget accumsan dolor iaculis.</a></li>
-                <li><a href="#">Vivamus enim libero, sodales et porttitor sit amet, tincidunt id ipsum. </a></li>
-            </ol>
+            <g:if test="${newestArticles}">
+                <ol>
+                    <g:each in="${newestArticles}" var="article">
+                        <li>
+                            <g:link controller="result" action="showArticle" params="${[hash:article.hash, title:article.title.encodeAsPrettyUrl()]}">${article.title}</g:link>
+                        </li>
+                    </g:each>
+                </ol>
+            </g:if>
         </div>
         <div class="span4">
             <h4 class="title muted"><g:message code="portal.mainPage.mostImportantArticlesSectionTitle" /></h4>

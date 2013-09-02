@@ -1,11 +1,11 @@
-package vanity.portal
+package vanity.portal.home
 
 import org.springframework.transaction.annotation.Transactional
 import vanity.article.Status
 import vanity.article.Tag
 import vanity.article.TagService
 
-class PromotionService {
+class TopTagsService {
 
     TagService tagService
 
