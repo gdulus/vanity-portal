@@ -9,7 +9,8 @@ class HomeController {
     def index() {
         [
             promotedTags: topTagsService.getPromotedTags(),
-            newestArticles: topArticlesService.getNewestArticles()
+            newestArticles: topArticlesService.getNewestArticles(),
+            hottestArticles: topArticlesService.getHottestArticles()
         ]
     }
 }

@@ -83,13 +83,15 @@
         </div>
         <div class="span4">
             <h4 class="title muted"><g:message code="portal.mainPage.mostImportantArticlesSectionTitle" /></h4>
-            <ol>
-                <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-                <li><a href="#">Curabitur vestibulum porttitor augue, vitae fermentum nibh fringilla non. Duis quam sapien, pharetra vel consectetur id.</a></li>
-                <li><a href="#">Phasellus at augue lorem. Integer arcu ipsum, dignissim vel consectetur bibendum, dictum in diam.</a></li>
-                <li><a href="#">Aliquam suscipit libero ullamcorper sem faucibus eget accumsan dolor iaculis.</a></li>
-                <li><a href="#">Vivamus enim libero, sodales et porttitor sit amet, tincidunt id ipsum. </a></li>
-            </ol>
+            <g:if test="${hottestArticles}">
+                <ol>
+                    <g:each in="${hottestArticles}" var="article">
+                        <li>
+                            <g:link controller="result" action="showArticle" params="${[hash:article.hash, title:article.title.encodeAsPrettyUrl()]}">${article.title}</g:link>
+                        </li>
+                    </g:each>
+                </ol>
+            </g:if>
         </div>
     </div>
 
