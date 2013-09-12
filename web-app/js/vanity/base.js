@@ -1,18 +1,26 @@
 window.V = window.V || {};
 
 /**
+ * JQuery extensions
+ */
+
+$.fn.exists = function () {
+    return this.length !== 0;
+}
+
+/**
  * Logger component
  */
-V.Logger = (function(){
+V.Logger = (function (undefined) {
 
-    var log = function(level, message){
-        if (console.log){
+    var log = function (level, message) {
+        if (console.log) {
             console.log('[' + level + ']: ' + message)
         }
     }
 
     return {
-        info: function(message){
+        info: function (message) {
             log('INFO', message);
         }
     }
@@ -21,30 +29,39 @@ V.Logger = (function(){
 /**
  * Search component
  */
-V.Search = (function(){
-
-    var prevValue = null;
+V.Search = (function (undefined) {
 
     var $element = null
 
+    var $resultContainer = null;
+
+    var apiUrl = null
+
+    var prevValue = null;
+
     var elementHeight = null
 
-    var $apiUrl = null
+    var hideAfter = 100;
 
-    var $resultContainer
+    var hide = false;
 
-    var triggerSearch = function(){
+    var hideTimerHandler = null;
+
+    var triggerSearch = function () {
         value = $element.val();
-        if (value != prevValue){
+        if (value != prevValue) {
             V.Logger.info('Show result for "' + value + '" - "' + prevValue + '"');
-            $.get($apiUrl, {term: value}, function(results) {
+            $.get(apiUrl, {term: value}, function (results) {
                 // clear previous results
                 $resultContainer.empty();
                 // populate new one
-                $.each(results, function(index, result) {$resultContainer.append('<li><a href="' + result.link + '">' + result.label + '</a></li>')});
+                $.each(results, function (index, result) {
+                    var cssClass = index == 0 ? 'class="selected"' : '';
+                    $resultContainer.append('<li ' + cssClass + '><a href="' + result.link + '">' + result.label + '</a></li>')
+                });
                 // adjust position
                 var offset = $element.offset();
-                $resultContainer.offset({left:offset.left, top:offset.top + elementHeight});
+                $resultContainer.offset({left: offset.left, top: offset.top + elementHeight});
                 $resultContainer.show();
             });
         }
@@ -52,8 +69,27 @@ V.Search = (function(){
         prevValue = value;
     }
 
-    function bindEvents($element){
-        $element.data('timeout', null).keyup(function(){
+    var swapColors = function (current, selected) {
+        if (!selected || !selected.exists()) {
+            return;
+        }
+
+        current.removeClass('selected');
+        selected.addClass('selected');
+    }
+
+    var hideResult = function () {
+        if (hide) {
+            $resultContainer.empty();
+            $resultContainer.hide();
+        }
+
+        clearTimeout(hideTimerHandler);
+        hideTimerHandler = null;
+    }
+
+    function bindEvents($element) {
+        $element.data('timeout', null).keyup(function () {
             clearTimeout($element.data('timeout'));
             $element.data('timeout', setTimeout(triggerSearch, 200));
         });
@@ -62,29 +98,57 @@ V.Search = (function(){
             var keyCode = e.keyCode || e.which;
             switch (keyCode) {
                 case 38: //up
-                    V.Logger.info('up');
+                    var current = $resultContainer.find('.selected');
+                    var selected = current.prev('li');
+                    swapColors(current, selected);
                     e.stopPropagation();
-                break;
+                    e.preventDefault();
+                    break;
                 case 40: //down
-                    V.Logger.info('down');
+                    var current = $resultContainer.find('.selected');
+                    var selected = current.next('li');
+                    swapColors(current, selected);
                     e.stopPropagation();
-                break;
-              }
+                    e.preventDefault();
+                    break;
+                case 13: //enter
+                    var current = $resultContainer.find('.selected a');
+                    var articleUrl = current.attr('href');
+                    window.location = articleUrl;
+                    e.stopPropagation();
+                    e.preventDefault();
+                    break;
+            }
         });
 
+        $element.mouseover(function () {
+            hide = false;
+            clearTimeout(hideTimerHandler);
+            hideTimerHandler = null;
+        });
 
+        $element.mouseout(function () {
+            hide = true;
+            hideTimerHandler = setTimeout(hideResult, hideAfter)
+        });
 
-        $resultContainer.mouseout(function(){
-            $resultContainer.empty();
-            $resultContainer.hide();
+        $resultContainer.mouseover(function () {
+            hide = false;
+            clearTimeout(hideTimerHandler);
+            hideTimerHandler = null;
+        });
+
+        $resultContainer.mouseout(function () {
+            hide = true;
+            hideTimerHandler = setTimeout(hideResult, hideAfter)
         })
     }
 
     return {
-        init: function(elementId){
-            if (!$element){
+        init: function (elementId) {
+            if (!$element) {
                 $element = $(elementId);
-                $apiUrl = $element.parent('form').attr('target');
+                apiUrl = $element.parent('form').attr('target');
                 elementHeight = $element.outerHeight();
                 $resultContainer = $('<ul id="search-result"></ul>')
                 $resultContainer.hide();

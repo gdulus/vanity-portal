@@ -19,7 +19,7 @@ class ApiController {
 
     private def getAsSearchByTermPosition(ArticleSearchResult result){
         def params = [hash:result.id, title: result.title.encodeAsPrettyUrl()]
-        def link = grailsLinkGenerator.link(controller: 'result', action: 'showArticle', params: params)
+        def link = grailsLinkGenerator.link(controller: 'result', action: 'showArticle', params: params, absolute: true)
         return [link:link, label:result.title]
     }
 

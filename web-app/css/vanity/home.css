@@ -167,23 +167,3 @@ div.icons.row a {
 .ui-widget-content a:hover {
     color: #005580;
 }
-
-
-#search-result {
-    position: absolute;
-    list-style: none;
-    z-index: 100;
-    background-color: #ffffff;
-    -webkit-box-shadow: 0px 15px 13px rgba(50, 50, 50, 0.71);
-    -moz-box-shadow:    0px 15px 13px rgba(50, 50, 50, 0.71);
-    box-shadow:         0px 15px 13px rgba(50, 50, 50, 0.71);
-}
-
-#search-result li {
-    background-color: #ffffff;
-    padding: 5px 10px;
-}
-
-#search-result a {
-    background-color: #ffffff;
-}

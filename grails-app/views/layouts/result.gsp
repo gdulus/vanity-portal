@@ -13,7 +13,7 @@
         <div id="wrap">
             <header>
                 <h1><a href="${createLink(controller: 'home')}">TaniLans</a></h1>
-                <form role="search" target="${createLink(controller: 'search', action: 'ajaxSearchResults')}">
+                <form role="search" target="${createLink(controller: 'api', action: 'searchByTerm')}">
                     <input autocomplete="off" id="search-field" type="search" class="input-xxlarge" placeholder="${g.message(code:'portal.searchForm.searchPlaceholder')}"/>
                     <button type="submit" class="btn btn-primary"><g:message code="portal.searchForm.searchButton" /></button>
                 </form>

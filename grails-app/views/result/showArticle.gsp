@@ -6,8 +6,6 @@
     <r:require module="showTags"/>
 </head>
 <body>
-    <iframe width="100%" height="800px" src="${viewModel.article.url}">
-
-    </iframe>
+    <iframe width="100%" height="800px" src="${viewModel.article.url}"></iframe>
 </body>
 </html>
