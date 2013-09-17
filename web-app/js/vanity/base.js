@@ -88,7 +88,7 @@ V.Search = (function (undefined) {
         hideTimerHandler = null;
     }
 
-    function bindEvents($element) {
+    function bindEvents() {
         $element.data('timeout', null).keyup(function () {
             clearTimeout($element.data('timeout'));
             $element.data('timeout', setTimeout(triggerSearch, 200));
@@ -121,27 +121,22 @@ V.Search = (function (undefined) {
             }
         });
 
-        $element.mouseover(function () {
+        var mouseOver = function () {
+            hide = true;
+            hideTimerHandler = setTimeout(hideResult, hideAfter)
+        };
+
+        $element.mouseover(mouseOver);
+        $resultContainer.mouseover(mouseOver);
+
+        var mouseOut = function () {
             hide = false;
             clearTimeout(hideTimerHandler);
             hideTimerHandler = null;
-        });
+        };
 
-        $element.mouseout(function () {
-            hide = true;
-            hideTimerHandler = setTimeout(hideResult, hideAfter)
-        });
-
-        $resultContainer.mouseover(function () {
-            hide = false;
-            clearTimeout(hideTimerHandler);
-            hideTimerHandler = null;
-        });
-
-        $resultContainer.mouseout(function () {
-            hide = true;
-            hideTimerHandler = setTimeout(hideResult, hideAfter)
-        })
+        $element.mouseout(mouseOut);
+        $resultContainer.mouseout(mouseOut);
     }
 
     return {
@@ -154,7 +149,7 @@ V.Search = (function (undefined) {
                 $resultContainer.hide();
                 $resultContainer.width($element.outerWidth());
                 $(document.body).append($resultContainer);
-                bindEvents($element)
+                bindEvents()
             }
         }
     }
