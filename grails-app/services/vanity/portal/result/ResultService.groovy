@@ -6,8 +6,8 @@ import vanity.celebrity.Celebrity
 import vanity.celebrity.CelebrityService
 import vanity.result.ShowArticleViewModel
 import vanity.result.ShowTagViewModel
-import vanity.search.ArticleSearchResult
 import vanity.search.SearchEngineQueryExecutor
+import vanity.search.SearchResult
 
 class ResultService {
 
@@ -25,7 +25,7 @@ class ResultService {
     public ShowArticleViewModel buildShowArticleModel(final String hash) {
         Article article = articleService.findByHashCode(hash)
 
-        if (!article){
+        if (!article) {
             return null
         }
 
@@ -41,7 +41,7 @@ class ResultService {
             return null
         }
 
-        List<ArticleSearchResult> searchResult = searchEngineQueryExecutor.getArticlesByTagName(tag.name)
+        List<SearchResult.ArticleSearchResult> searchResult = searchEngineQueryExecutor.getArticlesByTagName(tag.name)
 
         if (!searchResult) {
             return null
