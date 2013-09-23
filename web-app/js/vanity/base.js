@@ -54,11 +54,21 @@ V.Search = (function (undefined) {
             $.get(apiUrl, {term: value}, function (results) {
                 // clear previous results
                 $resultContainer.empty();
-                // populate new one
-                $.each(results, function (index, result) {
-                    var cssClass = index == 0 ? 'class="selected"' : '';
-                    $resultContainer.append('<li ' + cssClass + '><a href="' + result.link + '">' + result.label + '</a></li>')
-                });
+                // tags
+                if (results.tags && results.tags.length > 0) {
+                    $resultContainer.append('<li class="tag summary">Nasze gwiazdy</a></li>')
+                    $.each(results.tags, function (index, result) {
+                        var cssClass = index == 0 ? ' selected' : '';
+                        $resultContainer.append('<li class="tag ' + cssClass + '"><a href="' + result.link + '">' + result.label + '</a></li>')
+                    });
+                }
+                // articles
+                if (results.articles && results.articles.length > 0) {
+                    $resultContainer.append('<li class="article summary">Ostatnie newsy</a></li>')
+                    $.each(results.articles, function (index, result) {
+                        $resultContainer.append('<li class="article"><a href="' + result.link + '">' + result.label + '</a></li>')
+                    });
+                }
                 // adjust position
                 var offset = $element.offset();
                 $resultContainer.offset({left: offset.left, top: offset.top + elementHeight});
