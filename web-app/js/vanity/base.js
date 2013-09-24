@@ -31,52 +31,43 @@ V.Logger = (function (undefined) {
  */
 V.Search = (function (undefined) {
 
-    var $element = null
-
+    var $searchInput = null;
     var $resultContainer = null;
-
-    var apiUrl = null
-
-    var prevValue = null;
-
-    var elementHeight = null
-
-    var hideAfter = 100;
-
+    var apiUrl = null;
+    var hideAfter = 200;
+    var searchBoxFocusSearchAfter = 500;
     var hide = false;
-
     var hideTimerHandler = null;
+    var searchBoxFocusTimerHandler = null;
+    var previousSearchQuery = null;
 
-    var triggerSearch = function () {
-        value = $element.val();
-        if (value != prevValue) {
-            V.Logger.info('Show result for "' + value + '" - "' + prevValue + '"');
-            $.get(apiUrl, {term: value}, function (results) {
-                // clear previous results
-                $resultContainer.empty();
-                // tags
-                if (results.tags && results.tags.length > 0) {
-                    $resultContainer.append('<li class="tag summary">Nasze gwiazdy</a></li>')
-                    $.each(results.tags, function (index, result) {
-                        var cssClass = index == 0 ? ' selected' : '';
-                        $resultContainer.append('<li class="tag ' + cssClass + '"><a href="' + result.link + '">' + result.label + '</a></li>')
-                    });
-                }
-                // articles
-                if (results.articles && results.articles.length > 0) {
-                    $resultContainer.append('<li class="article summary">Ostatnie newsy</a></li>')
-                    $.each(results.articles, function (index, result) {
-                        $resultContainer.append('<li class="article"><a href="' + result.link + '">' + result.label + '</a></li>')
-                    });
-                }
-                // adjust position
-                var offset = $element.offset();
-                $resultContainer.offset({left: offset.left, top: offset.top + elementHeight});
-                $resultContainer.show();
-            });
-        }
+    var triggerSearch = function (value) {
+        $.get(apiUrl, {term: value}, function (results) {
+            V.Logger.info('Search for: ' + value);
+            // clear previous results
+            $resultContainer.empty();
+            // tags
+            if (results.tags && results.tags.length > 0) {
+                $resultContainer.append('<li class="tag summary">Nasze gwiazdy</a></li>')
+                $.each(results.tags, function (index, result) {
+                    var cssClass = index == 0 ? ' selected' : '';
+                    $resultContainer.append('<li class="tag' + cssClass + '"><a href="' + result.link + '">' + result.label + '</a></li>')
+                });
+            }
+            // articles
+            if (results.articles && results.articles.length > 0) {
+                $resultContainer.append('<li class="article summary">Ostatnie newsy</a></li>')
+                $.each(results.articles, function (index, result) {
+                    var cssClass = (results.tags.length == 0 && index == 0) ? ' selected' : '';
+                    $resultContainer.append('<li class="article' + cssClass + '"><a href="' + result.link + '">' + result.label + '</a></li>')
+                });
+            }
 
-        prevValue = value;
+            var offset = $searchInput.offset();
+            $resultContainer.css('left', offset.left);
+            $resultContainer.css('top', offset.top + $searchInput.outerHeight());
+            $resultContainer.show();
+        });
     }
 
     var swapColors = function (current, selected) {
@@ -99,17 +90,18 @@ V.Search = (function (undefined) {
     }
 
     function bindEvents() {
-        $element.data('timeout', null).keyup(function () {
-            clearTimeout($element.data('timeout'));
-            $element.data('timeout', setTimeout(triggerSearch, 200));
-        });
-
-        $element.keydown(function (e) {
+        // keyboard binding
+        $searchInput.keydown(function (e) {
             var keyCode = e.keyCode || e.which;
             switch (keyCode) {
                 case 38: //up
                     var current = $resultContainer.find('.selected');
                     var selected = current.prev('li');
+
+                    if (selected.hasClass('summary')) {
+                        selected = selected.prev('li')
+                    }
+
                     swapColors(current, selected);
                     e.stopPropagation();
                     e.preventDefault();
@@ -117,6 +109,11 @@ V.Search = (function (undefined) {
                 case 40: //down
                     var current = $resultContainer.find('.selected');
                     var selected = current.next('li');
+
+                    if (selected.hasClass('summary')) {
+                        selected = selected.next('li')
+                    }
+
                     swapColors(current, selected);
                     e.stopPropagation();
                     e.preventDefault();
@@ -130,34 +127,53 @@ V.Search = (function (undefined) {
                     break;
             }
         });
-
-        var mouseOver = function () {
+        // hide/show results
+        //
+        var mouseOut = function (e) {
             hide = true;
             hideTimerHandler = setTimeout(hideResult, hideAfter)
+            e.stopPropagation();
         };
 
-        $element.mouseover(mouseOver);
-        $resultContainer.mouseover(mouseOver);
-
-        var mouseOut = function () {
+        var mouseOver = function (e) {
             hide = false;
             clearTimeout(hideTimerHandler);
             hideTimerHandler = null;
+            e.stopPropagation();
         };
 
-        $element.mouseout(mouseOut);
+        $searchInput.mouseover(function (e) {
+            if (hide) {
+                triggerSearch(previousSearchQuery);
+            }
+            mouseOver(e);
+        });
+        $searchInput.mouseout(mouseOut);
+        $resultContainer.mouseover(mouseOver);
         $resultContainer.mouseout(mouseOut);
+
+        // search trigger
+        $searchInput.keyup(function () {
+            clearTimeout(searchBoxFocusTimerHandler);
+            searchBoxFocusTimerHandler = setTimeout(function () {
+                var searchQuery = $searchInput.val();
+                if (previousSearchQuery != searchQuery) {
+                    triggerSearch($searchInput.val());
+                }
+                previousSearchQuery = searchQuery;
+            }, searchBoxFocusSearchAfter);
+        });
     }
 
     return {
-        init: function (elementId) {
-            if (!$element) {
-                $element = $(elementId);
-                apiUrl = $element.parent('form').attr('target');
-                elementHeight = $element.outerHeight();
+        init: function (searchFormId) {
+            if (!$searchInput) {
+                var $searchForm = $(searchFormId)
+                apiUrl = $searchForm.attr('target');
+                $searchInput = $searchForm.find('input[type=search]');
                 $resultContainer = $('<ul id="search-result"></ul>')
+                $resultContainer.width($searchInput.outerWidth());
                 $resultContainer.hide();
-                $resultContainer.width($element.outerWidth());
                 $(document.body).append($resultContainer);
                 bindEvents()
             }

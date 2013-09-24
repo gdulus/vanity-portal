@@ -1,17 +1,21 @@
 package vanity.portal.result
 
 import org.springframework.transaction.annotation.Transactional
-import vanity.article.*
+import vanity.article.Article
+import vanity.article.ArticleService
+import vanity.article.Tag
+import vanity.article.TagService
 import vanity.celebrity.Celebrity
 import vanity.celebrity.CelebrityService
 import vanity.result.ShowArticleViewModel
 import vanity.result.ShowTagViewModel
 import vanity.search.SearchEngineQueryExecutor
 import vanity.search.SearchResult
+import vanity.tracking.ClickService
 
 class ResultService {
 
-    ArticleClickService articleClickService
+    ClickService clickService
 
     ArticleService articleService
 
@@ -29,7 +33,7 @@ class ResultService {
             return null
         }
 
-        articleClickService.createAsync(article)
+        clickService.create(article)
         return new ShowArticleViewModel(article: article)
     }
 
@@ -47,10 +51,10 @@ class ResultService {
             return null
         }
 
+        clickService.create(tag)
         List<String> searchResultArticleHashes = searchResult.collect { it.id }
         List<Article> articles = articleService.findByHashCodes(searchResultArticleHashes)
         Celebrity celebrity = celebrityService.findByTag(tag)
-
         return new ShowTagViewModel(tag: tag, articles: articles, celebirty: celebrity)
     }
 

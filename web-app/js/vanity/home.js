@@ -1,3 +1,3 @@
-(function(undefined){
-    V.Search.init('#search-field');
+(function (undefined) {
+    V.Search.init('#search');
 })();

@@ -1,52 +1,51 @@
 .row {
-	text-align: center
+    text-align: center
 }
 
 .title {
-	text-transform: capitalize;
+    text-transform: capitalize;
 }
 
 .top {
-	margin-top: 50px;
-	margin-left: -20px;
+    margin-top: 50px;
+    margin-left: -20px;
 }
 
 .top .menu a {
-	text-transform: uppercase;	
+    text-transform: uppercase;
 }
 
-
 .top .menu a {
-	margin: 0px 10px;	
+    margin: 0px 10px;
 }
 
 .top .logo {
-	display: block;
-	background-image: url("../../images/vanity/logo.jpg");
-	width: 406px;
-	height: 110px;
-	background-repeat: no-repeat;
-	color: transparent;
+    display: block;
+    background-image: url("../../images/vanity/logo.jpg");
+    width: 406px;
+    height: 110px;
+    background-repeat: no-repeat;
+    color: transparent;
 }
 
 .search input {
-	margin-bottom: 0px;	
-	height: 40px;	
+    margin-bottom: 0px;
+    height: 40px;
 }
 
 .search button {
-	height: 48px;	
+    height: 48px;
 }
 
 .section {
-	margin-bottom: 20px;	
+    margin-bottom: 20px;
 }
 
 div.popular.row,
 div.icons.row,
-div.news.row ,
+div.news.row,
 div#footer .row {
-	text-align: left;
+    text-align: left;
 }
 
 div.icons.row a {
@@ -54,73 +53,72 @@ div.icons.row a {
 }
 
 .tag-cloud .tag {
-	line-height: 30px;
-	padding: 0px 5px;
-	text-transform: capitalize;
+    line-height: 30px;
+    padding: 0px 5px;
+    text-transform: capitalize;
 }
 
 .tag-cloud .tag.scale1 {
-	font-size: 14px;	
+    font-size: 14px;
 }
 
 .tag-cloud .tag.scale2 {
-	font-size: 16px;		
+    font-size: 16px;
 }
 
 .tag-cloud .tag.scale3 {
-	font-size: 18px;		
+    font-size: 18px;
 }
 
 .tag-cloud .tag.scale4 {
-	font-size: 20px;		
+    font-size: 20px;
 }
 
 .tag-cloud .tag.scale5 {
-	font-size: 22px;		
+    font-size: 22px;
 }
 
 .tag-cloud .tag.scale6 {
-	font-size: 24px;		
+    font-size: 24px;
 }
 
 .tag-cloud .tag.scale7 {
-	font-size: 26px;		
+    font-size: 26px;
 }
 
 .tag-cloud .tag.scale8 {
-	font-size: 28px;		
+    font-size: 28px;
 }
 
 .tag-cloud .tag.scale9 {
-	font-size: 30px;		
+    font-size: 30px;
 }
 
 .tag-cloud .tag.scale10 {
-	font-size: 32px;	
+    font-size: 32px;
 }
 
 .popular .tag-cloud {
-	text-align: justify;
+    text-align: justify;
 }
 
 .icons p {
-	text-align: center;
+    text-align: center;
 }
 
 .icons p a:first-child {
-	margin-left: 0px;	
+    margin-left: 0px;
 }
 
 .icons p a {
-	margin-left: 20px;	
+    margin-left: 20px;
 }
 
 .search {
-    position: relative;
     height: 80px;
 }
+
 .search button {
-    position: absolute;
     right: 150px;
 }
 
@@ -135,7 +133,7 @@ div.icons.row a {
 #search-field,
 #search-field-input {
     position: absolute;
-    left:160px;
+    left: 160px;
 }
 
 #search-field.ui-autocomplete-loading {
