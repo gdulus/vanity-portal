@@ -3,16 +3,18 @@ package vanity.portal.home
 import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.springframework.transaction.annotation.Transactional
 import vanity.article.Article
+import vanity.stats.PopularityService
+import vanity.utils.ConfigUtils
 
 class TopArticlesService {
 
     GrailsApplication grailsApplication
 
+    PopularityService popularityService
+
     @Transactional(readOnly = true)
     public List<Article> getNewestArticles() {
-        List<Long> ids = (List<Long>) Article.executeQuery('''
-            select
-                a.id
+        return Article.executeQuery('''
             from
                 Article a
             order by
@@ -22,29 +24,34 @@ class TopArticlesService {
                 max: grailsApplication.config.portal.mainPage.newestArticles.max
             ]
         )
-
-        return ids.collect { Article.read(it) }
     }
 
     @Transactional(readOnly = true)
     public List<Article> getHottestArticles() {
-        List<Long> ids = (List<Long>) Article.executeQuery('''
-            select
-                a.id
+        Date fromDate = (new Date() - ConfigUtils.$as(grailsApplication.config.portal.mainPage.hottestArticles.dateWindow, Integer))
+        Integer max = ConfigUtils.$as(grailsApplication.config.portal.mainPage.hottestArticles.max, Integer)
+        List<Article> popular = popularityService.getTopArticlesFromDate(fromDate, max).collect { Article.read(it.elementId) }
+
+        if (popular.size() == max) {
+            return popular
+        }
+
+        List<Article> rest = Article.executeQuery('''
             from
                 Article a
             where
-                publicationDate >= :dateWindow
+                a.publicationDate >= :fromDate
+                and a.id not in (:popular)
             order by
-                a.rank desc ,
                 a.publicationDate desc
         ''',
             [
-                max: grailsApplication.config.portal.mainPage.hottestArticles.max,
-                dateWindow: (new Date() - (int)grailsApplication.config.portal.mainPage.hottestArticles.dateWindow)
+                max: (max - popular.size()),
+                fromDate: fromDate,
+                popular: popular*.id ?: [-1L]
             ]
         )
 
-        return ids.collect { Article.read(it) }
+        return (popular + rest)
     }
 }

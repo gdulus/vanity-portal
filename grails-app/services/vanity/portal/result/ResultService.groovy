@@ -7,8 +7,6 @@ import vanity.article.Tag
 import vanity.article.TagService
 import vanity.celebrity.Celebrity
 import vanity.celebrity.CelebrityService
-import vanity.result.ShowArticleViewModel
-import vanity.result.ShowTagViewModel
 import vanity.search.SearchEngineQueryExecutor
 import vanity.search.SearchResult
 import vanity.tracking.ClickService
@@ -55,7 +53,7 @@ class ResultService {
         List<String> searchResultArticleHashes = searchResult.collect { it.id }
         List<Article> articles = articleService.findByHashCodes(searchResultArticleHashes)
         Celebrity celebrity = celebrityService.findByTag(tag)
-        return new ShowTagViewModel(tag: tag, articles: articles, celebirty: celebrity)
+        return new ShowTagViewModel(tag: tag, articles: articles, celebrity: celebrity)
     }
 
 }

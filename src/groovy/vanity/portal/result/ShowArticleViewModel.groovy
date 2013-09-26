@@ -1,4 +1,4 @@
-package vanity.result
+package vanity.portal.result
 
 import vanity.article.Article
 

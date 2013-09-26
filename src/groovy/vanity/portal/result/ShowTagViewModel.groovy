@@ -1,4 +1,4 @@
-package vanity.result
+package vanity.portal.result
 
 import vanity.article.Article
 import vanity.article.Tag
@@ -10,6 +10,6 @@ class ShowTagViewModel {
 
     List<Article> articles
 
-    Celebrity celebirty
+    Celebrity celebrity
 
 }

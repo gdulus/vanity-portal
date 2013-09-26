@@ -21,8 +21,8 @@
     </div>
 </div>
 <!--
-      search box
-    -->
+    search box
+-->
 <div class="search row">
     <div class="span12 search">
         <form id="search" target="${createLink(controller: 'api', action: 'searchByTerm')}">
@@ -33,37 +33,32 @@
     </div>
 </div>
 <!--
-      popular celebrites
-    -->
-<div class="section popular row">
-    <div class="span8  offset2">
-        <h4 class="title muted"><g:message code="portal.mainPage.mostPopularSectionTitle"/></h4>
+    popular tags
+-->
+<g:if test="${viewModel.hottestTags}">
+    <div class="section popular row">
+        <div class="span8  offset2">
+            <h4 class="title muted"><g:message code="portal.mainPage.mostPopularSectionTitle"/></h4>
 
-        <p class="tag-cloud">
-            <a href="#Doda" class="tag scale1">Doda</a> <a href="#Rhiana" class="tag scale2">Rhiana</a>
-            <a href="#Doda" class="tag scale3">Doda</a> <a href="#Rhiana" class="tag scale4">Rhiana</a>
-            <a href="#Doda" class="tag scale5">Doda</a> <a href="#Rhiana" class="tag scale6">Rhiana</a>
-            <a href="#Doda" class="tag scale7">Doda</a> <a href="#Rhiana" class="tag scale8">Rhiana</a>
-            <a href="#Doda" class="tag scale9">Doda</a> <a href="#Rhiana" class="tag scale10">Rhiana</a>
-            <a href="#Doda" class="tag scale1">Doda</a> <a href="#Rhiana" class="tag scale2">Rhiana</a>
-            <a href="#Doda" class="tag scale3">Doda</a> <a href="#Rhiana" class="tag scale4">Rhiana</a>
-            <a href="#Doda" class="tag scale5">Doda</a> <a href="#Rhiana" class="tag scale6">Rhiana</a>
-            <a href="#Doda" class="tag scale7">Doda</a> <a href="#Rhiana" class="tag scale8">Rhiana</a>
-            <a href="#Doda" class="tag scale9">Doda</a> <a href="#Rhiana" class="tag scale10">Rhiana</a>
-        </p>
+            <p class="tag-cloud">
+                <g:each in="${viewModel.hottestTags}" var="hottestTag">
+                    <a href="${createLink(controller: 'result', action: 'showTag', params: [hash: hottestTag.tag.hash, tagName: hottestTag.tag.name.encodeAsPrettyUrl()])}"
+                       class="tag scale${hottestTag.rank}" title="${hottestTag.tag.name}">${hottestTag.tag.name}</a>
+                </g:each>
+            </p>
+        </div>
     </div>
-</div>
-
+</g:if>
 <!--
-      our icons
-    -->
-<g:if test="${promotedTags}">
+  promoted tags
+-->
+<g:if test="${viewModel.promotedTags}">
     <div class="section icons row">
         <div class="span8  offset2">
             <h4 class="title muted"><g:message code="portal.mainPage.ourIconsSectionTitle"/></h4>
 
             <p>
-                <g:each in="${promotedTags}" var="tag">
+                <g:each in="${viewModel.promotedTags}" var="tag">
                     <a href="${createLink(controller: 'result', action: 'showTag', params: [hash: tag.hash, tagName: tag.name.encodeAsPrettyUrl()])}"
                        class="tag-scale1" title="${tag.name}">${tag.name}</a>
                 </g:each>
@@ -72,14 +67,14 @@
     </div>
 </g:if>
 <!--
-      news
-    -->
+  news
+-->
 <div class="section news row">
     <div class="span4  offset2">
         <h4 class="title muted"><g:message code="portal.mainPage.newestArticlesSectionTitle"/></h4>
-        <g:if test="${newestArticles}">
+        <g:if test="${viewModel.newestArticles}">
             <ol>
-                <g:each in="${newestArticles}" var="article">
+                <g:each in="${viewModel.newestArticles}" var="article">
                     <li>
                         <g:link controller="result" action="showArticle"
                                 params="${[hash: article.hash, title: article.title.encodeAsPrettyUrl()]}">${article.title}</g:link>
@@ -91,9 +86,9 @@
 
     <div class="span4">
         <h4 class="title muted"><g:message code="portal.mainPage.mostImportantArticlesSectionTitle"/></h4>
-        <g:if test="${hottestArticles}">
+        <g:if test="${viewModel.hottestArticles}">
             <ol>
-                <g:each in="${hottestArticles}" var="article">
+                <g:each in="${viewModel.hottestArticles}" var="article">
                     <li>
                         <g:link controller="result" action="showArticle"
                                 params="${[hash: article.hash, title: article.title.encodeAsPrettyUrl()]}">${article.title}</g:link>
