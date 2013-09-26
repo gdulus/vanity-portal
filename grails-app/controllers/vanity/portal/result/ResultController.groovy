@@ -9,20 +9,20 @@ class ResultController {
     def showArticle(final String hash) {
         def model = resultService.buildShowArticleModel(hash)
 
-        if (!model){
+        if (!model) {
             return response.setStatus(HttpStatus.NOT_FOUND.value())
         }
 
-        return [viewModel:model]
+        return [viewModel: model]
     }
 
-    def showTag(final String hash){
-        def model = resultService.buildShowTagModel(hash)
+    def showTag(final String hash, final Integer startElement) {
+        def model = resultService.buildShowTagModel(hash, startElement)
 
-        if (!model){
+        if (!model) {
             return response.setStatus(HttpStatus.NOT_FOUND.value())
         }
 
-        return [viewModel:model]
+        return [viewModel: model]
     }
 }

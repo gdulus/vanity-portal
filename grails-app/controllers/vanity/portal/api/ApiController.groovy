@@ -1,9 +1,12 @@
 package vanity.portal.api
 
 import grails.converters.JSON
+import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.codehaus.groovy.grails.web.mapping.LinkGenerator
 import vanity.search.SearchEngineQueryExecutor
 import vanity.search.SearchResult
+import vanity.search.SearchResult.SearchResultItem
+import vanity.utils.ConfigUtils
 
 class ApiController {
 
@@ -11,24 +14,30 @@ class ApiController {
 
     LinkGenerator grailsLinkGenerator
 
+    GrailsApplication grailsApplication
+
     def searchByTerm(final String term) {
-        def articles = searchEngineQueryExecutor.getArticlesByQuery(term)
-        def tags = searchEngineQueryExecutor.getTagsByQuery(term)
-        def articleLinks = articles.collect { getAsArticleLink(it) }
-        def tagLinks = tags.collect { getAsTagLink(it) }
+        Integer maxArticles = ConfigUtils.$as(grailsApplication.config.portal.search.box.articles.max, Integer)
+        SearchResult articles = searchEngineQueryExecutor.findArticles(term, 0, maxArticles)
+        def articleLinks = articles.items.collect { getAsArticleLink(it) }
+
+        Integer maxTags = ConfigUtils.$as(grailsApplication.config.portal.search.box.tags.max, Integer)
+        SearchResult tags = searchEngineQueryExecutor.findTags(term, 0, maxTags)
+        def tagLinks = tags.items.collect { getAsTagLink(it) }
+
         render([tags: tagLinks, articles: articleLinks] as JSON)
     }
 
-    private def getAsArticleLink(SearchResult.ArticleSearchResult result) {
-        def params = [hash: result.id, title: result.title.encodeAsPrettyUrl()]
-        def link = grailsLinkGenerator.link(controller: 'result', action: 'showArticle', params: params, absolute: true)
-        return [link: link, label: result.title]
+    private Map<String, String> getAsArticleLink(final SearchResultItem resultItem) {
+        Map<String, ?> params = [hash: resultItem.id, title: resultItem.description.encodeAsPrettyUrl()]
+        String link = grailsLinkGenerator.link(controller: 'result', action: 'showArticle', params: params, absolute: true)
+        return [link: link, label: resultItem.description]
     }
 
-    private def getAsTagLink(SearchResult.TagSearchResult result) {
-        def params = [hash: result.id, tagName: result.name.encodeAsPrettyUrl()]
-        def link = grailsLinkGenerator.link(controller: 'result', action: 'showTag', params: params, absolute: true)
-        return [link: link, label: result.name]
+    private Map<String, String> getAsTagLink(final SearchResultItem resultItem) {
+        Map<String, ?> params = [hash: resultItem.id, tagName: resultItem.description.encodeAsPrettyUrl(), startElement: 0]
+        String link = grailsLinkGenerator.link(controller: 'result', action: 'showTag', params: params, absolute: true)
+        return [link: link, label: resultItem.description]
     }
 
 }

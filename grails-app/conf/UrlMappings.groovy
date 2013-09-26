@@ -17,7 +17,7 @@ class UrlMappings {
                 hash(blank: false, nullable: false)
             }
         }
-        "/t/$hash/$tagName"(controller: 'result', action: 'showTag') {
+        "/t/$hash/$tagName/$startElement?"(controller: 'result', action: 'showTag') {
             constraints {
                 hash(blank: false, nullable: false)
                 tagName(blank: false, nullable: false)
