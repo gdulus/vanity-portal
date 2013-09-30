@@ -11,13 +11,13 @@ class UrlMappings {
          * Portal
          */
         "/"(controller: 'home', action: 'main')
-        "/a/$hash/$title"(controller: 'result', action: 'showArticle')
-        "/a/$hash/$tag/$title"(controller: 'result', action: 'showArticle') {
+        "/artykul/$hash/$title"(controller: 'result', action: 'showArticle')
+        "/artykul/$hash/$tag/$title"(controller: 'result', action: 'showArticle') {
             constraints {
                 hash(blank: false, nullable: false)
             }
         }
-        "/t/$hash/$tagName/$startElement?"(controller: 'result', action: 'showByTag') {
+        "/vip/$hash/$tagName/$startElement?"(controller: 'result', action: 'showByTag') {
             constraints {
                 hash(blank: false, nullable: false)
                 tagName(blank: false, nullable: false)
@@ -27,7 +27,7 @@ class UrlMappings {
             }
         }
 
-        "/q/$startElement?"(controller: 'result', action: 'showByTerm') {
+        "/szukaj/$startElement?"(controller: 'result', action: 'showByTerm') {
             constraints {
                 startElement(validator: {
                     it.isNumber() && it.toInteger() >= 0

@@ -37,6 +37,7 @@ V.Search = (function (undefined) {
     var apiUrl = null;
     var hideAfter = 200;
     var searchBoxFocusSearchAfter = 500;
+    var termMinLength = 3;
     var hide = false;
     var hideTimerHandler = null;
     var searchBoxFocusTimerHandler = null;
@@ -167,7 +168,14 @@ V.Search = (function (undefined) {
         // search button click
         $searchButton.click(function (e) {
             var url = $(this).attr('href');
-            window.location.replace(url + '?term=' + $searchInput.val());
+            var term = $searchInput.val();
+
+            if (!term || term.length < termMinLength) {
+                $searchInput.stop().css("background-color", "#FFFF9C").animate({ backgroundColor: "#FFFFFF"}, 500);
+            } else {
+                window.location.replace(url + '/?q=' + term);
+            }
+
             e.stopPropagation();
             e.preventDefault();
         })
