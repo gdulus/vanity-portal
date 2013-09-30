@@ -17,14 +17,25 @@ class UrlMappings {
                 hash(blank: false, nullable: false)
             }
         }
-        "/t/$hash/$tagName/$startElement?"(controller: 'result', action: 'showTag') {
+        "/t/$hash/$tagName/$startElement?"(controller: 'result', action: 'showByTag') {
             constraints {
                 hash(blank: false, nullable: false)
                 tagName(blank: false, nullable: false)
+                startElement(validator: {
+                    it.isNumber() && it.toInteger() >= 0
+                })
             }
         }
 
-        "500"(controller: 'error', action: 'http500')
-        "404"(controller: 'error', action: 'http404')
+        "/q/$startElement?"(controller: 'result', action: 'showByTerm') {
+            constraints {
+                startElement(validator: {
+                    it.isNumber() && it.toInteger() >= 0
+                })
+            }
+        }
+
+        "500"(controller: 'error', action: 'serverError')
+        "404"(controller: 'error', action: 'notFound')
     }
 }

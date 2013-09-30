@@ -28,7 +28,8 @@
         <form id="search" target="${createLink(controller: 'api', action: 'searchByTerm')}">
             <input autocomplete="off" type="search" class="input-xxlarge"
                    placeholder="${g.message(code: 'portal.searchForm.searchPlaceholder')}"/>
-            <button type="submit" class="btn btn-primary"><g:message code="portal.searchForm.searchButton"/></button>
+            <g:link controller="result" action="showByTerm" class="btn btn-primary btn-large"><g:message
+                    code="portal.searchForm.searchButton"/></g:link>
         </form>
     </div>
 </div>
@@ -42,7 +43,7 @@
 
             <p class="tag-cloud">
                 <g:each in="${viewModel.hottestTags}" var="hottestTag">
-                    <a href="${createLink(controller: 'result', action: 'showTag', params: [hash: hottestTag.tag.hash, tagName: hottestTag.tag.name.encodeAsPrettyUrl()])}"
+                    <a href="${createLink(controller: 'result', action: 'showByTag', params: [hash: hottestTag.tag.hash, tagName: hottestTag.tag.name.encodeAsPrettyUrl()])}"
                        class="tag scale${hottestTag.rank}" title="${hottestTag.tag.name}">${hottestTag.tag.name}</a>
                 </g:each>
             </p>
@@ -59,7 +60,7 @@
 
             <p>
                 <g:each in="${viewModel.promotedTags}" var="tag">
-                    <a href="${createLink(controller: 'result', action: 'showTag', params: [hash: tag.hash, tagName: tag.name.encodeAsPrettyUrl()])}"
+                    <a href="${createLink(controller: 'result', action: 'showByTag', params: [hash: tag.hash, tagName: tag.name.encodeAsPrettyUrl()])}"
                        class="tag-scale1" title="${tag.name}">${tag.name}</a>
                 </g:each>
             </p>

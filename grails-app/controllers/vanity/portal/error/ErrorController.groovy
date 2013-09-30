@@ -2,11 +2,12 @@ package vanity.portal.error
 
 class ErrorController {
 
-    def http404() {
+    def notFound() {
 
     }
 
-    def http500() {
+    def serverError() {
 
     }
+
 }

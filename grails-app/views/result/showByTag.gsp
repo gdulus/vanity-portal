@@ -25,14 +25,25 @@
             <p>${article.shortBody}</p>
             <ul>
                 <g:each in="${article.tags}" var="articleTag">
-                    <li><g:link class="label label-success" action="showTag" params="${[hash: articleTag.hash,
-                            tagName: articleTag.name.encodeAsPrettyUrl()]}">${articleTag.name}</g:link></li>
+                    <li>
+                        <g:link class="label label-success"
+                                action="showByTag"
+                                params="${[hash: articleTag.hash, tagName: articleTag.name.encodeAsPrettyUrl()]}">${articleTag.name}
+                        </g:link>
+                    </li>
                 </g:each>
             </ul>
-            <span><g:message code="portal.searchResult.readRest"/> <a href="${article.url}" target="_blank"><g:message
-                    code="${article.source.target.name()}"/></a></span>
+            <span><g:message code="portal.searchResult.readRest"/>
+                <a href="${article.url}" target="_blank"><g:message code="${article.source.target.name()}"/></a>
+            </span>
         </article>
     </g:each>
+    <v:paginate controller="result"
+                action="showByTag"
+                params="[tagName: viewModel.tag.name.encodeAsPrettyUrl(), hash: viewModel.tag.hash]"
+                startParamName="startElement"
+                start="${viewModel.start}"
+                total="${viewModel.numFound}"/>
 </section>
 </body>
 </html>

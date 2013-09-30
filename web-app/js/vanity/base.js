@@ -32,6 +32,7 @@ V.Logger = (function (undefined) {
 V.Search = (function (undefined) {
 
     var $searchInput = null;
+    var $searchButton = null;
     var $resultContainer = null;
     var apiUrl = null;
     var hideAfter = 200;
@@ -163,6 +164,13 @@ V.Search = (function (undefined) {
                 previousSearchQuery = searchQuery;
             }, searchBoxFocusSearchAfter);
         });
+        // search button click
+        $searchButton.click(function (e) {
+            var url = $(this).attr('href');
+            window.location.replace(url + '?term=' + $searchInput.val());
+            e.stopPropagation();
+            e.preventDefault();
+        })
     }
 
     return {
@@ -171,6 +179,7 @@ V.Search = (function (undefined) {
                 var $searchForm = $(searchFormId)
                 apiUrl = $searchForm.attr('target');
                 $searchInput = $searchForm.find('input[type=search]');
+                $searchButton = $searchForm.find('a');
                 $resultContainer = $('<ul id="search-result"></ul>')
                 $resultContainer.width($searchInput.outerWidth());
                 $resultContainer.hide();

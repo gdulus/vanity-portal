@@ -10,19 +10,33 @@ class ResultController {
         def model = resultService.buildShowArticleModel(hash)
 
         if (!model) {
-            return response.setStatus(HttpStatus.NOT_FOUND.value())
+            response.sendError(HttpStatus.NOT_FOUND.value())
+            return
         }
 
         return [viewModel: model]
     }
 
-    def showTag(final String hash, final Integer startElement) {
-        def model = resultService.buildShowTagModel(hash, startElement)
+    def showByTag(final String hash, final Integer startElement) {
+        def model = resultService.buildShowByTagModel(hash, startElement)
 
         if (!model) {
-            return response.setStatus(HttpStatus.NOT_FOUND.value())
+            response.sendError(HttpStatus.NOT_FOUND.value())
+            return
         }
 
         return [viewModel: model]
     }
+
+    def showByTerm(final String term, final Integer startElement) {
+        def model = resultService.buildShowByTermModel(term, startElement)
+
+        if (!model) {
+            response.sendError(HttpStatus.NOT_FOUND.value())
+            return
+        }
+
+        return [viewModel: model]
+    }
+
 }

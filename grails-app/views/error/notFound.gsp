@@ -1,9 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-  <title></title>
+    <title></title>
 </head>
+
 <body>
-   404
+404
 </body>
 </html>

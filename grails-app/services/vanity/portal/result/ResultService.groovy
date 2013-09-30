@@ -40,7 +40,7 @@ class ResultService {
     }
 
     @Transactional(readOnly = true)
-    public ShowTagViewModel buildShowTagModel(final String hash, final Integer startElement) {
+    public ShowByTagViewModel buildShowByTagModel(final String hash, final Integer startElement) {
         Tag tag = tagService.readByHash(hash)
 
         if (!tag) {
@@ -57,7 +57,11 @@ class ResultService {
         clickService.create(tag)
         List<Article> articles = articleService.findByHashCodes(searchResult.items*.id)
         Celebrity celebrity = celebrityService.findByTag(tag)
-        return new ShowTagViewModel(tag: tag, articles: articles, celebrity: celebrity)
+        return new ShowByTagViewModel(tag: tag, articles: articles, celebrity: celebrity, start: searchResult.start, numFound: searchResult.numFound)
     }
 
+    @Transactional(readOnly = true)
+    public ShowByTagViewModel buildShowByTermModel(final String phrase, final Integer startElement) {
+
+    }
 }
