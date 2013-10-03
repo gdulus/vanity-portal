@@ -10,7 +10,6 @@ class UrlMappings {
         /**
          * Portal
          */
-        "/test"(controller: 'test', action: 'index')
         "/"(controller: 'home', action: 'main')
         "/artykul/$hash/$title"(controller: 'result', action: 'showArticle')
         "/artykul/$hash/$tag/$title"(controller: 'result', action: 'showArticle') {
