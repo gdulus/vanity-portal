@@ -3,9 +3,10 @@
 <head>
     <title></title>
     <meta name="layout" content="result"/>
-    <r:require module="showTags"/>
+    <r:require module="showArticle"/>
 </head>
+
 <body>
-    <iframe width="100%" height="800px" src="${viewModel.article.url}"></iframe>
+<iframe width="100%" height="800px" src="${viewModel.article.url}"></iframe>
 </body>
 </html>

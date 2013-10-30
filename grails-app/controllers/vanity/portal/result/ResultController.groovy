@@ -1,5 +1,6 @@
 package vanity.portal.result
 
+import grails.web.RequestParameter
 import org.springframework.http.HttpStatus
 
 class ResultController {
@@ -28,7 +29,7 @@ class ResultController {
         return [viewModel: model]
     }
 
-    def showByTerm(final String term, final Integer startElement) {
+    def showByTerm(@RequestParameter('q') final String term, final Integer startElement) {
         def model = resultService.buildShowByTermModel(term, startElement)
 
         if (!model) {

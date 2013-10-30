@@ -61,7 +61,19 @@ class ResultService {
     }
 
     @Transactional(readOnly = true)
-    public ShowByTagViewModel buildShowByTermModel(final String phrase, final Integer startElement) {
+    public ShowByTermViewModel buildShowByTermModel(final String term, final Integer startElement) {
+        if (!term) {
+            return null
+        }
 
+        Integer maxArticles = ConfigUtils.$as(grailsApplication.config.portal.search.page.articles.max, Integer)
+        SearchResult searchResult = searchEngineQueryExecutor.findArticles(term, startElement, maxArticles)
+
+        if (!searchResult.items) {
+            return null
+        }
+
+        List<Article> articles = articleService.findByHashCodes(searchResult.items*.id)
+        return new ShowByTermViewModel(term: term, articles: articles, start: searchResult.start, numFound: searchResult.numFound)
     }
 }

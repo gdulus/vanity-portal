@@ -21,7 +21,7 @@
 
 .top .logo {
     display: block;
-    background-image: url("../../images/vanity/logo.jpg");
+    background-image: url("../../../images/vanity/logo.jpg");
     width: 406px;
     height: 110px;
     background-repeat: no-repeat;
@@ -137,7 +137,7 @@ div.icons.row a {
 }
 
 #search-field.ui-autocomplete-loading {
-    background-image: url("../../images/vanity/loader_big.gif");
+    background-image: url("../../../images/vanity/loader_big.gif");
     background-position: 510px center;
     background-repeat: no-repeat;
 }

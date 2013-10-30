@@ -1,14 +1,10 @@
 package vanity.portal.result
 
 import vanity.article.Article
-import vanity.article.Tag
-import vanity.celebrity.Celebrity
 
-class ShowByTagViewModel {
+class ShowByTermViewModel {
 
-    Tag tag
-
-    Celebrity celebrity
+    String term
 
     List<Article> articles
 

@@ -13,12 +13,12 @@ header form {
     float: left;
 }
 
-header form input[type=search]{
+header form input[type=search] {
     margin-top: 15px;
     margin-left: 20px;
 }
 
-header form button[type=submit]{
+header form button[type=submit] {
     margin-top: 5px;
     margin-left: 5px;
 }

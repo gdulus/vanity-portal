@@ -25,12 +25,7 @@
 -->
 <div class="search row">
     <div class="span12 search">
-        <form id="search" target="${createLink(controller: 'api', action: 'searchByTerm')}">
-            <input autocomplete="off" type="search" class="input-xxlarge"
-                   placeholder="${g.message(code: 'portal.searchForm.searchPlaceholder')}"/>
-            <g:link controller="result" action="showByTerm" class="btn btn-primary btn-large"><g:message
-                    code="portal.searchForm.searchButton"/></g:link>
-        </form>
+        <v:searchWidget/>
     </div>
 </div>
 <!--

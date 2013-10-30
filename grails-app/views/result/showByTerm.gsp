@@ -2,25 +2,22 @@
 <head>
     <title></title>
     <meta name="layout" content="result"/>
-    <r:require module="showByTag"/>
+    <r:require module="showByTerm"/>
 </head>
 
 <body>
-<g:if test="${viewModel.celebrity}">
-    <section>
-        <h1>${viewModel.celebrity.firstName} ${viewModel.celebrity.lastName}</h1>
-        ${viewModel.celebrity.description}
-    </section>
-</g:if>
 <section>
     <h2>
         <g:message code="portal.searchResult.foundArticles"/>
     </h2>
     <g:each in="${viewModel.articles}" var="article">
         <article>
-            <h3><g:link action="showArticle" params="${[hash: article.hash,
-                    tag: viewModel.tag.name.encodeAsPrettyUrl(),
-                    title: article.title.encodeAsPrettyUrl()]}">${article.title}</g:link></h3>
+            <h3>
+                <g:link action="showArticle"
+                        params="${[hash: article.hash, title: article.title.encodeAsPrettyUrl()]}">
+                    ${article.title}
+                </g:link>
+            </h3>
 
             <p>${article.shortBody}</p>
             <ul>
@@ -39,8 +36,8 @@
         </article>
     </g:each>
     <v:paginate controller="result"
-                action="showByTag"
-                params="[tagName: viewModel.tag.name.encodeAsPrettyUrl(), hash: viewModel.tag.hash]"
+                action="showByTerm"
+                params="[q: viewModel.term]"
                 startParamName="startElement"
                 start="${viewModel.start}"
                 total="${viewModel.numFound}"/>

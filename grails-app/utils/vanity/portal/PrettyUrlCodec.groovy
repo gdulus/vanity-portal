@@ -24,16 +24,17 @@ class PrettyUrlCodec {
         ',': '',
         '\\.': '',
         ':': '',
+        ' ': '_'
     ]
 
     static encode = { String str ->
-        if (!str){
+        if (!str) {
             return str
         }
 
         String result = str.toLowerCase()
 
-        REPLACEMENT_MAP.each {item ->
+        REPLACEMENT_MAP.each { item ->
             result = result.replaceAll(item.key, item.value)
         }
 
