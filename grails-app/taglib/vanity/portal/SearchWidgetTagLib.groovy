@@ -8,7 +8,7 @@ class SearchWidgetTagLib {
     String apiURL = g.createLink(controller: 'api', action: 'searchByTerm')
 
     @Lazy
-    String showURL = g.createLink(controller: 'result', action: 'showByTerm')
+    String showURL = g.createLink(controller: 'search', action: 'searchByTerm')
 
     @Lazy
     String searchPlaceholder = g.message(code: 'portal.searchForm.searchPlaceholder')

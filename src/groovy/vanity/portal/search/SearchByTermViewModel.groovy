@@ -1,8 +1,8 @@
-package vanity.portal.result
+package vanity.portal.search
 
 import vanity.article.Article
 
-class ShowByTermViewModel {
+class SearchByTermViewModel {
 
     String term
 

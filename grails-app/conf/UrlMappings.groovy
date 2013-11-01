@@ -8,16 +8,24 @@ class UrlMappings {
         "/api/search/byTerm"(controller: 'api', action: 'searchByTerm')
 
         /**
-         * Portal
+         * Portal main page
          */
         "/"(controller: 'home', action: 'main')
+
+        /**
+         * Portal result page
+         */
         "/artykul/$hash/$title"(controller: 'result', action: 'showArticle')
         "/artykul/$hash/$tag/$title"(controller: 'result', action: 'showArticle') {
             constraints {
                 hash(blank: false, nullable: false)
             }
         }
-        "/vip/$hash/$tagName/$startElement?"(controller: 'result', action: 'showByTag') {
+
+        /**
+         * Portal search result pages
+         */
+        "/vip/$hash/$tagName/$startElement?"(controller: 'search', action: 'searchByTag') {
             constraints {
                 hash(blank: false, nullable: false)
                 tagName(blank: false, nullable: false)
@@ -27,7 +35,7 @@ class UrlMappings {
             }
         }
 
-        "/szukaj/$startElement?"(controller: 'result', action: 'showByTerm') {
+        "/szukaj/$startElement?"(controller: 'search', action: 'searchByTerm') {
             constraints {
                 startElement(validator: {
                     it.isNumber() && it.toInteger() >= 0
@@ -35,6 +43,9 @@ class UrlMappings {
             }
         }
 
+        /**
+         * Error pages
+         */
         "500"(controller: 'error', action: 'serverError')
         "404"(controller: 'error', action: 'notFound')
     }

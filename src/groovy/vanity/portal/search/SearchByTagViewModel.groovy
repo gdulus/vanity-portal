@@ -1,10 +1,10 @@
-package vanity.portal.result
+package vanity.portal.search
 
 import vanity.article.Article
 import vanity.article.Tag
 import vanity.celebrity.Celebrity
 
-class ShowByTagViewModel {
+class SearchByTagViewModel {
 
     Tag tag
 

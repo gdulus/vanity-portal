@@ -38,7 +38,7 @@
 
             <p class="tag-cloud">
                 <g:each in="${viewModel.hottestTags}" var="hottestTag">
-                    <a href="${createLink(controller: 'result', action: 'showByTag', params: [hash: hottestTag.tag.hash, tagName: hottestTag.tag.name.encodeAsPrettyUrl()])}"
+                    <a href="${createLink(controller: 'search', action: 'searchByTag', params: [hash: hottestTag.tag.hash, tagName: hottestTag.tag.name.encodeAsPrettyUrl()])}"
                        class="tag scale${hottestTag.rank}" title="${hottestTag.tag.name}">${hottestTag.tag.name}</a>
                 </g:each>
             </p>
@@ -55,7 +55,7 @@
 
             <p>
                 <g:each in="${viewModel.promotedTags}" var="tag">
-                    <a href="${createLink(controller: 'result', action: 'showByTag', params: [hash: tag.hash, tagName: tag.name.encodeAsPrettyUrl()])}"
+                    <a href="${createLink(controller: 'search', action: 'searchByTag', params: [hash: tag.hash, tagName: tag.name.encodeAsPrettyUrl()])}"
                        class="tag-scale1" title="${tag.name}">${tag.name}</a>
                 </g:each>
             </p>
@@ -72,7 +72,7 @@
             <ol>
                 <g:each in="${viewModel.newestArticles}" var="article">
                     <li>
-                        <g:link controller="result" action="showArticle"
+                        <g:link controller="search" action="showArticle"
                                 params="${[hash: article.hash, title: article.title.encodeAsPrettyUrl()]}">${article.title}</g:link>
                     </li>
                 </g:each>
@@ -86,7 +86,7 @@
             <ol>
                 <g:each in="${viewModel.hottestArticles}" var="article">
                     <li>
-                        <g:link controller="result" action="showArticle"
+                        <g:link controller="search" action="showArticle"
                                 params="${[hash: article.hash, title: article.title.encodeAsPrettyUrl()]}">${article.title}</g:link>
                     </li>
                 </g:each>
