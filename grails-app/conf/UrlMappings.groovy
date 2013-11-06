@@ -44,6 +44,13 @@ class UrlMappings {
         }
 
         /**
+         * Top results
+         */
+        "/najnowsze-plotki/$offset?/$max?"(controller: 'top', action: 'newestArticles')
+        "/najwazniejsze-plotki/$offset?/$max?"(controller: 'top', action: 'mostPopularArticles')
+        "/najpopularniejsi-celebryci"(controller: 'top', action: 'mostPopularTags')
+
+        /**
          * Error pages
          */
         "500"(controller: 'error', action: 'serverError')

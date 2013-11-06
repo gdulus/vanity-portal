@@ -13,7 +13,8 @@
     <g:each in="${viewModel.articles}" var="article">
         <article>
             <h3>
-                <g:link action="showArticle"
+                <g:link controller="result"
+                        action="showArticle"
                         params="${[hash: article.hash, title: article.title.encodeAsPrettyUrl()]}">
                     ${article.title}
                 </g:link>
@@ -24,6 +25,7 @@
                 <g:each in="${article.tags}" var="articleTag">
                     <li>
                         <g:link class="label label-success"
+                                controller="search"
                                 action="searchByTag"
                                 params="${[hash: articleTag.hash, tagName: articleTag.name.encodeAsPrettyUrl()]}">${articleTag.name}
                         </g:link>

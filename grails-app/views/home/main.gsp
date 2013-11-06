@@ -14,9 +14,11 @@
         <a href="./" class="logo offset3"><g:message code="portal.title"/></a>
 
         <div class="menu">
-            <a href="#"><g:message code="portal.menu.newestArticles"/></a>
-            <a href="#"><g:message code="portal.menu.mostPopularCelebrities"/></a>
-            <a href="#"><g:message code="portal.menu.mostImportantArticles"/></a>
+            <g:link controller="top" action="newestArticles"><g:message code="portal.menu.newestArticles"/></g:link>
+            <g:link controller="top" action="mostPopularArticles"><g:message
+                    code="portal.menu.mostImportantArticles"/></g:link>
+            <g:link controller="top" action="mostPopularTags"><g:message
+                    code="portal.menu.mostPopularCelebrities"/></g:link>
         </div>
     </div>
 </div>
@@ -72,7 +74,7 @@
             <ol>
                 <g:each in="${viewModel.newestArticles}" var="article">
                     <li>
-                        <g:link controller="search" action="showArticle"
+                        <g:link controller="result" action="showArticle"
                                 params="${[hash: article.hash, title: article.title.encodeAsPrettyUrl()]}">${article.title}</g:link>
                     </li>
                 </g:each>
@@ -86,7 +88,7 @@
             <ol>
                 <g:each in="${viewModel.hottestArticles}" var="article">
                     <li>
-                        <g:link controller="search" action="showArticle"
+                        <g:link controller="result" action="showArticle"
                                 params="${[hash: article.hash, title: article.title.encodeAsPrettyUrl()]}">${article.title}</g:link>
                     </li>
                 </g:each>

@@ -2,6 +2,7 @@ package vanity.portal.home
 
 import vanity.article.Article
 import vanity.article.Tag
+import vanity.portal.top.PopularTagDTO
 
 class MainViewModel {
 

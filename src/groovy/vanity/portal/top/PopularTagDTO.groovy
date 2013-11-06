@@ -1,4 +1,4 @@
-package vanity.portal.home
+package vanity.portal.top
 
 import vanity.article.Tag
 

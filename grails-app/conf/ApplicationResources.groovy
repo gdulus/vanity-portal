@@ -38,4 +38,17 @@ modules = {
     showByTerm {
         dependsOn 'results'
     }
+
+    newestArticles {
+        dependsOn 'results'
+    }
+
+    mostPopularArticles {
+        dependsOn 'results'
+    }
+
+    mostPopularTags {
+        dependsOn 'results'
+        resource url: 'css/vanity/page/mostPopularTags.css'
+    }
 }

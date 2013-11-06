@@ -1,4 +1,4 @@
-package vanity.portal.home
+package vanity.portal.top
 
 import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.springframework.transaction.annotation.Transactional

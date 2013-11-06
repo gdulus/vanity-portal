@@ -30,7 +30,7 @@ class ApiController {
 
     private Map<String, String> getAsArticleLink(final SearchResultItem resultItem) {
         Map<String, ?> params = [hash: resultItem.id, title: resultItem.description.encodeAsPrettyUrl()]
-        String link = grailsLinkGenerator.link(controller: 'search', action: 'showArticle', params: params, absolute: true)
+        String link = grailsLinkGenerator.link(controller: 'result', action: 'showArticle', params: params, absolute: true)
         return [link: link, label: resultItem.description]
     }
 

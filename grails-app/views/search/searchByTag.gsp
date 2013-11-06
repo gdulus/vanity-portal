@@ -18,15 +18,16 @@
     </h2>
     <g:each in="${viewModel.articles}" var="article">
         <article>
-            <h3><g:link action="showArticle" params="${[hash: article.hash,
-                    tag: viewModel.tag.name.encodeAsPrettyUrl(),
-                    title: article.title.encodeAsPrettyUrl()]}">${article.title}</g:link></h3>
+            <h3><g:link controller="result"
+                        action="showArticle"
+                        params="${[hash: article.hash, tag: viewModel.tag.name.encodeAsPrettyUrl(), title: article.title.encodeAsPrettyUrl()]}">${article.title}</g:link></h3>
 
             <p>${article.shortBody}</p>
             <ul>
                 <g:each in="${article.tags}" var="articleTag">
                     <li>
                         <g:link class="label label-success"
+                                controller="search"
                                 action="searchByTag"
                                 params="${[hash: articleTag.hash, tagName: articleTag.name.encodeAsPrettyUrl()]}">${articleTag.name}
                         </g:link>

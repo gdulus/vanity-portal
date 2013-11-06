@@ -13,6 +13,7 @@ import vanity.search.SearchResult
 import vanity.tracking.ClickService
 import vanity.utils.ConfigUtils
 
+@Transactional(readOnly = true)
 class SearchService {
 
     ClickService clickService
@@ -27,7 +28,6 @@ class SearchService {
 
     GrailsApplication grailsApplication
 
-    @Transactional(readOnly = true)
     public SearchByTagViewModel buildSearchByTagModel(final String hash, final Integer startElement) {
         Tag tag = tagService.readByHash(hash)
 
@@ -48,7 +48,6 @@ class SearchService {
         return new SearchByTagViewModel(tag: tag, articles: articles, celebrity: celebrity, start: searchResult.start, numFound: searchResult.numFound)
     }
 
-    @Transactional(readOnly = true)
     public SearchByTermViewModel buildSearchByTermModel(final String term, final Integer startElement) {
         if (!term) {
             return null

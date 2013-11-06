@@ -1,35 +1,20 @@
-package vanity.portal.home
+package vanity.portal.top
 
-import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.springframework.transaction.annotation.Transactional
 import vanity.article.Article
 import vanity.stats.PopularityService
-import vanity.utils.ConfigUtils
 
 class TopArticlesService {
-
-    GrailsApplication grailsApplication
 
     PopularityService popularityService
 
     @Transactional(readOnly = true)
-    public List<Article> getNewestArticles() {
-        return Article.executeQuery('''
-            from
-                Article a
-            order by
-                a.publicationDate desc
-        ''',
-            [
-                max: grailsApplication.config.portal.mainPage.newestArticles.max
-            ]
-        )
+    public List<Article> getNewestArticles(final Integer max, final Integer offset) {
+        return Article.listOrderByPublicationDate(max: max, offset: offset, order: 'desc')
     }
 
     @Transactional(readOnly = true)
-    public List<Article> getHottestArticles() {
-        Date fromDate = (new Date() - ConfigUtils.$as(grailsApplication.config.portal.mainPage.hottestArticles.dateWindow, Integer))
-        Integer max = ConfigUtils.$as(grailsApplication.config.portal.mainPage.hottestArticles.max, Integer)
+    public List<Article> getHottestArticles(final Date fromDate, final Integer max) {
         List<Article> popular = popularityService.getTopArticlesFromDate(fromDate, max).collect { Article.read(it.elementId) }
 
         if (popular.size() == max) {

@@ -20,9 +20,12 @@
         <div class="clearfix"></div>
         <nav>
             <ul>
-                <li><a href="#"><g:message code="portal.menu.newestArticles"/></a></li>
-                <li><a href="#"><g:message code="portal.menu.mostPopularCelebrities"/></a></li>
-                <li><a href="#"><g:message code="portal.menu.mostImportantArticles"/></a></li>
+                <li><g:link controller="top" action="newestArticles"><g:message
+                        code="portal.menu.newestArticles"/></g:link></li>
+                <li><g:link controller="top" action="mostPopularArticles"><g:message
+                        code="portal.menu.mostImportantArticles"/></g:link></li>
+                <li><g:link controller="top" action="mostPopularTags"><g:message
+                        code="portal.menu.mostPopularCelebrities"/></g:link></li>
             </ul>
         </nav>
 

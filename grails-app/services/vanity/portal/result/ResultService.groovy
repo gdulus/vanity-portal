@@ -5,13 +5,13 @@ import vanity.article.Article
 import vanity.article.ArticleService
 import vanity.tracking.ClickService
 
+@Transactional(readOnly = true)
 class ResultService {
 
     ClickService clickService
 
     ArticleService articleService
 
-    @Transactional(readOnly = true)
     public ShowArticleViewModel buildShowArticleModel(final String hash) {
         Article article = articleService.findByHashCode(hash)
 
