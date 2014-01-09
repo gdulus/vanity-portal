@@ -8,8 +8,13 @@
 <body>
 <g:if test="${viewModel.celebrity}">
     <section>
-        <h1>${viewModel.celebrity.firstName} ${viewModel.celebrity.lastName}</h1>
-        ${viewModel.celebrity.description}
+        <img src="${viewModel.celebrity.getImagePath(grailsApplication)}" alt="${viewModel.celebrity.fullName}">
+
+        <h1>${viewModel.celebrity.fullName}</h1>
+
+        <p>
+            ${viewModel.celebrity.description}
+        </p>
     </section>
 </g:if>
 <section>
@@ -39,8 +44,8 @@
             </span>
         </article>
     </g:each>
-    <v:paginate controller="result"
-                action="showByTag"
+    <v:paginate controller="search"
+                action="searchByTag"
                 params="[tagName: viewModel.tag.name.encodeAsPrettyUrl(), hash: viewModel.tag.hash]"
                 startParamName="startElement"
                 start="${viewModel.start}"
