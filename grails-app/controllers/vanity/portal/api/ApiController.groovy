@@ -29,13 +29,13 @@ class ApiController {
     }
 
     private Map<String, String> getAsArticleLink(final SearchResultItem resultItem) {
-        Map<String, ?> params = [hash: resultItem.id, title: resultItem.description.encodeAsPrettyUrl()]
+        Map<String, ?> params = [id: resultItem.id, title: resultItem.description.encodeAsPrettyUrl()]
         String link = grailsLinkGenerator.link(controller: 'result', action: 'showArticle', params: params, absolute: true)
         return [link: link, label: resultItem.description]
     }
 
     private Map<String, String> getAsTagLink(final SearchResultItem resultItem) {
-        Map<String, ?> params = [hash: resultItem.id, tagName: resultItem.description.encodeAsPrettyUrl(), startElement: 0]
+        Map<String, ?> params = [tagName: resultItem.description.encodeAsPrettyUrl()]
         String link = grailsLinkGenerator.link(controller: 'search', action: 'searchByTag', params: params, absolute: true)
         return [link: link, label: resultItem.description]
     }

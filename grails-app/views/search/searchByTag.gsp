@@ -25,7 +25,7 @@
         <article>
             <h3><g:link controller="result"
                         action="showArticle"
-                        params="${[hash: article.hash, tag: viewModel.tag.name.encodeAsPrettyUrl(), title: article.title.encodeAsPrettyUrl()]}">${article.title}</g:link></h3>
+                        params="${[id: article.id, tag: viewModel.tag.name.encodeAsPrettyUrl(), title: article.title.encodeAsPrettyUrl()]}">${article.title}</g:link></h3>
 
             <p>${article.shortBody}</p>
             <ul>
@@ -34,7 +34,7 @@
                         <g:link class="label label-success"
                                 controller="search"
                                 action="searchByTag"
-                                params="${[hash: articleTag.hash, tagName: articleTag.name.encodeAsPrettyUrl()]}">${articleTag.name}
+                                params="${[tagName: articleTag.normalizedName]}">${articleTag.name}
                         </g:link>
                     </li>
                 </g:each>

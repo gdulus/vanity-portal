@@ -12,8 +12,8 @@ class ResultService {
 
     ArticleService articleService
 
-    public ShowArticleViewModel buildShowArticleModel(final String hash) {
-        Article article = articleService.findByHashCode(hash)
+    public ShowArticleViewModel buildShowArticleModel(final Long id) {
+        Article article = articleService.read(id)
 
         if (!article) {
             return null

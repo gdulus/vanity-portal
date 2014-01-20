@@ -28,8 +28,8 @@ class SearchService {
 
     GrailsApplication grailsApplication
 
-    public SearchByTagViewModel buildSearchByTagModel(final String hash, final Integer startElement) {
-        Tag tag = tagService.readByHash(hash)
+    public SearchByTagViewModel buildSearchByTagModel(final String tagName, final Integer startElement) {
+        Tag tag = tagService.readByTagName(tagName)
 
         if (!tag) {
             return null

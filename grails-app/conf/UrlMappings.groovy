@@ -15,22 +15,17 @@ class UrlMappings {
         /**
          * Portal result page
          */
-        "/artykul/$hash/$title"(controller: 'result', action: 'showArticle')
-        "/artykul/$hash/$tag/$title"(controller: 'result', action: 'showArticle') {
-            constraints {
-                hash(blank: false, nullable: false)
-            }
-        }
+        "/artykul/$id/$title"(controller: 'result', action: 'showArticle')
+        "/artykul/$id/$tag/$title"(controller: 'result', action: 'showArticle')
 
         /**
          * Portal search result pages
          */
-        "/vip/$hash/$tagName/$startElement?"(controller: 'search', action: 'searchByTag') {
+        "/vip/$tagName/$startElement?"(controller: 'search', action: 'searchByTag') {
             constraints {
-                hash(blank: false, nullable: false)
                 tagName(blank: false, nullable: false)
                 startElement(validator: {
-                    it.isNumber() && it.toInteger() >= 0
+                    !it || (it.isNumber() && it.toInteger() >= 0)
                 })
             }
         }
@@ -38,7 +33,7 @@ class UrlMappings {
         "/szukaj/$startElement?"(controller: 'search', action: 'searchByTerm') {
             constraints {
                 startElement(validator: {
-                    it.isNumber() && it.toInteger() >= 0
+                    !it || (it.isNumber() && it.toInteger() >= 0)
                 })
             }
         }

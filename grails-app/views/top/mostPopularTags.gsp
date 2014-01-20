@@ -11,7 +11,7 @@
 
 <p class="tag-cloud">
     <g:each in="${viewModel.tags}" var="hottestTag">
-        <a href="${createLink(controller: 'search', action: 'searchByTag', params: [hash: hottestTag.tag.hash, tagName: hottestTag.tag.name.encodeAsPrettyUrl()])}"
+        <a href="${createLink(controller: 'search', action: 'searchByTag', params: [tagName: hottestTag.tag.normalizedName])}"
            class="tag scale${hottestTag.rank}" title="${hottestTag.tag.name}">${hottestTag.tag.name}</a>
     </g:each>
 </p>

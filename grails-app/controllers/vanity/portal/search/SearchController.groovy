@@ -7,8 +7,8 @@ class SearchController {
 
     def searchService
 
-    def searchByTag(final String hash, final Integer startElement) {
-        def model = searchService.buildSearchByTagModel(hash, startElement)
+    def searchByTag(final String tagName, final Integer startElement) {
+        def model = searchService.buildSearchByTagModel(tagName, startElement)
 
         if (!model) {
             response.sendError(HttpStatus.NOT_FOUND.value())
