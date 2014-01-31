@@ -29,7 +29,7 @@ class SearchService {
     GrailsApplication grailsApplication
 
     public SearchByTagViewModel buildSearchByTagModel(final String tagName, final Integer startElement) {
-        Tag tag = tagService.readByTagName(tagName)
+        Tag tag = tagService.findByTagName(tagName)
 
         if (!tag) {
             return null
@@ -43,7 +43,7 @@ class SearchService {
         }
 
         clickService.create(tag)
-        List<Article> articles = articleService.findByHashCodes(searchResult.items*.id)
+        List<Article> articles = articleService.findAllByHashCodes(searchResult.items*.id)
         Celebrity celebrity = celebrityService.findByTag(tag)
         return new SearchByTagViewModel(tag: tag, articles: articles, celebrity: celebrity, start: searchResult.start, numFound: searchResult.numFound)
     }
@@ -60,7 +60,7 @@ class SearchService {
             return null
         }
 
-        List<Article> articles = articleService.findByHashCodes(searchResult.items*.id)
+        List<Article> articles = articleService.findAllByHashCodes(searchResult.items*.id)
         return new SearchByTermViewModel(term: term, articles: articles, start: searchResult.start, numFound: searchResult.numFound)
     }
 }

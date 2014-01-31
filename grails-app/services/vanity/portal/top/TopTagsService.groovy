@@ -19,7 +19,7 @@ class TopTagsService {
 
     @Transactional(readOnly = true)
     public List<Tag> getPromotedTags() {
-        return tagService.getAllTagsByStatus(Status.Tag.PROMOTED)
+        return tagService.findAllByStatus(Status.Tag.PROMOTED)
     }
 
     @Transactional(readOnly = true)
