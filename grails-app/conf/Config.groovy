@@ -3,11 +3,11 @@ import vanity.utils.ConfigUtils
 /**
  * set up all external config file
  */
-ConfigUtils.externalConfig(grails, userHome) {
-    file 'base-db.properties'
-    file 'base-search.properties'
-    file 'base-files.properties'
-    file 'portal-config.properties'
+grails.config.locations = ConfigUtils.externalConfig(userHome) {
+    file 'base-db'
+    file 'base-search'
+    file 'base-files'
+    file 'portal-config'
 }
 
 /**

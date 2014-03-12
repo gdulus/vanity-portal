@@ -2,9 +2,9 @@ package vanity.portal.top
 
 import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.springframework.transaction.annotation.Transactional
-import vanity.article.Status
 import vanity.article.Tag
 import vanity.article.TagService
+import vanity.article.TagStatus
 import vanity.stats.PopularityDTO
 import vanity.stats.PopularityService
 import vanity.utils.ConfigUtils
@@ -19,7 +19,7 @@ class TopTagsService {
 
     @Transactional(readOnly = true)
     public List<Tag> getPromotedTags() {
-        return tagService.findAllByStatus(Status.Tag.PROMOTED)
+        return tagService.findAllByStatus(TagStatus.PROMOTED)
     }
 
     @Transactional(readOnly = true)

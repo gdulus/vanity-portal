@@ -1,7 +1,6 @@
 package vanity.portal.top
 
 import org.springframework.http.HttpStatus
-import vanity.portal.paginate.PaginateCmd
 
 class TopController {
 
