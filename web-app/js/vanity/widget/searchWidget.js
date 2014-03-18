@@ -8,7 +8,7 @@ V.Search = (function (undefined) {
     var $resultContainer = null;
     var apiUrl = null;
     var hideAfter = 200;
-    var searchBoxFocusSearchAfter = 500;
+    var searchBoxFocusSearchAfter = 200;
     var termMinLength = 3;
     var hide = false;
     var hideTimerHandler = null;
@@ -40,6 +40,7 @@ V.Search = (function (undefined) {
             var offset = $searchInput.offset();
             $resultContainer.css('left', offset.left);
             $resultContainer.css('top', offset.top + $searchInput.outerHeight());
+            $resultContainer.width($searchInput.outerWidth());
             $resultContainer.show();
         });
     }
@@ -64,7 +65,8 @@ V.Search = (function (undefined) {
     }
 
     function bindEvents() {
-        // keyboard binding
+        V.Logger.info('Start binding events');
+        V.Logger.info('Keyboard bindings');
         $searchInput.keydown(function (e) {
             var keyCode = e.keyCode || e.which;
             switch (keyCode) {
@@ -116,6 +118,7 @@ V.Search = (function (undefined) {
             e.stopPropagation();
         };
 
+        V.Logger.info('Search input bindings');
         $searchInput.mouseover(function (e) {
             if (hide) {
                 triggerSearch(previousSearchQuery);
@@ -123,10 +126,6 @@ V.Search = (function (undefined) {
             mouseOver(e);
         });
         $searchInput.mouseout(mouseOut);
-        $resultContainer.mouseover(mouseOver);
-        $resultContainer.mouseout(mouseOut);
-
-        // search trigger
         $searchInput.keyup(function () {
             clearTimeout(searchBoxFocusTimerHandler);
             searchBoxFocusTimerHandler = setTimeout(function () {
@@ -137,7 +136,12 @@ V.Search = (function (undefined) {
                 previousSearchQuery = searchQuery;
             }, searchBoxFocusSearchAfter);
         });
-        // search button click
+
+        V.Logger.info('Result container bindings');
+        $resultContainer.mouseover(mouseOver);
+        $resultContainer.mouseout(mouseOut);
+
+        V.Logger.info('Search button bindings');
         $searchButton.click(function (e) {
             var url = $(this).attr('href');
             var term = $searchInput.val();
@@ -151,20 +155,23 @@ V.Search = (function (undefined) {
             e.stopPropagation();
             e.preventDefault();
         })
+
+        V.Logger.info('Events initialized');
     }
 
     return {
         init: function (searchFormId) {
             if (!$searchInput) {
-                var $searchForm = $(searchFormId)
-                apiUrl = $searchForm.attr('target');
+                V.Logger.info('Initializing search widget');
+                var $searchForm = $(searchFormId).find('form');
+                apiUrl = $searchForm.attr('action');
                 $searchInput = $searchForm.find('input[type=search]');
-                $searchButton = $searchForm.find('a');
+                $searchButton = $searchForm.find('input[type=submit]');
                 $resultContainer = $('<ul id="search-result"></ul>')
-                $resultContainer.width($searchInput.outerWidth());
                 $resultContainer.hide();
                 $(document.body).append($resultContainer);
-                bindEvents()
+                bindEvents();
+                V.Logger.info('Search widget initialized for endpoint ' + apiUrl);
             }
         }
     }

@@ -3,7 +3,7 @@ import vanity.utils.ConfigUtils
 /**
  * set up all external config file
  */
-grails.config.locations = ConfigUtils.externalConfig(userHome) {
+ConfigUtils.externalConfig(grails, userHome) {
     file 'base-db'
     file 'base-search'
     file 'base-files'
@@ -36,6 +36,7 @@ grails.mime.types = [
 
 // What URL patterns should be processed by the resources plugin
 grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
+grails.resources.adhoc.excludes = ['**/WEB-INF/**', '**/META-INF/**']
 
 // The default codec used to encode data with ${}
 grails.views.default.codec = "none" // none, html, base64
@@ -53,7 +54,7 @@ grails.enable.native2ascii = true
 // packages to include in Spring bean scanning
 grails.spring.bean.packages = []
 // whether to disable processing of multi part requests
-grails.web.disable.multipart = false
+grails.web.disable.multipart = true
 
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
@@ -78,9 +79,8 @@ log4j = {
     //appenders {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
-    info 'vanity'
-
-    error 'org.codehaus.groovy.grails.web.servlet',        // controllers
+    info 'vanity',
+        'org.codehaus.groovy.grails.web.servlet',      // controllers
         'org.codehaus.groovy.grails.web.pages',          // GSP
         'org.codehaus.groovy.grails.web.sitemesh',       // layouts
         'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping

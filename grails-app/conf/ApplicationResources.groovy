@@ -1,12 +1,11 @@
 modules = {
-    base {
-        resource url: 'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', defaultBundle: false
-        resource url: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js', defaultBundle: false
-        resource url: 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/base/jquery-ui.css', defaultBundle: false
-        resource url: 'js/vanity/base.js'
-        resource url: 'css/libs/bootstrap.min.css'
-        resource url: 'css/vanity/page/base.css'
 
+    base {
+        resource url: 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js', defaultBundle: false, attrs: [type: 'js']
+        resource url: 'http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css', defaultBundle: false, attrs: [type: 'css']
+        resource url: 'http://fonts.googleapis.com/css?family=Archivo+Narrow:400,700&subset=latin,latin-ext', defaultBundle: false, attrs: [type: 'css']
+
+        resource url: 'js/vanity/base.js'
     }
 
     searchWidget {
@@ -17,14 +16,13 @@ modules = {
 
     home {
         dependsOn 'base, searchWidget'
-        resource url: 'css/vanity/page/home.css'
         resource url: 'js/vanity/home.js'
+        resource url: 'less/main.less', attrs: [rel: "stylesheet/less", type: 'css']
     }
 
     results {
         dependsOn 'base, searchWidget'
-        resource url: 'css/vanity/page/results.css'
-        resource url: 'js/vanity/results.js'
+        resource url: 'less/results.less', attrs: [rel: "stylesheet/less", type: 'css']
     }
 
     showArticle {
@@ -49,6 +47,10 @@ modules = {
 
     mostPopularTags {
         dependsOn 'results'
-        resource url: 'css/vanity/page/mostPopularTags.css'
+    }
+
+    errors {
+        dependsOn 'base, searchWidget'
+        resource url: 'less/errors.less', attrs: [rel: "stylesheet/less", type: 'css']
     }
 }

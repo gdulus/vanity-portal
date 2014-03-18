@@ -1,0 +1,124 @@
+@import "results.less";
+
+#summary {
+
+  margin-bottom: 25px;
+
+  h2 {
+    .reset;
+    border-top: 1px solid #c6c6c6;
+    font-size: 26px;
+    font-weight: bold;
+    color: @main-color;
+    padding-top: 24px;
+
+    span {
+      color: #535353;
+    }
+  }
+}
+
+#cellebrity {
+
+  margin-bottom: 20px;
+
+  .wrapper {
+    border: 1px solid @main-color;
+    background-color: #ffffff;
+    padding: 20px;
+  }
+
+  h3 {
+    .reset;
+    color: @main-color;
+    padding-bottom: 15px;
+  }
+
+  @media (max-width: 992px) {
+    .picture {
+      display: none;
+    }
+  }
+
+  .description p {
+    text-align: justify;
+  }
+
+}
+
+#articles {
+
+  ul {
+    .reset;
+    list-style: none;
+  }
+
+  .article {
+
+    padding: 20px;
+    background-color: white;
+    margin-bottom: 20px;
+
+    h4 {
+      .reset;
+
+      a {
+        font-size: 26px;
+        color: #000000;
+      }
+    }
+
+    .date {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #535353;
+    }
+
+    p {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #535353;
+    }
+
+    .source {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #000000;
+
+      a {
+        color: #000000;
+      }
+    }
+
+    .tags {
+      margin-top: 15px;
+
+      a {
+        padding: 5px;
+        background-color: #f7f7f7;
+        font-size: 14px;
+        font-weight: normal;
+        color: #7e7d7d;;
+      }
+    }
+  }
+}
+
+#pagination {
+  .pagination {
+    margin: 0px 0px 30px 0px;
+  }
+
+  * {
+    border-radius: 0px;
+    border: none;
+  }
+
+  a {
+    color: #535353;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}

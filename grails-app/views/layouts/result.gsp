@@ -1,59 +1,89 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="utf-8">
-    <title><g:message code="portal.title"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <title><g:layoutTitle default="Vanity cms"/></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title><g:layoutTitle/></title>
     <g:layoutHead/>
     <r:layoutResources/>
 </head>
 
 <body>
-<div id="wrap">
-    <header>
-        <h1>
-            <a href="${createLink(controller: 'home')}">TaniLans</a>
-        </h1>
-        <v:searchWidget/>
-        <div class="clearfix"></div>
-        <nav>
-            <ul>
-                <li><g:link controller="top" action="newestArticles"><g:message
-                        code="portal.menu.newestArticles"/></g:link></li>
-                <li><g:link controller="top" action="mostPopularArticles"><g:message
-                        code="portal.menu.mostImportantArticles"/></g:link></li>
-                <li><g:link controller="top" action="mostPopularTags"><g:message
-                        code="portal.menu.mostPopularCelebrities"/></g:link></li>
-            </ul>
-        </nav>
 
-        <div class="clearfix"></div>
-    </header>
-
-    <div role="main">
-        <g:layoutBody/>
-    </div>
-
-    <div id="push"></div>
-</div>
-
-<footer id="footer">
+<div id="header">
     <div class="container">
-        <div class="row credit">
-            <div class="span2 offset2">
-                <h6 class="vanity"><g:message code="portal.credits" args="[new Date().format('yyyy')]"/></h6>
+        <div class="row">
+            <div class="logo col-md-3 col-md-offset-1">
+                <h1><g:link controller="home"><img src="images/logo-small.jpg" alt="Tani Lans"
+                                                   class="img-responsive"/></g:link></h1>
             </div>
 
-            <div class="span6 menu text-right">
-                <a href="#" class="muted"><g:message code="portal.footer.aboutUs"/></a>
-                <a href="#" class="muted"><g:message code="portal.footer.regulations"/></a>
-                <a href="#" class="muted"><g:message code="portal.footer.contact"/></a>
+            <div id="search" class="col-md-7" role="search">
+                <form target="#">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control"
+                                       placeholder="${g.message(code: 'portal.searchForm.searchPlaceholder')}"/>
+                                <span class="input-group-btn">
+                                    <input class="btn btn-default" type="submit"
+                                           value="${g.message(code: 'portal.searchForm.searchButton')}"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</footer>
+</div>
+
+<div id="main-menu">
+    <div class="container">
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#main-menu .navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><g:link controller="top" action="newestArticles"><g:message
+                                code="portal.menu.newestArticles"/></g:link></li>
+                        <li><g:link controller="top" action="mostPopularArticles"><g:message
+                                code="portal.menu.mostImportantArticles"/></g:link></li>
+                        <li><g:link controller="top" action="mostPopularTags"><g:message
+                                code="portal.menu.mostPopularCelebrities"/></g:link></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="main" class="container" role="main">
+    <g:layoutBody/>
+</div>
+
+<div id="footer" role="navigation">
+    <div class="container">
+        <div class="col-md-10 col-md-offset-1">
+            <ul>
+                <li><a href="#" class="muted"><g:message code="portal.footer.aboutUs"/></a></li>
+                <li><a href="#" class="muted"><g:message code="portal.footer.regulations"/></a></li>
+                <li><a href="#" class="muted"><g:message code="portal.footer.contact"/></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
 <r:layoutResources/>
 </body>
 </html>
