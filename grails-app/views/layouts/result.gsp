@@ -4,9 +4,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content="">
     <title><g:layoutTitle/></title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Archivo+Narrow:400,700&subset=latin,latin-ext"
+          type="text/css"/>
     <g:layoutHead/>
-    <r:layoutResources/>
+
 </head>
 
 <body>
@@ -15,16 +19,16 @@
     <div class="container">
         <div class="row">
             <div class="logo col-md-3 col-md-offset-1">
-                <h1><g:link controller="home"><img src="images/logo-small.jpg" alt="Tani Lans"
-                                                   class="img-responsive"/></g:link></h1>
+                <h1><g:link controller="home"><asset:image src="logo-small.jpg" alt="Tani Lans"
+                                                           class="img-responsive"/></g:link></h1>
             </div>
 
-            <div id="search" class="col-md-7" role="search">
-                <form target="#">
+            <div id="search" class="col-md-7">
+                <g:form controller="api" action="searchByTerm">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
-                                <input type="text" class="form-control"
+                                <input type="search" class="form-control"
                                        placeholder="${g.message(code: 'portal.searchForm.searchPlaceholder')}"/>
                                 <span class="input-group-btn">
                                     <input class="btn btn-default" type="submit"
@@ -33,7 +37,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                </g:form>
             </div>
         </div>
     </div>
@@ -84,6 +88,10 @@
     </div>
 </div>
 
-<r:layoutResources/>
+<%--
+    JS assets
+--%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+<asset:javascript src="vanity/results.js"/>
 </body>
 </html>

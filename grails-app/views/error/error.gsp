@@ -3,7 +3,7 @@
 <head>
     <title><g:message code="error.${status}"/></title>
     <meta name="layout" content="result"/>
-    <r:require module="errors"/>
+    <asset:stylesheet href="vanity/errors.css"/>
 </head>
 
 <body>

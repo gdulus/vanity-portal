@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title></title>
+    <title><g:message code="portal.top.topArticles"/></title>
     <meta name="layout" content="result"/>
-    <r:require module="newestArticles"/>
+    <asset:stylesheet href="vanity/list.css"/>
 </head>
 
 <body>

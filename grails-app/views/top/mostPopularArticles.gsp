@@ -5,7 +5,6 @@
 <head>
     <title></title>
     <meta name="layout" content="result"/>
-    <r:require module="mostPopularArticles"/>
 </head>
 
 <body>
