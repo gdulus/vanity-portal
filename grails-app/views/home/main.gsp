@@ -2,7 +2,7 @@
 <head>
     <title></title>
     <meta name="layout" content="home"/>
-    <r:require module="home"/>
+    <asset:stylesheet href="vanity/main.css"/>
 </head>
 
 <body>
@@ -105,6 +105,10 @@
         </div>
     </div>
 </div>
+
+<content tag="javascript">
+    <asset:javascript src="vanity/home.js"/>
+</content>
 
 </body>
 </html>
