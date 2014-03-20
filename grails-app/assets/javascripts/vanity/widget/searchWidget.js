@@ -16,8 +16,13 @@ V.Search = (function (undefined) {
     var previousSearchQuery = null;
 
     var triggerSearch = function (value) {
+        // show loader
+        $searchInput.addClass('loader');
+        // execute ajax call
         $.get(apiUrl, {term: value}, function (results) {
             V.Logger.info('Search for: ' + value);
+            // remove loader
+            $searchInput.removeClass('loader');
             // clear previous results
             $resultContainer.empty();
             // tags
@@ -168,7 +173,7 @@ V.Search = (function (undefined) {
                 $searchInput = $searchForm.find('input[type=search]');
                 $searchButton = $searchForm.find('input[type=submit]');
                 $resultContainer = $('<ul id="search-result"></ul>')
-                $resultContainer.hide();
+                //$resultContainer.hide();
                 $(document.body).append($resultContainer);
                 bindEvents();
                 V.Logger.info('Search widget initialized for endpoint ' + apiUrl);
