@@ -1,43 +1,49 @@
-package vanity.portal.api
+package vanity.portal
 
 import grails.converters.JSON
-import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.codehaus.groovy.grails.web.mapping.LinkGenerator
+import org.springframework.beans.factory.annotation.Value
 import vanity.search.SearchEngineQueryExecutor
 import vanity.search.SearchResult
-import vanity.search.SearchResult.SearchResultItem
-import vanity.utils.ConfigUtils
 
-class ApiController {
+import javax.ws.rs.GET
+import javax.ws.rs.Path
+import javax.ws.rs.Produces
+import javax.ws.rs.QueryParam
+
+@Path('/api/search')
+class SearchResource {
 
     SearchEngineQueryExecutor searchEngineQueryExecutor
 
     LinkGenerator grailsLinkGenerator
 
-    GrailsApplication grailsApplication
+    @Value('${portal.search.box.articles.max}')
+    Integer maxArticles
 
-    def searchByTerm(final String term) {
-        Integer maxArticles = ConfigUtils.$as(grailsApplication.config.portal.search.box.articles.max, Integer)
+    @Value('${portal.search.box.tags.max}')
+    Integer maxTags
+
+    @GET
+    @Produces('application/json')
+    JSON result(@QueryParam('term') final String term) {
         SearchResult articles = searchEngineQueryExecutor.findArticles(term, 0, maxArticles)
-        def articleLinks = articles.items.collect { getAsArticleLink(it) }
+        List<Map<String, String>> articleLinks = articles.items.collect { getAsArticleLink(it) }
 
-        Integer maxTags = ConfigUtils.$as(grailsApplication.config.portal.search.box.tags.max, Integer)
         SearchResult tags = searchEngineQueryExecutor.findTags(term, 0, maxTags)
-        def tagLinks = tags.items.collect { getAsTagLink(it) }
-
-        render([tags: tagLinks, articles: articleLinks] as JSON)
+        List<Map<String, String>> tagLinks = tags.items.collect { getAsTagLink(it) }
+        return [tags: tagLinks, articles: articleLinks] as JSON
     }
 
-    private Map<String, String> getAsArticleLink(final SearchResultItem resultItem) {
+    private Map<String, String> getAsArticleLink(final SearchResult.SearchResultItem resultItem) {
         Map<String, ?> params = [id: resultItem.id, title: resultItem.description.encodeAsPrettyUrl()]
         String link = grailsLinkGenerator.link(controller: 'result', action: 'showArticle', params: params, absolute: true)
         return [link: link, label: resultItem.description]
     }
 
-    private Map<String, String> getAsTagLink(final SearchResultItem resultItem) {
+    private Map<String, String> getAsTagLink(final SearchResult.SearchResultItem resultItem) {
         Map<String, ?> params = [tagName: resultItem.description.encodeAsPrettyUrl()]
         String link = grailsLinkGenerator.link(controller: 'search', action: 'searchByTag', params: params, absolute: true)
         return [link: link, label: resultItem.description]
     }
-
 }

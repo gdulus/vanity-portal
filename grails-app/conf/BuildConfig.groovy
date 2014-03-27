@@ -26,6 +26,7 @@ grails.project.dependency.resolution = {
         grailsCentral()
         mavenLocal()
         mavenCentral()
+        mavenRepo 'http://maven.restlet.org'
     }
 
     dependencies {
@@ -41,6 +42,7 @@ grails.project.dependency.resolution = {
         compile ":cache:1.1.1"
         compile ":asset-pipeline:1.7.1"
         compile ":less-asset-pipeline:1.7.0"
+        compile ':jaxrs:0.10'
     }
 }
 

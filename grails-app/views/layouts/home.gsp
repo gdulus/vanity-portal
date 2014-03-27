@@ -50,7 +50,7 @@
 </div>
 
 <div id="search" class="container" role="search">
-    <g:form controller="api" action="searchByTerm">
+    <form action="${createLink(uri: '/api/search')}" method="get">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="input-group">
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </div>
-    </g:form>
+    </form>
 </div>
 
 <div id="main" class="container" role="main">
