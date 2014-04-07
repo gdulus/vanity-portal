@@ -1,8 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title><g:message code="portal.searchResult.foundArticles" args="[viewModel.tag.name]"/></title>
+    <title><g:message code="portal.searchResult.foundArticles.title" args="[viewModel.tag.name]"/></title>
     <meta name="layout" content="list"/>
+    <asset:stylesheet href="vanity/list.css"/>
 </head>
 
 <body>

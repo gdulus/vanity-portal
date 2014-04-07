@@ -57,7 +57,9 @@
                     <input type="search" class="form-control"
                            placeholder="${g.message(code: 'portal.searchForm.searchPlaceholder')}"/>
                     <span class="input-group-btn">
-                        <input class="btn btn-default" type="submit"
+                        <input class="btn btn-default"
+                               type="submit"
+                               href="${createLink(controller: 'search', action: 'searchByTerm')}"
                                value="${g.message(code: 'portal.searchForm.searchButton')}"/>
                     </span>
                 </div>
@@ -70,17 +72,7 @@
     <g:layoutBody/>
 </div>
 
-<div id="footer" role="navigation">
-    <div class="container">
-        <div class="col-md-10 col-md-offset-1">
-            <ul>
-                <li><a href="#" class="muted"><g:message code="portal.footer.aboutUs"/></a></li>
-                <li><a href="#" class="muted"><g:message code="portal.footer.regulations"/></a></li>
-                <li><a href="#" class="muted"><g:message code="portal.footer.contact"/></a></li>
-            </ul>
-        </div>
-    </div>
-</div>
+<g:render template="/layouts/footer"/>
 
 <%--
     JS assets

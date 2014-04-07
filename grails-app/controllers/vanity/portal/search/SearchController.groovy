@@ -18,8 +18,8 @@ class SearchController {
         return [viewModel: model]
     }
 
-    def searchByTerm(@RequestParameter('q') final String term, final Integer startElement) {
-        def model = searchService.buildSearchByTermModel(term, startElement)
+    def searchByTerm(@RequestParameter('q') final String term, final Integer offset) {
+        def model = searchService.buildSearchByTermModel(term, offset)
 
         if (!model) {
             response.sendError(HttpStatus.NOT_FOUND.value())

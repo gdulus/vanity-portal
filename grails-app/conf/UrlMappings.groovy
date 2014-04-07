@@ -27,13 +27,7 @@ class UrlMappings {
             }
         }
 
-        "/szukaj/$startElement?"(controller: 'search', action: 'searchByTerm') {
-            constraints {
-                startElement(validator: {
-                    !it || (it.isNumber() && it.toInteger() >= 0)
-                })
-            }
-        }
+        "/szukaj/$offset?/$max?"(controller: 'search', action: 'searchByTerm')
 
         /**
          * Top results
@@ -41,6 +35,13 @@ class UrlMappings {
         "/najnowsze-plotki/$offset?/$max?"(controller: 'top', action: 'newestArticles')
         "/najwazniejsze-plotki/$offset?/$max?"(controller: 'top', action: 'mostPopularArticles')
         "/najpopularniejsi-celebryci"(controller: 'top', action: 'mostPopularTags')
+
+        /**
+         * Info page
+         */
+        "/o-nas"(controller: 'info', action: 'aboutUs')
+        "/regulamin"(controller: 'info', action: 'regulations')
+        "/kontakt"(controller: 'info', action: 'contact')
 
         /**
          * Error pages

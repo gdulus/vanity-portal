@@ -3,6 +3,7 @@
 <head>
     <title><g:message code="portal.top.hottestArticles"/></title>
     <meta name="layout" content="list"/>
+    <asset:stylesheet href="vanity/list.css"/>
 </head>
 
 <body>

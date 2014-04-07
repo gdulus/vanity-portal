@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title></title>
-    <meta name="layout" content="result"/>
-    <r:require module="mostPopularTags"/>
+    <title><g:message code="portal.top.mostPopularTags"/></title>
+    <meta name="layout" content="list"/>
+    <asset:stylesheet href="vanity/list.css"/>
 </head>
 
 <body>
