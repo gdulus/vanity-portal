@@ -88,6 +88,10 @@ log4j = {
         'org.springframework',
         'org.hibernate',
         'net.sf.ehcache.hibernate'
+
+    root {
+        info 'console'
+    }
 }
 // Uncomment and edit the following lines to start using Grails encoding & escaping improvements
 

@@ -9,9 +9,8 @@
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Archivo+Narrow:400,700&subset=latin,latin-ext"
           type="text/css"/>
-    <asset:stylesheet href="vanity/result.css"/>
+    <asset:stylesheet href="vanity/list.css"/>
     <g:layoutHead/>
-
 </head>
 
 <body>
@@ -73,7 +72,21 @@
     </div>
 </div>
 
-<g:layoutBody/>
+<div id="main" class="container">
+    <g:layoutBody/>
+</div>
+
+<div id="footer">
+    <div class="container">
+        <div class="col-md-10 col-md-offset-1">
+            <ul>
+                <li><a href="#" class="muted"><g:message code="portal.footer.aboutUs"/></a></li>
+                <li><a href="#" class="muted"><g:message code="portal.footer.regulations"/></a></li>
+                <li><a href="#" class="muted"><g:message code="portal.footer.contact"/></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 
 <%--
     JS assets

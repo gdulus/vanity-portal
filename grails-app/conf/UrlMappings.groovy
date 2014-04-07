@@ -21,12 +21,9 @@ class UrlMappings {
         /**
          * Portal search result pages
          */
-        "/vip/$tagName/$startElement?"(controller: 'search', action: 'searchByTag') {
+        "/vip/$tagName/$offset?/$max?"(controller: 'search', action: 'searchByTag') {
             constraints {
                 tagName(blank: false, nullable: false)
-                startElement(validator: {
-                    !it || (it.isNumber() && it.toInteger() >= 0)
-                })
             }
         }
 

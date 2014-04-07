@@ -1,55 +1,61 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title></title>
-    <meta name="layout" content="result"/>
-    <r:require module="showByTag"/>
+    <title><g:message code="portal.searchResult.foundArticles" args="[viewModel.tag.name]"/></title>
+    <meta name="layout" content="list"/>
 </head>
 
 <body>
-<g:if test="${viewModel.celebrity}">
-    <section>
-        <img src="${viewModel.celebrity.getImagePath(grailsApplication)}" alt="${viewModel.celebrity.fullName}">
+<div id="summary" class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h2><g:message code="portal.searchResult.foundArticles" args="[viewModel.tag.name]"/></h2>
+    </div>
+</div>
 
-        <h1>${viewModel.celebrity.fullName}</h1>
-
-        <p>
-            ${viewModel.celebrity.description}
-        </p>
-    </section>
-</g:if>
-<section>
-    <h2>
-        <g:message code="portal.searchResult.foundArticles"/>
-    </h2>
-    <g:each in="${viewModel.articles}" var="article">
-        <article>
-            <h3><g:link controller="result"
-                        action="showArticle"
-                        params="${[id: article.id, tag: viewModel.tag.name.encodeAsPrettyUrl(), title: article.title.encodeAsPrettyUrl()]}">${article.title}</g:link></h3>
-
-            <p>${article.shortBody}</p>
+<g:each in="${viewModel.articles}" var="article">
+    <div id="articles" class="row">
+        <div class="col-md-10 col-md-offset-1">
             <ul>
-                <g:each in="${article.tags}" var="articleTag">
-                    <li>
-                        <g:link class="label label-success"
-                                controller="search"
-                                action="searchByTag"
-                                params="${[tagName: articleTag.normalizedName]}">${articleTag.name}
-                        </g:link>
-                    </li>
-                </g:each>
+                <li class="article">
+                    <h4>
+                        <g:link controller="result"
+                                action="showArticle"
+                                params="${[id: article.id, title: article.title.encodeAsPrettyUrl()]}">${article.title}</g:link>
+
+                    </h4>
+
+                    <div class="date"><g:formatDate format="yyyy-MM-dd" date="${article.publicationDate}"/></div>
+
+                    <p>
+                        ${article.shortBody}
+                    </p>
+
+                    <div class="source">
+                        <g:message code="portal.searchResult.readRest"/>
+                        <a href="${article.url}" target="_blank"><g:message code="${article.source.target.name()}"/></a>
+
+                        <div class="tags">
+                            <g:each in="${article.tags}" var="articleTag">
+                                <g:link controller="search"
+                                        action="searchByTag"
+                                        params="${[tagName: articleTag.normalizedName]}">${articleTag.name}</g:link>
+                            </g:each>
+                        </div>
+                </li>
             </ul>
-            <span><g:message code="portal.searchResult.readRest"/>
-                <a href="${article.url}" target="_blank"><g:message code="${article.source.target.name()}"/></a>
-            </span>
-        </article>
-    </g:each>
-    <v:paginate controller="search"
-                action="searchByTag"
-                params="[tagName: viewModel.tag.name.encodeAsPrettyUrl(), hash: viewModel.tag.hash]"
-                startParamName="startElement"
-                start="${viewModel.start}"
-                total="${viewModel.numFound}"/>
-</section>
+        </div>
+    </div>
+</g:each>
+
+<div id="pagination" class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <v:paginateDefault next="${g.message(code: 'portal.paginate.next')}"
+                           prev="${g.message(code: 'portal.paginate.prev')}"
+                           params="[tagName: viewModel.tag.normalizedName]"
+                           total="${viewModel.numFound}"/>
+    </div>
+</div>
+
 </body>
 </html>
+

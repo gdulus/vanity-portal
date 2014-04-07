@@ -2,8 +2,7 @@
 <html>
 <head>
     <title><g:message code="portal.top.topArticles"/></title>
-    <meta name="layout" content="result"/>
-    <asset:stylesheet href="vanity/list.css"/>
+    <meta name="layout" content="list"/>
 </head>
 
 <body>
@@ -25,7 +24,7 @@
 
                     </h4>
 
-                    <div class="date">07.09.2014</div>
+                    <div class="date"><g:formatDate format="yyyy-MM-dd" date="${article.publicationDate}"/></div>
 
                     <p>
                         ${article.shortBody}

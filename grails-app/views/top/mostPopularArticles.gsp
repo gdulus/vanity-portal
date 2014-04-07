@@ -1,10 +1,8 @@
-</body>
-</html>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title></title>
-    <meta name="layout" content="result"/>
+    <title><g:message code="portal.top.hottestArticles"/></title>
+    <meta name="layout" content="list"/>
 </head>
 
 <body>
@@ -28,7 +26,7 @@
 
                     </h4>
 
-                    <div class="date">07.09.2014</div>
+                    <div class="date"><g:formatDate format="yyyy-MM-dd" date="${article.publicationDate}"/></div>
 
                     <p>
                         ${article.shortBody}
@@ -52,9 +50,13 @@
     </div>
 </g:each>
 
-<g:paginate next="${g.message(code: 'portal.paginate.next')}"
-            prev="${g.message(code: 'portal.paginate.prev')}"
-            total="${viewModel.total}"/>
+<div id="pagination" class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <v:paginateDefault next="${g.message(code: 'portal.paginate.next')}"
+                           prev="${g.message(code: 'portal.paginate.prev')}"
+                           total="${viewModel.total}"/>
+    </div>
+</div>
 
 </body>
 </html>

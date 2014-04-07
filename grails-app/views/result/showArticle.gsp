@@ -3,10 +3,8 @@
 <head>
     <title></title>
     <meta name="layout" content="result"/>
-    <r:require module="showArticle"/>
 </head>
-
 <body>
-<iframe width="100%" height="800px" src="${viewModel.article.url}"></iframe>
+<iframe id="result" frameborder="0" src="${viewModel.article.url}"></iframe>
 </body>
 </html>

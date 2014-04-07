@@ -36,14 +36,14 @@ class SearchService {
         }
 
         Integer maxArticles = ConfigUtils.$as(grailsApplication.config.portal.search.page.articles.max, Integer)
-        SearchResult searchResult = searchEngineQueryExecutor.findArticles(tag.name, startElement, maxArticles)
+        SearchResult searchResult = searchEngineQueryExecutor.findArticlesByTag(tag.name, startElement, maxArticles)
 
         if (!searchResult.items) {
             return null
         }
 
         clickService.create(tag)
-        List<Article> articles = articleService.findAllByHashCodes(searchResult.items*.id)
+        List<Article> articles = articleService.findAllByIds(searchResult.items*.id)
         Celebrity celebrity = celebrityService.findByTag(tag)
         return new SearchByTagViewModel(tag: tag, articles: articles, celebrity: celebrity, start: searchResult.start, numFound: searchResult.numFound)
     }
@@ -60,7 +60,7 @@ class SearchService {
             return null
         }
 
-        List<Article> articles = articleService.findAllByHashCodes(searchResult.items*.id)
+        List<Article> articles = articleService.findAllByIds(searchResult.items*.id)
         return new SearchByTermViewModel(term: term, articles: articles, start: searchResult.start, numFound: searchResult.numFound)
     }
 }
