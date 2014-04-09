@@ -43,6 +43,7 @@ grails.project.dependency.resolution = {
         compile ":asset-pipeline:1.7.1"
         compile ":less-asset-pipeline:1.7.0"
         compile ':jaxrs:0.10'
+        compile ":mail:1.0.4"
     }
 }
 
