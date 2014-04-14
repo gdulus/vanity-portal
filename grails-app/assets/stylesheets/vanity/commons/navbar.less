@@ -1,4 +1,4 @@
-@import "base.less";
+@import "../base";
 
 @header-bg: #ffffff;
 @main-menu-bg: #000000;
@@ -115,6 +115,10 @@
       }
 
       a:hover {
+        color: @main-menu-hover-color;
+      }
+
+      a.active {
         color: @main-menu-hover-color;
       }
     }

@@ -1,5 +1,6 @@
 @import "base.less";
-@import "widget/searchWidget.less";
+@import "commons/searchWidget.less";
+@import "commons/tags.less";
 
 @header-bg: #ffffff;
 @main-menu-bg: #000000;
@@ -128,31 +129,6 @@
     font-size: 30px;
     font-weight: bold;
     color: @header-color;
-  }
-
-  .tag-container {
-    .reset;
-    text-align: justify;
-
-    a {
-      color: #000000;
-      padding: 5px;
-      font-weight: normal;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .loopingClass (@index) when (@index > 0) {
-      .tag@{index} {
-        font-size: 12px + (@index * 2);
-      }
-
-      .loopingClass(@index - 1);
-    }
-
-    .loopingClass(10);
   }
 }
 

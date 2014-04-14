@@ -44,12 +44,15 @@
 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><g:link controller="top" action="newestArticles"><g:message
-                                code="portal.menu.newestArticles"/></g:link></li>
-                        <li><g:link controller="top" action="mostPopularArticles"><g:message
-                                code="portal.menu.mostImportantArticles"/></g:link></li>
-                        <li><g:link controller="top" action="mostPopularTags"><g:message
-                                code="portal.menu.mostPopularCelebrities"/></g:link></li>
+                        <li>
+                            <v:menuItem controller="top" action="newestArticles" code="portal.menu.newestArticles"/>
+                        </li>
+                        <li>
+                            <v:menuItem controller="top" action="mostPopularArticles" code="portal.menu.mostImportantArticles"/>
+                        </li>
+                        <li>
+                            <v:menuItem controller="top" action="mostPopularTags" code="portal.menu.mostPopularCelebrities"/>
+                        </li>
                     </ul>
                 </div>
             </div>

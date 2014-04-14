@@ -15,7 +15,7 @@
 
 <body>
 
-<g:render template="/layouts/navbar"/>
+<g:render template="/commons/navbar"/>
 
 <g:layoutBody/>
 

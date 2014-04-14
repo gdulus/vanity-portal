@@ -11,13 +11,14 @@
           type="text/css"/>
     <g:layoutHead/>
 </head>
+
 <body>
 
-    <g:render template="/layouts/navbar"/>
-    <div id="main" class="container">
-        <g:layoutBody/>
-    </div>
-    <g:render template="/layouts/footer"/>
+<g:render template="/commons/navbar"/>
+<div id="main" class="container">
+    <g:layoutBody/>
+</div>
+<g:render template="/commons/footer"/>
 
 <%--
     JS assets

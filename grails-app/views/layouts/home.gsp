@@ -72,7 +72,7 @@
     <g:layoutBody/>
 </div>
 
-<g:render template="/layouts/footer"/>
+<g:render template="/commons/footer"/>
 
 <%--
     JS assets

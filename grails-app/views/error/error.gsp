@@ -20,7 +20,7 @@
 
 <body>
 
-<g:render template="/layouts/navbar"/>
+<g:render template="/commons/navbar"/>
 
 <div id="main" class="container" role="main">
     <div class="row">
@@ -34,7 +34,7 @@
     </div>
 </div>
 
-<g:render template="/layouts/footer"/>
+<g:render template="/commons/footer"/>
 
 <%--
     JS assets

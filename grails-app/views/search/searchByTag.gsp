@@ -13,40 +13,15 @@
     </div>
 </div>
 
-<g:each in="${viewModel.articles}" var="article">
-    <div id="articles" class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <ul>
-                <li class="article">
-                    <h4>
-                        <g:link controller="result"
-                                action="showArticle"
-                                params="${[id: article.id, title: article.title.encodeAsPrettyUrl()]}">${article.title}</g:link>
-
-                    </h4>
-
-                    <div class="date"><g:formatDate format="yyyy-MM-dd" date="${article.publicationDate}"/></div>
-
-                    <p>
-                        ${article.shortBody}
-                    </p>
-
-                    <div class="source">
-                        <g:message code="portal.searchResult.readRest"/>
-                        <a href="${article.url}" target="_blank"><g:message code="${article.source.target.name()}"/></a>
-
-                        <div class="tags">
-                            <g:each in="${article.tags}" var="articleTag">
-                                <g:link controller="search"
-                                        action="searchByTag"
-                                        params="${[tagName: articleTag.normalizedName]}">${articleTag.name}</g:link>
-                            </g:each>
-                        </div>
-                </li>
-            </ul>
-        </div>
+<div id="articles" class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <ul>
+            <g:each in="${viewModel.articles}" var="article">
+                <g:render template="/commons/article" model="[article: article]"/>
+            </g:each>
+        </ul>
     </div>
-</g:each>
+</div>
 
 <div id="pagination" class="row">
     <div class="col-md-10 col-md-offset-1">
