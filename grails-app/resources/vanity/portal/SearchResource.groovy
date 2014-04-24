@@ -37,13 +37,13 @@ class SearchResource {
 
     private Map<String, String> getAsArticleLink(final SearchResult.SearchResultItem resultItem) {
         Map<String, ?> params = [id: resultItem.id, title: resultItem.description.encodeAsPrettyUrl()]
-        String link = grailsLinkGenerator.link(controller: 'result', action: 'showArticle', params: params, absolute: true)
+        String link = grailsLinkGenerator.link(controller: 'result', action: 'showArticle', params: params)
         return [link: link, label: resultItem.description]
     }
 
     private Map<String, String> getAsTagLink(final SearchResult.SearchResultItem resultItem) {
         Map<String, ?> params = [tagName: resultItem.description.encodeAsPrettyUrl()]
-        String link = grailsLinkGenerator.link(controller: 'search', action: 'searchByTag', params: params, absolute: true)
+        String link = grailsLinkGenerator.link(controller: 'search', action: 'searchByTag', params: params)
         return [link: link, label: resultItem.description]
     }
 }
