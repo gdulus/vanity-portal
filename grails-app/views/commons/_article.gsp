@@ -1,7 +1,7 @@
 <li class="article">
     <h4>
         <g:link controller="result"
-                action="showArticle"
+                action="showPreview"
                 params="${[id: article.id, title: article.title.encodeAsPrettyUrl()]}">
             ${article.title}
         </g:link>
@@ -26,4 +26,5 @@
                 </g:link>
             </g:each>
         </div>
+    </div>
 </li>

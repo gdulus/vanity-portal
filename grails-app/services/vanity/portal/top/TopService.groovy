@@ -32,14 +32,15 @@ class TopService {
     }
 
     public TopArticlesViewModel buildMostPopularArticlesModel(final Integer offset) {
+        Date from = new Date() - ConfigUtils.$as(grailsApplication.config.portal.top.articles.days, Integer)
         Integer max = ConfigUtils.$as(grailsApplication.config.portal.top.articles.max, Integer)
-        List<Article> articles = popularityService.getTopArticles(max, offset)
+        List<Article> articles = popularityService.getTopArticlesFromDate(from, max, offset)
 
         if (!articles) {
             return null
         }
 
-        return new TopArticlesViewModel(articles: articles, total: popularityService.countTopArticles())
+        return new TopArticlesViewModel(articles: articles, total: popularityService.countTopArticlesFromDate(from))
     }
 
     public TopTagsViewModel buildMostPopularTagsModel() {

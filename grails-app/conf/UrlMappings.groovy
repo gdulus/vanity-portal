@@ -15,6 +15,7 @@ class UrlMappings {
         /**
          * Portal result page
          */
+        "/artykul/komentarze/$id/$title"(controller: 'result', action: 'showPreview')
         "/artykul/$id/$title"(controller: 'result', action: 'showArticle')
         "/artykul/$id/$tag/$title"(controller: 'result', action: 'showArticle')
 

@@ -15,7 +15,7 @@ class TopArticlesService {
 
     @Transactional(readOnly = true)
     public List<Article> getHottestArticles(final Date fromDate, final Integer max) {
-        List<Article> popular = popularityService.getTopArticlesFromDate(fromDate, max).collect { Article.read(it.elementId) }
+        List<Article> popular = popularityService.getTopArticlesFromDate(fromDate, max)
 
         if (popular.size() == max) {
             return popular

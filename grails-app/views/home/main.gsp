@@ -73,7 +73,7 @@
                             <g:each in="${viewModel.newestArticles}" var="article">
                                 <li>
                                     <g:link controller="result"
-                                            action="showArticle"
+                                            action="showPreview"
                                             params="${[id: article.id, title: article.title.encodeAsPrettyUrl()]}">
                                         ${article.title}
                                     </g:link>
@@ -92,7 +92,7 @@
                             <g:each in="${viewModel.hottestArticles}" var="article">
                                 <li>
                                     <g:link controller="result"
-                                            action="showArticle"
+                                            action="showPreview"
                                             params="${[id: article.id, title: article.title.encodeAsPrettyUrl()]}">
                                         ${article.title}
                                     </g:link>

@@ -9,6 +9,7 @@ portal.mainPage.hottestTags.max = 10
 portal.mainPage.hottestTags.dateWindow = 14
 
 portal.top.articles.max = 10
+portal.top.articles.days = 30
 portal.top.tags.max = 100
 
 portal.contact.to = 'gdula.pawel@gmail.com'
