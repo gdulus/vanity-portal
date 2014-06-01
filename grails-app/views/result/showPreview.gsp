@@ -4,6 +4,7 @@
     <title><g:message code="portal.credits" args="${[viewModel.article.title]}"/></title>
     <meta name="layout" content="list"/>
     <asset:stylesheet href="vanity/result.css"/>
+    <meta property="og:type" content="article"/>
 </head>
 
 <body>
