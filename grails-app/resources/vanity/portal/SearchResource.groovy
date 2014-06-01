@@ -37,7 +37,7 @@ class SearchResource {
 
     private Map<String, String> getAsArticleLink(final SearchResult.SearchResultItem resultItem) {
         Map<String, ?> params = [id: resultItem.id, title: resultItem.description.encodeAsPrettyUrl()]
-        String link = grailsLinkGenerator.link(controller: 'result', action: 'showArticle', params: params)
+        String link = grailsLinkGenerator.link(controller: 'result', action: 'showPreview', params: params)
         return [link: link, label: resultItem.description]
     }
 
