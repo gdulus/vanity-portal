@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title><g:message code="portal.searchResult.foundArticles.title" args="[viewModel.tag.name]"/></title>
+    <title><g:message code="portal.searchResult.foundTag.title" args="[viewModel.tag.name]"/></title>
+    <meta name="description" content="${message(code: 'portal.searchResult.foundTag.description', args: [viewModel.tag.name])}"/>
     <meta name="layout" content="list"/>
     <asset:stylesheet href="vanity/list.css"/>
 </head>
@@ -9,7 +10,7 @@
 <body>
 <div id="summary" class="row">
     <div class="col-md-10 col-md-offset-1">
-        <h2><g:message code="portal.searchResult.foundArticles" args="[viewModel.tag.name]"/></h2>
+        <h2><g:message code="portal.searchResult.foundTag.h1" args="[viewModel.tag.name]"/></h2>
     </div>
 </div>
 

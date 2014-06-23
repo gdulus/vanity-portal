@@ -15,9 +15,10 @@ class UrlMappings {
         /**
          * Portal result page
          */
-        "/artykul/komentarze/$id/$title"(controller: 'result', action: 'showPreview')
-        "/artykul/$id/$title"(controller: 'result', action: 'showArticle')
-        "/artykul/$id/$tag/$title"(controller: 'result', action: 'showArticle')
+        "/news/$id"(controller: 'result', action: 'showById')
+        "/news/comments/$title/$id"(controller: 'result', action: 'showPreview')
+        "/news/$title/$id"(controller: 'result', action: 'showArticle')
+        "/news/$title/$tag/$id"(controller: 'result', action: 'showArticle')
 
         /**
          * Portal search result pages

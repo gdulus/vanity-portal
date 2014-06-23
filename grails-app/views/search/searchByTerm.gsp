@@ -2,6 +2,8 @@
 <html>
 <head>
     <title><g:message code="portal.searchResult.foundArticles.title" args="[viewModel.term]"/></title>
+    <meta name="description" content="${message(code: 'portal.searchResult.foundArticles.description')}"/>
+    <meta name="robots" content="noindex"/>
     <meta name="layout" content="list"/>
     <asset:stylesheet href="vanity/list.css"/>
 </head>
@@ -10,7 +12,7 @@
 <div id="summary" class="row">
     <div class="col-md-10 col-md-offset-1">
         <h2>
-            <g:message code="portal.searchResult.foundArticles" args="[viewModel.term]"/>
+            <g:message code="portal.searchResult.foundArticles.h1" args="[viewModel.term]"/>
         </h2>
     </div>
 </div>

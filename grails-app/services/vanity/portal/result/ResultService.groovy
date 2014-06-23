@@ -16,6 +16,7 @@ class ResultService {
 
     PopularityService popularityService
 
+
     public ShowPreviewViewModel buildShowPreview(final Long id, final String currentPage) {
         Article article = articleService.read(id)
 

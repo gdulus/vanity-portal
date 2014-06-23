@@ -1,6 +1,7 @@
 <html>
 <head>
-    <title></title>
+    <title><g:message code="portal.home.title"/></title>
+    <meta name="description" content="${message(code: 'portal.home.description')}"/>
     <meta name="layout" content="home"/>
     <asset:stylesheet href="vanity/main.css"/>
 </head>
