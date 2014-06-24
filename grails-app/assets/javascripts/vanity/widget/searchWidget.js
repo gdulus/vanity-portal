@@ -14,39 +14,66 @@ V.Search = (function (undefined) {
     var hideTimerHandler = null;
     var searchBoxFocusTimerHandler = null;
     var previousSearchQuery = null;
+    var cache = {};
+
+    var getSearchTermQueryUrl = function () {
+        var url = $searchButton.attr('href');
+        var term = $searchInput.val();
+
+        if (!term || term.length < termMinLength) {
+            return null;
+        }
+
+        return url + '/?q=' + term;
+    };
+
+    var renderResults = function (results) {
+        V.Logger.info('Rendering results');
+        // remove loader
+        $searchInput.removeClass('loader');
+        // clear previous results
+        $resultContainer.empty();
+        // tags
+        if (results.tags && results.tags.length > 0) {
+            $resultContainer.append('<li class="tag summary">Nasze gwiazdy</a></li>')
+            $.each(results.tags, function (index, result) {
+                var cssClass = index == 0 ? ' selected' : '';
+                $resultContainer.append('<li class="tag' + cssClass + '"><a href="' + result.link + '">' + result.label + '</a></li>')
+            });
+        }
+        // articles
+        if (results.articles && results.articles.length > 0) {
+            $resultContainer.append('<li class="article summary">Ostatnie newsy</a></li>')
+            $.each(results.articles, function (index, result) {
+                var cssClass = (results.tags.length == 0 && index == 0) ? ' selected' : '';
+                $resultContainer.append('<li class="article' + cssClass + '"><a href="' + result.link + '">' + result.label + '</a></li>')
+            });
+        }
+
+        var offset = $searchInput.offset();
+        $resultContainer.css('left', offset.left);
+        $resultContainer.css('top', offset.top + $searchInput.outerHeight());
+        $resultContainer.width($searchInput.outerWidth());
+        $resultContainer.show();
+    }
 
     var triggerSearch = function (value) {
-        // show loader
+        // trigger search only for not empty results
+        if (!value) {
+            return;
+        }
+        // check if value is present in cache
+        if (cache[value]) {
+            V.Logger.info('Cache hit for value: ' + value);
+            renderResults(cache[value]);
+            return;
+        }
+        // value not present in cache, execute ajax call
+        V.Logger.info('Triggering ajax call for: ' + value);
         $searchInput.addClass('loader');
-        // execute ajax call
         $.get(apiUrl, {term: value}, function (results) {
-            V.Logger.info('Search for: ' + value);
-            // remove loader
-            $searchInput.removeClass('loader');
-            // clear previous results
-            $resultContainer.empty();
-            // tags
-            if (results.tags && results.tags.length > 0) {
-                $resultContainer.append('<li class="tag summary">Nasze gwiazdy</a></li>')
-                $.each(results.tags, function (index, result) {
-                    var cssClass = index == 0 ? ' selected' : '';
-                    $resultContainer.append('<li class="tag' + cssClass + '"><a href="' + result.link + '">' + result.label + '</a></li>')
-                });
-            }
-            // articles
-            if (results.articles && results.articles.length > 0) {
-                $resultContainer.append('<li class="article summary">Ostatnie newsy</a></li>')
-                $.each(results.articles, function (index, result) {
-                    var cssClass = (results.tags.length == 0 && index == 0) ? ' selected' : '';
-                    $resultContainer.append('<li class="article' + cssClass + '"><a href="' + result.link + '">' + result.label + '</a></li>')
-                });
-            }
-
-            var offset = $searchInput.offset();
-            $resultContainer.css('left', offset.left);
-            $resultContainer.css('top', offset.top + $searchInput.outerHeight());
-            $resultContainer.width($searchInput.outerWidth());
-            $resultContainer.show();
+            cache[value] = results;
+            renderResults(results);
         });
     }
 
@@ -102,7 +129,16 @@ V.Search = (function (undefined) {
                 case 13: //enter
                     var current = $resultContainer.find('.selected a');
                     var articleUrl = current.attr('href');
-                    window.location = articleUrl;
+
+                    if (articleUrl) {
+                        window.location.href = articleUrl;
+                    } else {
+                        var url = getSearchTermQueryUrl();
+                        if (url) {
+                            window.location.replace(url);
+                        }
+                    }
+
                     e.stopPropagation();
                     e.preventDefault();
                     break;
@@ -112,7 +148,7 @@ V.Search = (function (undefined) {
         //
         var mouseOut = function (e) {
             hide = true;
-            hideTimerHandler = setTimeout(hideResult, hideAfter)
+            hideTimerHandler = setTimeout(hideResult, hideAfter);
             e.stopPropagation();
         };
 
@@ -148,18 +184,15 @@ V.Search = (function (undefined) {
 
         V.Logger.info('Search button bindings');
         $searchButton.click(function (e) {
-            var url = $(this).attr('href');
-            var term = $searchInput.val();
+            var url = getSearchTermQueryUrl();
 
-            if (!term || term.length < termMinLength) {
-                $searchInput.stop().css("background-color", "#FFFF9C").animate({ backgroundColor: "#FFFFFF"}, 500);
-            } else {
-                window.location.replace(url + '/?q=' + term);
+            if (url) {
+                window.location.replace(url);
             }
 
             e.stopPropagation();
             e.preventDefault();
-        })
+        });
 
         V.Logger.info('Events initialized');
     }

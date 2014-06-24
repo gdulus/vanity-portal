@@ -21,11 +21,11 @@ class MetaTagLib {
     }
 
     private List<String> getRequiredTags(final Article article) {
-        if (!article) {
+        List<Tag> publicTags = article.publicTags
+
+        if (!publicTags) {
             return Collections.emptyList()
         }
-
-        List<Tag> publicTags = article.publicTags
 
         if (publicTags.size() == 1) {
             return [publicTags.first().name]

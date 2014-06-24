@@ -16,9 +16,8 @@ class UrlMappings {
          * Portal result page
          */
         "/news/$id"(controller: 'result', action: 'showById')
-        "/news/comments/$title/$id"(controller: 'result', action: 'showPreview')
-        "/news/$title/$id"(controller: 'result', action: 'showArticle')
-        "/news/$title/$tag/$id"(controller: 'result', action: 'showArticle')
+        "/news/$id/$title"(controller: 'result', action: 'showPreview')
+        "/czytaj/$id/$title"(controller: 'result', action: 'showArticle')
 
         /**
          * Portal search result pages
