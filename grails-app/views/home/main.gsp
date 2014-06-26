@@ -29,36 +29,19 @@
 
 <g:if test="${viewModel.promotedTags}">
     <div id="celebrities-promoted" class="row">
-        <div class="navbar navbar-default col-md-10 col-md-offset-1">
-            <div>
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse"
-                                data-target="#celebrities-promoted .navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
+        <div class="col-md-10 col-md-offset-1">
+            <h2><g:message code="portal.mainPage.ourIconsSectionTitle"/></h2>
 
-                        <h2 class="navbar-brand"><g:message code="portal.mainPage.ourIconsSectionTitle"/></h2>
-                    </div>
-
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <g:each in="${viewModel.promotedTags}" var="tag">
-                                <li>
-                                <g:link controller="search"
-                                        action="searchByTag"
-                                        params="[tagName: tag.normalizedName]"
-                                        title="${tag.name}">
-                                    ${tag.name}
-                                </g:link>
-                            </g:each>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <p class="tag-container">
+                <g:each in="${viewModel.promotedTags}" var="tag">
+                    <g:link controller="search"
+                            action="searchByTag"
+                            params="[tagName: tag.normalizedName]"
+                            class="tag4">
+                        ${tag.name}
+                    </g:link>
+                </g:each>
+            </p>
         </div>
     </div>
 </g:if>

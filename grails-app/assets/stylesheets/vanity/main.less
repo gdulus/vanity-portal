@@ -125,7 +125,7 @@
 
   h2 {
     border-bottom: 1px solid #c6c6c6;
-    padding: 0px 0px 15px 0px;
+    padding: 0px 0px 15px 10px;
     font-size: 30px;
     font-weight: bold;
     color: @header-color;
@@ -136,50 +136,18 @@
 
   @height: 60px;
   margin-bottom: 30px;
-  padding: 0px 15px;
-
-  .container-fluid, .navbar-default, .navbar-toggle, .navbar, .navbar-collapse {
-    border: none;
-    border-radius: 0px;
-    background-color: @header-color;
-  }
-
-  .navbar-toggle {
-    margin-top: 14px;
-
-    .icon-bar {
-      background-color: #ffffff;
-    }
-  }
+  padding: 0px 0px;
 
   h2 {
     margin: 0px;
-    padding: 18px 0px 0px 22px;
+    padding: 10px 10px;
+    margin-bottom: 10px;
     color: #ffffff;
     font-size: 30px;
     font-weight: bold;
-    height: @height;
-    width: 210px;
-    background-image: url('../../images/arrow.jpg');
+    background-color: @header-color;
     background-repeat: no-repeat;
     background-position: right;
-  }
-
-  ul {
-    background-color: @header-color;
-    list-style: none;
-
-    li {
-      a {
-        font-size: 24px;
-        color: #ffffff;
-        padding: 18px 0px 20px 20px;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-    }
   }
 }
 
