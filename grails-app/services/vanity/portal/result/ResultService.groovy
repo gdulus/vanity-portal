@@ -4,6 +4,7 @@ import org.springframework.transaction.annotation.Transactional
 import vanity.article.Article
 import vanity.article.ArticleService
 import vanity.article.Tag
+import vanity.article.TagService
 import vanity.stats.PopularityService
 import vanity.tracking.ClickService
 
@@ -14,8 +15,7 @@ class ResultService {
 
     ArticleService articleService
 
-    PopularityService popularityService
-
+    TagService tagService
 
     public ShowPreviewViewModel buildShowPreview(final Long id, final String currentPage) {
         Article article = articleService.read(id)
@@ -25,10 +25,9 @@ class ResultService {
         }
 
         clickService.create(article)
-        Set<Article> other = [] as LinkedHashSet<Article>
-        Map<Tag, List<Article>> otherPopular = popularityService.findOtherPopular(article, 3, 100)
-        otherPopular.values().each { other += it }
-        return new ShowPreviewViewModel(currentPage: currentPage, article: article, other: other.sort { it.publicationDate })
+        List<Tag> tags = tagService.findAllRootParentsByArticle(article)
+        Set<Article> other = tags.sum { Tag tag -> articleService.findAllNewsetByTag(tag, 3) } as LinkedHashSet<Article>
+        return new ShowPreviewViewModel(currentPage: currentPage, article: article, other: other)
     }
 
     public ShowArticleViewModel buildShowArticleModel(final Long id) {
