@@ -13,7 +13,8 @@ class RequestFilters {
 
                 if (cleanURI.endsWith('/')) {
                     log.info('Redirecting {} due to trailing slash', cleanURI)
-                    redirect(uri: "/${cleanURI.split('/').grep().join('/')}")
+                    String uri = "/${cleanURI.split('/').grep().join('/')}"
+                    redirect(uri: uri)
                     return false
                 }
 

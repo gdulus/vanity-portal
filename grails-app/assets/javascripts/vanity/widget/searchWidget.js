@@ -24,7 +24,7 @@ V.Search = (function (undefined) {
             return null;
         }
 
-        return url + '/?q=' + term;
+        return url + '?q=' + term;
     };
 
     var renderResults = function (results) {
@@ -37,16 +37,14 @@ V.Search = (function (undefined) {
         if (results.tags && results.tags.length > 0) {
             $resultContainer.append('<li class="tag summary">Nasze gwiazdy</a></li>')
             $.each(results.tags, function (index, result) {
-                var cssClass = index == 0 ? ' selected' : '';
-                $resultContainer.append('<li class="tag' + cssClass + '"><a href="' + result.link + '">' + result.label + '</a></li>')
+                $resultContainer.append('<li class="tag element"><a href="' + result.link + '">' + result.label + '</a></li>')
             });
         }
         // articles
         if (results.articles && results.articles.length > 0) {
             $resultContainer.append('<li class="article summary">Ostatnie newsy</a></li>')
             $.each(results.articles, function (index, result) {
-                var cssClass = (results.tags.length == 0 && index == 0) ? ' selected' : '';
-                $resultContainer.append('<li class="article' + cssClass + '"><a href="' + result.link + '">' + result.label + '</a></li>')
+                $resultContainer.append('<li class="article element"><a href="' + result.link + '">' + result.label + '</a></li>')
             });
         }
 
@@ -104,6 +102,13 @@ V.Search = (function (undefined) {
             switch (keyCode) {
                 case 38: //up
                     var current = $resultContainer.find('.selected');
+
+                    if (!current) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        return;
+                    }
+
                     var selected = current.prev('li');
 
                     if (selected.hasClass('summary')) {
@@ -116,8 +121,16 @@ V.Search = (function (undefined) {
                     break;
                 case 40: //down
                     var current = $resultContainer.find('.selected');
-                    var selected = current.next('li');
 
+                    if (current.length == 0) {
+                        current = $resultContainer.find('.element').first();
+                        swapColors(current, current);
+                        e.stopPropagation();
+                        e.preventDefault();
+                        return
+                    }
+
+                    var selected = current.next('li');
                     if (selected.hasClass('summary')) {
                         selected = selected.next('li')
                     }
