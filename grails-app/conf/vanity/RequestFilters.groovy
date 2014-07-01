@@ -8,7 +8,8 @@ class RequestFilters {
     def filters = {
         all(controller: '*', action: '*') {
             before = {
-                String cleanURI = request.forwardURI.replace("${request.getContextPath()}/", '')
+                String cleanURI = request.forwardURI.replace("${request.contextPath}/", '')
+                log.info('forward uri = {}, context path = {}, clean uri = {}', request.forwardURI, request.contextPath, cleanURI)
 
                 if (cleanURI.endsWith('/')) {
                     log.info('Redirecting {} due to trailing slash', cleanURI)
