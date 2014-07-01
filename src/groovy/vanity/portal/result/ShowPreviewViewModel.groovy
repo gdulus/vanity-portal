@@ -10,4 +10,7 @@ class ShowPreviewViewModel {
 
     Set<Article> other
 
+    Set<Article> getOther() {
+        return other ?: Collections.emptySet()
+    }
 }

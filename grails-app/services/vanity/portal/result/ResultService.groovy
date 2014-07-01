@@ -26,7 +26,12 @@ class ResultService {
 
         clickService.create(article)
         List<Tag> tags = tagService.findAllRootParentsByArticle(article)
-        Set<Article> other = tags.sum { Tag tag -> articleService.findAllNewsetByTag(tag, 3) } as LinkedHashSet<Article>
+
+        if (!tags){
+            return new ShowPreviewViewModel(currentPage: currentPage, article: article)
+        }
+
+       Set<Article> other = tags?.sum { Tag tag -> articleService.findAllNewsetByTag(tag, 3) } as LinkedHashSet<Article>
         other.remove(article)
         return new ShowPreviewViewModel(currentPage: currentPage, article: article, other: other)
     }
