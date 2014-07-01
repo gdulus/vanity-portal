@@ -6,7 +6,7 @@ class DefaultRequestWorker implements RequestWorker {
 
     @Override
     boolean isUrlInvalid(final HttpServletRequest request) {
-        return request.forwardURI.endsWith('/')
+        return request.forwardURI.endsWith('/') && request.forwardURI != '/'
     }
 
     @Override
