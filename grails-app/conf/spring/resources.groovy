@@ -1,3 +1,7 @@
+import grails.util.Environment
+import vanity.portal.request.DefaultRequestWorker
+import vanity.portal.request.DevelopmentRequestWorker
+
 beans = {
 
     xmlns context: "http://www.springframework.org/schema/context"
@@ -5,5 +9,11 @@ beans = {
 
     context.'component-scan'('base-package': 'vanity.portal')
     task.'annotation-driven'('proxy-target-class': true, 'mode': 'proxy')
+
+    if (Environment.isDevelopmentMode()) {
+        requestWorker(DevelopmentRequestWorker)
+    } else {
+        requestWorker(DefaultRequestWorker)
+    }
 
 }
