@@ -40,8 +40,8 @@ class UrlMappings {
         /**
          * Info page
          */
-//        "/o-nas"(controller: 'info', action: 'aboutUs')
-//        "/regulamin"(controller: 'info', action: 'regulations')
+        // "/o-nas"(controller: 'info', action: 'aboutUs')
+        // "/regulamin"(controller: 'info', action: 'regulations')
         "/kontakt"(controller: 'info', action: 'contact')
         "/kontakt/wyslij"(controller: 'info', action: 'contactSend')
 
@@ -50,5 +50,11 @@ class UrlMappings {
          */
         "500"(controller: 'error', action: 'serverError')
         "404"(controller: 'error', action: 'notFound')
+
+        /**
+         * Robots
+         */
+        "/robots.txt"(view: 'robots-txt')
+
     }
 }
