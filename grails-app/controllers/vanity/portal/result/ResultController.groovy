@@ -1,9 +1,11 @@
 package vanity.portal.result
 
+import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import vanity.article.Article
 
+@Slf4j
 class ResultController {
 
     def resultService
@@ -19,11 +21,12 @@ class ResultController {
             return
         }
 
+        log.info('Redirecting request by id {} to full name', id)
         redirect(action: 'showPreview', permanent: true, params: [id: id, title: article.title.encodeAsPrettyUrl()])
     }
 
     def showPreview(final Long id) {
-        def model = resultService.buildShowPreview(id, serverURL + request.forwardURI)
+        def model = resultService.buildShowPreview(id, "${serverURL}/${request.forwardURI}")
 
         if (!model) {
             response.sendError(HttpStatus.NOT_FOUND.value())
