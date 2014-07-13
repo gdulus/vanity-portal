@@ -15,6 +15,7 @@ class ResultController {
 
     def showById(final Long id) {
         Article article = resultService.articleService.read(id)
+        log.info('Requested article by id id', id)
 
         if (!article) {
             response.sendError(HttpStatus.NOT_FOUND.value())
