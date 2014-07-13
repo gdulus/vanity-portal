@@ -21,8 +21,9 @@ class ResultController {
             return
         }
 
-        log.info('Redirecting request by id {} to full name', id)
-        redirect(action: 'showPreview', permanent: true, params: [id: id, title: article.title.encodeAsPrettyUrl()])
+        String url = createLink(action: 'showPreview', absolute: true, params: [id: id, title: article.title.encodeAsPrettyUrl()])
+        log.info('Redirecting request by id {} to full url {}', id, url)
+        redirect(url: url, permanent: true)
     }
 
     def showPreview(final Long id) {
