@@ -19,7 +19,6 @@
   }
 
   .logo {
-
     padding-top: 16px;
   }
 
@@ -78,7 +77,23 @@
   height: @main-menu-height;
   margin-bottom: 30px;
 
+  @media (max-width: 768px) {
+    .navbar-brand {
+      padding: 0px;
+      margin-left: 20px;
+      padding-top: 7px;
+
+      img {
+        height: 35px;
+      }
+    }
+  }
+
   @media (min-width: 768px) {
+    .navbar-brand {
+      display: none;
+    }
+
     .navbar-nav {
       margin: 0 auto;
       display: table;

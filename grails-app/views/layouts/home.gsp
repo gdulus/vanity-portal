@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="pl">
 <head>
     <title><g:layoutTitle/></title>
@@ -14,19 +14,22 @@
 
 <div id="header">
     <div class="logo">
-        <h1><a href="#main">main page</a></h1>
+        <h1>
+        <g:link controller="home" action="main">
+            <asset:image src="logo-main.jpg" class="img-responsive"/>
+        </g:link>
+        </h1>
     </div>
 </div>
 
 <div id="main-menu">
-
     <div class="container">
         <div class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse"
                             data-target="#main-menu .navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
+                        <span class="sr-only"><g:message code="portal.toggleNavigation"/></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>

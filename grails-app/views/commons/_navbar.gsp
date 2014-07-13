@@ -40,6 +40,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    <g:link controller="home" action="main" class="navbar-brand"><asset:image src="logo-small-no-text.png" /></g:link>
                 </div>
 
                 <div class="navbar-collapse collapse">
