@@ -23,14 +23,12 @@ class ResultController {
         }
 
         String url = createLink(action: 'showPreview', absolute: true, params: [id: id, title: article.title.encodeAsPrettyUrl()])
-        // fix for //news
-        url = url.replaceAll("${serverURL}//", "${serverURL}/")
         log.info('Redirecting request by id {} to full url {} (serverURL = {})', id, url, serverURL)
         redirect(url: url)
     }
 
     def showPreview(final Long id) {
-        def model = resultService.buildShowPreview(id, "${serverURL}/${request.forwardURI}")
+        def model = resultService.buildShowPreview(id, "${serverURL}${request.forwardURI}")
 
         if (!model) {
             response.sendError(HttpStatus.NOT_FOUND.value())

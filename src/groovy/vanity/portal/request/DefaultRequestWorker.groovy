@@ -11,6 +11,6 @@ class DefaultRequestWorker implements RequestWorker {
 
     @Override
     String correctInvalidUrl(final HttpServletRequest request) {
-        return "${request.forwardURI.split('/').grep().join('/')}"
+        return "/${request.forwardURI.split('/').grep().join('/')}"
     }
 }
