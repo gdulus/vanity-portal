@@ -24,7 +24,7 @@ class ResultController {
 
         String url = createLink(action: 'showPreview', absolute: true, params: [id: id, title: article.title.encodeAsPrettyUrl()])
         log.info('Redirecting request by id {} to full url {} (serverURL = {})', id, url, serverURL)
-        redirect(url: url.replaceAll('//news/', '/news/'))
+        redirect(url: url)
     }
 
     def showPreview(final Long id) {

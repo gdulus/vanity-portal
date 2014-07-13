@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title><<g:message code="portal.top.mostPopularTags.title"/></title>
+    <title><g:message code="portal.top.mostPopularTags.title"/></title>
     <meta name="description" content="${message(code: 'portal.top.mostPopularTags.description')}"/>
     <meta name="layout" content="list"/>
     <asset:stylesheet href="vanity/list.css"/>

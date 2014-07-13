@@ -5,7 +5,7 @@
     <meta name="description" content="${v.articleDescription(article: viewModel.article)}"/>
     <meta name="robots" content="noindex"/>
     <meta name="layout" content="result"/>
-    <asset:stylesheet href="vanity/result.css"/>
+    <asset:stylesheet href="vanity/showArticle.css"/>
 </head>
 
 <body>

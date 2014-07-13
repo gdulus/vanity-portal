@@ -5,7 +5,7 @@
     <meta name="description" content="${v.articleDescription(article: viewModel.article)}"/>
     <meta name="robots" content="noindex"/>
     <meta name="layout" content="list"/>
-    <asset:stylesheet href="vanity/result.css"/>
+    <asset:stylesheet href="vanity/showPreview.css"/>
     <meta property="og:type" content="article"/>
 </head>
 
@@ -90,6 +90,7 @@
                             <p>
                                 ${otherArticle.getShortBody(200)}
                             </p>
+                            <hr/>
                         </li>
                     </g:each>
                 </ul>
