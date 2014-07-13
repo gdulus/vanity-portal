@@ -134,20 +134,52 @@
 
 #celebrities-promoted {
 
-  @height: 60px;
+  @height: 55px;
   margin-bottom: 30px;
-  padding: 0px 0px;
+  padding: 0px 15px;
+
+  .container-fluid, .navbar-default, .navbar-toggle, .navbar, .navbar-collapse {
+    border: none;
+    border-radius: 0px;
+    background-color: @header-color;
+  }
+
+  .navbar-toggle {
+    margin-top: 14px;
+
+    .icon-bar {
+      background-color: #ffffff;
+    }
+  }
 
   h2 {
     margin: 0px;
-    padding: 10px 10px;
-    margin-bottom: 10px;
+    padding-left: 0px;
     color: #ffffff;
     font-size: 30px;
     font-weight: bold;
-    background-color: @header-color;
+    height: @height;
+    width: 180px;
+    background-image: url('../../images/arrow.jpg');
     background-repeat: no-repeat;
     background-position: right;
+  }
+
+  ul {
+    background-color: @header-color;
+    list-style: none;
+
+    li {
+      a {
+        font-size: 24px;
+        color: #ffffff;
+        padding: 18px 0px 10px 15px;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
 
