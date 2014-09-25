@@ -11,8 +11,6 @@ import vanity.tracking.ClickService
 @Transactional(readOnly = true)
 class ResultService {
 
-    ClickService clickService
-
     ArticleService articleService
 
     TagService tagService
@@ -24,7 +22,6 @@ class ResultService {
             return null
         }
 
-        clickService.create(article)
         List<Tag> tags = tagService.findAllRootParentsByArticle(article)
 
         if (!tags){
@@ -43,7 +40,6 @@ class ResultService {
             return null
         }
 
-        clickService.create(article)
         return new ShowArticleViewModel(article: article)
     }
 

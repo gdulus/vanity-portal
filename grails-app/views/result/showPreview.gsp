@@ -6,7 +6,6 @@
     <meta name="robots" content="noindex"/>
     <meta name="layout" content="list"/>
     <asset:stylesheet href="vanity/showPreview.css"/>
-    <meta property="og:type" content="article"/>
 </head>
 
 <body>
@@ -52,18 +51,6 @@
     </div>
 </div>
 
-<div id="fb-root"></div>
-<script>(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-</script>
-
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <div class="fb-comments" data-width="100%" data-href="${viewModel.currentPage}" data-numposts="5" data-colorscheme="light"></div>
@@ -98,6 +85,10 @@
         </div>
     </div>
 </g:if>
+
+<content tag="javascript">
+    <tracking:article bean="${viewModel.article}"/>
+</content>
 
 </body>
 </html>

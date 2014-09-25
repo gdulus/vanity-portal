@@ -1,3 +1,5 @@
+window.V = window.V || {};
+
 /**
  * Search component
  */

@@ -3,11 +3,6 @@ class UrlMappings {
     static mappings = {
 
         /**
-         * API
-         */
-        "/api/search/byTerm"(controller: 'api', action: 'searchByTerm')
-
-        /**
          * Portal main page
          */
         "/"(controller: 'home', action: 'main')
@@ -28,6 +23,10 @@ class UrlMappings {
             }
         }
 
+        /**
+         * Search api
+         */
+        "/szukaj/api"(controller: 'search', action: 'api')
         "/szukaj/$offset?/$max?"(controller: 'search', action: 'searchByTerm')
 
         /**

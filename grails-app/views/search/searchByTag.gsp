@@ -62,6 +62,10 @@
     </div>
 </div>
 
+<content tag="javascript">
+    <tracking:tag bean="${viewModel.tag}"/>
+</content>
+
 </body>
 </html>
 

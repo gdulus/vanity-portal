@@ -16,8 +16,6 @@ import vanity.utils.ConfigUtils
 @Transactional(readOnly = true)
 class SearchService {
 
-    ClickService clickService
-
     ArticleService articleService
 
     TagService tagService
@@ -42,7 +40,6 @@ class SearchService {
             return null
         }
 
-        clickService.create(tag)
         List<Article> articles = articleService.findAllByIds(searchResult.items*.id)
         Celebrity celebrity = celebrityService.findByTag(tag)
         return new SearchByTagViewModel(tag: tag, articles: articles, celebrity: celebrity, start: searchResult.start, numFound: searchResult.numFound)

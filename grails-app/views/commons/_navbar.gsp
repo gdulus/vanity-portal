@@ -7,7 +7,7 @@
             </div>
 
             <div id="search" class="col-md-7">
-                <form action="${createLink(uri: '/api/search')}" method="get">
+                <g:form controller="search"  action="api" method="get">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
@@ -22,7 +22,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                </g:form>
             </div>
         </div>
     </div>

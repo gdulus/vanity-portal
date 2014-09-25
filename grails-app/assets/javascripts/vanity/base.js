@@ -3,7 +3,6 @@ window.V = window.V || {};
 /**
  * JQuery extensions
  */
-
 $.fn.exists = function () {
     return this.length !== 0;
 }
