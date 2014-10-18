@@ -1,0 +1,43 @@
+@import "../base.less";
+
+.loader {
+  background-image: url('../../images/loader.gif');
+  background-repeat: no-repeat;
+  background-position: 98% center;
+}
+
+#search-result {
+  position: absolute;
+  list-style: none;
+  z-index: 1001;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0px 15px 13px rgba(50, 50, 50, 0.71);
+  -moz-box-shadow: 0px 15px 13px rgba(50, 50, 50, 0.71);
+  box-shadow: 0px 15px 13px rgba(50, 50, 50, 0.71);
+  padding: 0px;
+
+  li {
+    background-color: #ffffff;
+    padding: 5px 10px;
+    font-size: 16px;
+  }
+
+  .summary {
+    font-size: 20px;
+    color: @main-color;
+  }
+
+  a {
+    background-color: #ffffff;
+    text-align: left;
+    color: #000000;
+  }
+
+  li.selected {
+    background-color: #f0f0f0;
+    a {
+      background-color: #f0f0f0;
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,141 @@
+@import "../base";
+
+@header-bg: #ffffff;
+@main-menu-bg: #000000;
+@main-menu-blur-color: #fb5627;
+@main-menu-hover-color: #ffffff;
+@header-color: #f54616;
+
+@main-menu-height: 51px;
+@logo-section-height: 140px;
+
+#header {
+
+  height: @logo-section-height;
+  background-color: @header-bg;
+
+  h1 {
+    .reset;
+  }
+
+  .logo {
+    padding-top: 16px;
+  }
+
+  @media (max-width: 1201px) {
+    .logo {
+      padding-top: 25px;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .logo {
+      display: none;
+    }
+  }
+}
+
+#search {
+  @height: 48px;
+
+  form {
+    margin-top: 54px;
+
+    input {
+      border-radius: 0px;
+      height: @height;
+      outline-width: 0;
+      font-size: 16px;
+      border-width: 1px 0px 1px 1px;
+    }
+
+    input[type="search"] {
+      padding: 0px 20px;
+      color: #535353;
+      border-left: 1px solid #e0e0e0;
+      border-top: 1px solid #e0e0e0;
+      border-bottom: 1px solid #e0e0e0;
+      border-right: none;
+      box-shadow: none;
+    }
+
+    input[type="submit"] {
+      border: none;
+      padding: 0px 10px;
+      background-color: @main-color;
+      color: #ffffff;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 14px;
+    }
+  }
+}
+
+#main-menu {
+
+  background-color: @main-menu-bg;
+  height: @main-menu-height;
+  margin-bottom: 30px;
+
+  @media (max-width: 768px) {
+    .navbar-brand {
+      padding: 0px;
+      margin-left: 20px;
+      padding-top: 7px;
+
+      img {
+        height: 35px;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    .navbar-brand {
+      display: none;
+    }
+
+    .navbar-nav {
+      margin: 0 auto;
+      display: table;
+      table-layout: fixed;
+      float: none;
+    }
+  }
+
+  .container-fluid, .navbar-default, .navbar-toggle, .navbar, .navbar-collapse {
+    border: none;
+    background-color: @main-menu-bg;
+  }
+
+  .navbar-toggle {
+    .icon-bar {
+      background-color: @main-menu-blur-color;
+    }
+  }
+
+  ul {
+
+    li {
+
+      z-index: 1000;
+
+      a {
+        z-index: 1000;
+        height: @main-menu-height;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: @main-menu-blur-color;
+        font-size: 18px;
+        background-color: @main-menu-bg;
+      }
+
+      a:hover {
+        color: @main-menu-hover-color;
+      }
+
+      a.active {
+        color: @main-menu-hover-color;
+      }
+    }
+  }
+}

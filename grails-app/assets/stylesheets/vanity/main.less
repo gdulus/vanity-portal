@@ -1,0 +1,247 @@
+@import "base.less";
+@import "commons/searchWidget.less";
+@import "commons/tags.less";
+
+@header-bg: #ffffff;
+@main-menu-bg: #000000;
+@main-menu-blur-color: #fb5627;
+@main-menu-hover-color: #ffffff;
+@header-color: #f54616;
+
+@main-menu-height: 51px;
+@logo-section-height: 178px;
+
+#header {
+
+  background-color: @header-bg;
+
+  @media (min-width: 768px) {
+    height: @logo-section-height + @main-menu-height;
+
+    .logo {
+      height: @logo-section-height;
+      padding: 45px 0px 45px 0px;
+
+      h1 {
+        .reset;
+      }
+
+      a {
+        img {
+          .block;
+          .center;
+          max-width: 80%;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .logo {
+      padding: 20px 0px;
+
+      h1 {
+        .reset;
+      }
+
+      a {
+        img {
+          .block;
+          .center;
+          max-width: 80%;
+        }
+      }
+    }
+  }
+}
+
+#main-menu {
+
+  background-color: @main-menu-bg;
+  height: @main-menu-height;
+
+  @media (min-width: 768px) {
+    .navbar-nav {
+      margin: 0 auto;
+      display: table;
+      table-layout: fixed;
+      float: none;
+    }
+  }
+
+  .container-fluid, .navbar-default, .navbar-toggle, .navbar, .navbar-collapse {
+    border: none;
+    background-color: @main-menu-bg;
+  }
+
+  .navbar-toggle {
+    .icon-bar {
+      background-color: @main-menu-blur-color;
+    }
+  }
+
+  ul {
+
+    li {
+
+      z-index: 1000;
+
+      a {
+
+        z-index: 1000;
+        height: @main-menu-height;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: @main-menu-blur-color;
+        font-size: 18px;
+        background-color: @main-menu-bg;
+      }
+
+      a:hover {
+        color: @main-menu-hover-color;
+      }
+    }
+  }
+}
+
+#search {
+  @height: 50px;
+  @input-width: 571px;
+
+  margin-bottom: 45px;
+
+  form {
+    .block;
+    .center;
+    margin-top: 60px;
+
+    input {
+      border: none;
+      border-radius: 0px;
+      height: @height;
+      outline-width: 0;
+      font-size: 20px;
+    }
+
+    input[type="search"] {
+      padding: 0px 20px;
+      color: #535353;
+      border: none;
+      box-shadow: none;
+    }
+
+    input[type="submit"] {
+      padding: 0px 10px;
+      background-color: @main-color;
+      color: #ffffff;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  }
+}
+
+#celebrities-popular {
+
+  margin-bottom: 40px;
+
+  h2 {
+    border-bottom: 1px solid #c6c6c6;
+    padding: 0px 0px 15px 10px;
+    font-size: 30px;
+    font-weight: bold;
+    color: @header-color;
+  }
+}
+
+#celebrities-promoted {
+
+  @height: 55px;
+  margin-bottom: 30px;
+  padding: 0px 15px;
+
+  .container-fluid, .navbar-default, .navbar-toggle, .navbar, .navbar-collapse {
+    border: none;
+    border-radius: 0px;
+    background-color: @header-color;
+  }
+
+  .navbar-toggle {
+    margin-top: 14px;
+
+    .icon-bar {
+      background-color: #ffffff;
+    }
+  }
+
+  h2 {
+    margin: 0px;
+    padding-left: 0px;
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: bold;
+    height: @height;
+    width: 180px;
+    background-image: url('../../images/arrow.jpg');
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+
+  ul {
+    background-color: @header-color;
+    list-style: none;
+
+    li {
+      a {
+        font-size: 24px;
+        color: #ffffff;
+        padding: 18px 0px 10px 15px;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+#articles {
+
+  @column-bg: #ffffff;
+
+  h2 {
+    color: @header-color;
+    margin: 0px;
+    padding: 20px 0px 20px 20px;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 1px solid #e2e2e2;
+  }
+
+  .column {
+    background-color: @column-bg;
+    padding: 0px 10px 5px 10px;
+    margin-bottom: 30px;
+  }
+
+  .positions {
+    margin: 0px 0px 0px 8%;
+    padding: 0px;
+
+    li {
+      margin-bottom: 10px;
+
+      a {
+        color: #000000;
+        font-size: 14px;
+      }
+    }
+
+    li:first-child {
+      margin-top: 20px;
+    }
+
+    li:last-child {
+      margin-bottom: 20px;
+    }
+  }
+}
