@@ -70,8 +70,8 @@
                         </div>
 
                         <div class="form-actions">
-                            <span>&#x2606;</span> <g:message code="portal.info.contact.fieldRequired"/> <input
-                                type="submit" class="btn btn-default pull-right"
+                            <span>&#x2606;</span> <g:message code="portal.info.contact.fieldRequired"/>
+                            <input type="submit" class="btn btn-default button-main pull-right"
                                 value="${g.message(code: 'portal.info.contact.send')}"/>
                         </div>
 

@@ -55,5 +55,10 @@ class UrlMappings {
          */
         "/robots.txt"(view: 'robots-txt')
 
+        /**
+         * Social mapping
+         */
+        "/social/$template"(controller: 'social')
+
     }
 }

@@ -1,30 +1,53 @@
 package vanity.portal.home
 
-import org.codehaus.groovy.grails.commons.GrailsApplication
-import org.springframework.transaction.annotation.Transactional
-import vanity.portal.top.TopArticlesService
-import vanity.portal.top.TopTagsService
-import vanity.utils.ConfigUtils
+import org.springframework.beans.factory.annotation.Value
+import vanity.portal.command.NewestArticlesCommand
+import vanity.portal.command.PopularArticlesCommand
+import vanity.portal.command.PopularTagsCommand
+import vanity.portal.command.PromotedTagsCommand
+import vanity.portal.domain.Article
+import vanity.portal.domain.PopularTag
+import vanity.portal.domain.Tag
+import vanity.portal.ms.ServiceEndpointsRepository
 
-@Transactional(readOnly = true)
+import java.util.concurrent.Future
+
 class HomeService {
 
-    TopArticlesService topArticlesService
+    static transactional = false
 
-    TopTagsService topTagsService
+    ServiceEndpointsRepository serviceEndpointsRepository
 
-    GrailsApplication grailsApplication
+    @Value('${portal.mainPage.promotedTags.max}')
+    Integer maxPromotedTags
+
+    @Value('${portal.mainPage.popularTags.max}')
+    Integer maxPopularTags
+
+    @Value('${portal.mainPage.popularTags.dateWindow}')
+    Integer popularTagsDateWindow
+
+    @Value('${portal.mainPage.newestArticles.max}')
+    Integer maxNewestArticles
+
+    @Value('${portal.mainPage.hottestArticles.max}')
+    Integer maxPopularArticles
+
+    @Value('${portal.mainPage.hottestArticles.dateWindow}')
+    Integer popularArticlesDateWindow
 
     public MainViewModel buildMainModel() {
-        Integer maxNewestArticles = ConfigUtils.$as(grailsApplication.config.portal.mainPage.newestArticles.max, Integer)
-        Integer maxHottestArticles = ConfigUtils.$as(grailsApplication.config.portal.mainPage.hottestArticles.max, Integer)
-        Date hottestArticlesFromDate = (new Date() - ConfigUtils.$as(grailsApplication.config.portal.mainPage.hottestArticles.dateWindow, Integer))
+        Future<List<Tag>> promotedTagsCommand = new PromotedTagsCommand(serviceEndpointsRepository, maxPromotedTags).queue()
+        Future<List<PopularTag>> popularTagsCommand = new PopularTagsCommand(serviceEndpointsRepository, maxPopularTags, popularTagsDateWindow).queue()
+        Future<List<Article>> newestArticles = new NewestArticlesCommand(serviceEndpointsRepository, maxNewestArticles).queue()
+        Future<List<Article>> popularArticles = new PopularArticlesCommand(serviceEndpointsRepository, maxPopularArticles, popularArticlesDateWindow).queue()
 
         return new MainViewModel(
-            promotedTags: topTagsService.getPromotedTags(),
-            hottestTags: topTagsService.getHottestTags(),
-            newestArticles: topArticlesService.getNewestArticles(maxNewestArticles, 0),
-            hottestArticles: topArticlesService.getHottestArticles(hottestArticlesFromDate, maxHottestArticles),
+            promotedTags: promotedTagsCommand.get(),
+            popularTags: popularTagsCommand.get(),
+            newestArticles: newestArticles.get(),
+            hottestArticles: popularArticles.get()
         )
     }
+
 }

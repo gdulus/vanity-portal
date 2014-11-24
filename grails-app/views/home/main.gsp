@@ -8,19 +8,17 @@
 
 <body>
 
-<g:if test="${viewModel.hottestTags}">
+<g:if test="${viewModel.popularTags}">
     <div id="celebrities-popular" class="row">
         <div class="col-md-10 col-md-offset-1">
             <h2><g:message code="portal.mainPage.mostPopularSectionTitle"/></h2>
 
             <p class="tag-container">
-                <g:each in="${viewModel.hottestTags}" var="hottestTag">
+                <g:each in="${viewModel.popularTags}" var="hottestTag">
                     <g:link controller="search"
                             action="searchByTag"
                             params="[tagName: hottestTag.tag.normalizedName]"
-                            class="tag${hottestTag.rank}">
-                        ${hottestTag.tag.name}
-                    </g:link>
+                            class="tag${hottestTag.rank}">${hottestTag.tag.name}</g:link>
                 </g:each>
             </p>
         </div>

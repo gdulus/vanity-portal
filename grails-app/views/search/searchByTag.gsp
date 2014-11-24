@@ -8,6 +8,11 @@
 </head>
 
 <body>
+
+<div id="social" class="row" ng-app="Social.app">
+    <div class="col-md-10 col-md-offset-1 stream" ng-view ng-controller="MainController"></div>
+</div>
+
 <div id="summary" class="row">
     <div class="col-md-10 col-md-offset-1">
         <h2><g:message code="portal.searchResult.foundTag.h1" args="[viewModel.tag.name]"/></h2>
@@ -64,6 +69,9 @@
 
 <content tag="javascript">
     <tracking:tag bean="${viewModel.tag}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.js"></script>
+    <asset:javascript src="social/init.js" />
 </content>
 
 </body>
