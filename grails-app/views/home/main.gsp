@@ -68,9 +68,9 @@
             <div class="col-md-6">
                 <div class="column">
                     <h2><g:message code="portal.mainPage.newestArticlesSectionTitle"/></h2>
-                    <g:if test="${viewModel.newestArticles}">
+                    <g:if test="${viewModel.newestArticles.content}">
                         <ol class="positions">
-                            <g:each in="${viewModel.newestArticles}" var="article">
+                            <g:each in="${viewModel.newestArticles.content}" var="article">
                                 <li>
                                     <g:link controller="result"
                                             action="showPreview"

@@ -1,6 +1,7 @@
 package vanity.portal.home
 
 import vanity.portal.domain.Article
+import vanity.portal.domain.ArticlePage
 import vanity.portal.domain.PopularTag
 import vanity.portal.domain.Tag
 
@@ -10,7 +11,7 @@ class MainViewModel {
 
     public List<PopularTag> popularTags
 
-    public List<Article> newestArticles
+    public ArticlePage newestArticles
 
     public List<Article> hottestArticles
 

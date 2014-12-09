@@ -6,6 +6,7 @@ import vanity.portal.command.PopularArticlesCommand
 import vanity.portal.command.PopularTagsCommand
 import vanity.portal.command.PromotedTagsCommand
 import vanity.portal.domain.Article
+import vanity.portal.domain.ArticlePage
 import vanity.portal.domain.PopularTag
 import vanity.portal.domain.Tag
 import vanity.portal.ms.ServiceEndpointsRepository
@@ -39,7 +40,7 @@ class HomeService {
     public MainViewModel buildMainModel() {
         Future<List<Tag>> promotedTagsCommand = new PromotedTagsCommand(serviceEndpointsRepository, maxPromotedTags).queue()
         Future<List<PopularTag>> popularTagsCommand = new PopularTagsCommand(serviceEndpointsRepository, maxPopularTags, popularTagsDateWindow).queue()
-        Future<List<Article>> newestArticles = new NewestArticlesCommand(serviceEndpointsRepository, maxNewestArticles).queue()
+        Future<ArticlePage> newestArticles = new NewestArticlesCommand(serviceEndpointsRepository, 0, maxNewestArticles).queue()
         Future<List<Article>> popularArticles = new PopularArticlesCommand(serviceEndpointsRepository, maxPopularArticles, popularArticlesDateWindow).queue()
 
         return new MainViewModel(

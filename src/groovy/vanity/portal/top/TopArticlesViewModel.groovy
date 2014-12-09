@@ -1,6 +1,7 @@
 package vanity.portal.top
 
-import vanity.article.Article
+import vanity.portal.domain.Article
+
 
 class TopArticlesViewModel {
 
