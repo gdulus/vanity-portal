@@ -10,13 +10,10 @@ import vanity.celebrity.Celebrity
 import vanity.celebrity.CelebrityService
 import vanity.search.SearchEngineQueryExecutor
 import vanity.search.SearchResult
-import vanity.tracking.ClickService
 import vanity.utils.ConfigUtils
 
 @Transactional(readOnly = true)
 class SearchService {
-
-    ClickService clickService
 
     ArticleService articleService
 
@@ -42,7 +39,6 @@ class SearchService {
             return null
         }
 
-        clickService.create(tag)
         List<Article> articles = articleService.findAllByIds(searchResult.items*.id)
         Celebrity celebrity = celebrityService.findByTag(tag)
         return new SearchByTagViewModel(tag: tag, articles: articles, celebrity: celebrity, start: searchResult.start, numFound: searchResult.numFound)

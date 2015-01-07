@@ -5,13 +5,9 @@ import vanity.article.Article
 import vanity.article.ArticleService
 import vanity.article.Tag
 import vanity.article.TagService
-import vanity.stats.PopularityService
-import vanity.tracking.ClickService
 
 @Transactional(readOnly = true)
 class ResultService {
-
-    ClickService clickService
 
     ArticleService articleService
 
@@ -24,10 +20,9 @@ class ResultService {
             return null
         }
 
-        clickService.create(article)
         List<Tag> tags = tagService.findAllRootParentsByArticle(article)
 
-        if (!tags){
+        if (!tags) {
             return new ShowPreviewViewModel(currentPage: currentPage, article: article)
         }
 
@@ -43,7 +38,6 @@ class ResultService {
             return null
         }
 
-        clickService.create(article)
         return new ShowArticleViewModel(article: article)
     }
 

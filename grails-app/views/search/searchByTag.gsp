@@ -62,6 +62,12 @@
     </div>
 </div>
 
+<content tag="javascript">
+    <g:javascript>
+    V.Tracking.tag(${viewModel.tag.id});
+    </g:javascript>
+</content>
+
 </body>
 </html>
 

@@ -18,9 +18,7 @@
                     <g:link controller="search"
                             action="searchByTag"
                             params="[tagName: hottestTag.tag.normalizedName]"
-                            class="tag${hottestTag.rank}">
-                        ${hottestTag.tag.name}
-                    </g:link>
+                            class="tag${hottestTag.rank}">${hottestTag.tag.name}</g:link>
                 </g:each>
             </p>
         </div>

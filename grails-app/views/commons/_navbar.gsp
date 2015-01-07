@@ -1,15 +1,19 @@
-<div id="header">
-    <div class="container">
+<nav id="main-menu">
+    <div class="container main-section">
         <div class="row">
-            <div class="logo col-md-3 col-md-offset-1">
-                <h1><g:link controller="home"><asset:image src="logo-small.jpg" alt="Tani Lans"
-                                                           class="img-responsive"/></g:link></h1>
-            </div>
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row">
+                    <div class="col-xs-2 col-md-3">
+                        <button id="sub-menu-button" type="button" class="dropdown-toggle pull-left">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <g:link controller="home" action="main" class="logo  pull-left"><asset:image src="logo-white.jpg"/></g:link>
+                    </div>
 
-            <div id="search" class="col-md-7">
-                <form action="${createLink(uri: '/api/search')}" method="get">
-                    <div class="row">
-                        <div class="col-md-12">
+                    <div id="search" class="col-xs-8 col-md-9">
+                        <form action="${createLink(uri: '/api/search')}" method="get">
                             <div class="input-group">
                                 <input type="search" class="form-control"
                                        placeholder="${g.message(code: 'portal.searchForm.searchPlaceholder')}"/>
@@ -20,43 +24,29 @@
                                            value="${g.message(code: 'portal.searchForm.searchButton')}"/>
                                 </span>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                </form>
+
+                </div>
             </div>
         </div>
     </div>
-</div>
+</nav>
 
-<div id="main-menu">
+<div id="sub-menu" class="hidden">
     <div class="container">
-        <div class="navbar navbar-default" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse"
-                            data-target="#main-menu .navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <g:link controller="home" action="main" class="navbar-brand"><asset:image src="logo-small-no-text.png" /></g:link>
-                </div>
-
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <v:menuItem controller="top" action="newestArticles" code="portal.menu.newestArticles"/>
-                        </li>
-                        <li>
-                            <v:menuItem controller="top" action="mostPopularArticles" code="portal.menu.mostImportantArticles"/>
-                        </li>
-                        <li>
-                            <v:menuItem controller="top" action="mostPopularTags" code="portal.menu.mostPopularCelebrities"/>
-                        </li>
-                    </ul>
-                </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <ul class="row">
+                    <li class="col-md-4"><v:menuItem controller="top" action="newestArticles" code="portal.menu.newestArticles"/></li>
+                    <li class="col-md-4"><v:menuItem controller="top" action="mostPopularArticles" code="portal.menu.mostImportantArticles"/></li>
+                    <li class="col-md-4"><v:menuItem controller="top" action="mostPopularTags" code="portal.menu.mostPopularCelebrities"/></li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
