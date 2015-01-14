@@ -14,8 +14,22 @@
   .logo {
     .reset;
     display: block;
-    margin-left: 20px;
-    margin-top: 3px;
+    margin-left: 10px;
+    margin-top: 5px;
+    background-repeat: no-repeat;
+
+    @media (min-width: 700px) {
+      height: 40px;
+      width: 163px;
+      background-image: url('../../images/logo-header-full.png');
+      background-repeat: no-repeat;
+    }
+
+    @media (max-width: 700px) {
+      height: 40px;
+      width: 23px;
+      background-image: url('../../images/logo-header-small.png');
+    }
   }
 
   .dropdown-toggle {

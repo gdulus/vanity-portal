@@ -1,5 +1,6 @@
 package vanity.portal.search
 
+import groovy.util.logging.Slf4j
 import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.springframework.transaction.annotation.Transactional
 import vanity.article.Article
@@ -12,6 +13,7 @@ import vanity.search.SearchEngineQueryExecutor
 import vanity.search.SearchResult
 import vanity.utils.ConfigUtils
 
+@Slf4j
 @Transactional(readOnly = true)
 class SearchService {
 
@@ -26,12 +28,24 @@ class SearchService {
     GrailsApplication grailsApplication
 
     public SearchByTagViewModel buildSearchByTagModel(final String tagName, final Integer startElement) {
-        Tag tag = tagService.findByTagName(tagName)
+        Tag tag = tagService.findByNormalizedName(tagName)
 
-        if (!tag) {
+        if (!tag || !tag.indexable()) {
+            log.info('No tag found for name {}', tagName)
             return null
         }
+        // not a root tag, try to find related root
+        if (!tag.root) {
+            List<Tag> rootTags = tagService.findAllRootParents(tag)
 
+            if (rootTags.size() == 1) {
+                throw new NotARootTagException(rootTags.first())
+            } else {
+                log.info('More than one root tag found {} for tag {}', rootTags, tagName)
+                return null
+            }
+        }
+        // trigger search
         Integer maxArticles = ConfigUtils.$as(grailsApplication.config.portal.search.page.articles.max, Integer)
         SearchResult searchResult = searchEngineQueryExecutor.findArticlesByTag(tag.name, startElement, maxArticles)
 

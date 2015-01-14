@@ -3,16 +3,16 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="row">
-                    <div class="col-xs-2 col-md-3">
+                    <div class="col-xs-4 col-md-4">
                         <button id="sub-menu-button" type="button" class="dropdown-toggle pull-left">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <g:link controller="home" action="main" class="logo  pull-left"><asset:image src="logo-white.jpg"/></g:link>
+                        <g:link controller="home" action="main" class="logo pull-left"></g:link>
                     </div>
 
-                    <div id="search" class="col-xs-8 col-md-9">
+                    <div id="search" class="col-xs-8 col-md-8">
                         <form action="${createLink(uri: '/api/search')}" method="get">
                             <div class="input-group">
                                 <input type="search" class="form-control"
