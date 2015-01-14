@@ -1,16 +1,17 @@
 package vanity.portal.home
 
-import vanity.article.Article
-import vanity.article.Tag
-import vanity.portal.top.PopularTagDTO
+import vanity.portal.domain.Article
+import vanity.portal.domain.ArticlePage
+import vanity.portal.domain.PopularTag
+import vanity.portal.domain.Tag
 
 class MainViewModel {
 
     public List<Tag> promotedTags
 
-    public List<PopularTagDTO> hottestTags
+    public List<PopularTag> popularTags
 
-    public List<Article> newestArticles
+    public ArticlePage newestArticles
 
     public List<Article> hottestArticles
 

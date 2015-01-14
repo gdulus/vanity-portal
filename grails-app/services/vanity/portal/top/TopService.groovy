@@ -1,10 +1,13 @@
 package vanity.portal.top
 
 import org.codehaus.groovy.grails.commons.GrailsApplication
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.transaction.annotation.Transactional
 import vanity.article.Article
-import vanity.article.ArticleService
 import vanity.article.Tag
+import vanity.portal.command.NewestArticlesCommand
+import vanity.portal.domain.ArticlePage
+import vanity.portal.ms.ServiceEndpointsRepository
 import vanity.stats.PopularityDTO
 import vanity.stats.PopularityService
 import vanity.utils.ConfigUtils
@@ -12,23 +15,23 @@ import vanity.utils.ConfigUtils
 @Transactional(readOnly = true)
 class TopService {
 
+    ServiceEndpointsRepository serviceEndpointsRepository
+
+    @Value('${portal.top.articles.max}')
+    Integer topArticlesMax
+
     PopularityService popularityService
-
-    TopArticlesService topArticlesService
-
-    ArticleService articleService
 
     GrailsApplication grailsApplication
 
     public TopArticlesViewModel buildNewestArticlesModel(final Integer offset) {
-        Integer max = ConfigUtils.$as(grailsApplication.config.portal.top.articles.max, Integer)
-        List<Article> articles = topArticlesService.getNewestArticles(max, offset)
+        ArticlePage newestArticles = new NewestArticlesCommand(serviceEndpointsRepository, offset, topArticlesMax).execute()
 
-        if (!articles) {
+        if (newestArticles.isEmpty()) {
             return null
         }
 
-        return new TopArticlesViewModel(articles: articles, total: articleService.count())
+        return new TopArticlesViewModel(articles: newestArticles.content, total: newestArticles.totalElements)
     }
 
     public TopArticlesViewModel buildMostPopularArticlesModel(final Integer offset) {

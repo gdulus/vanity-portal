@@ -16,7 +16,6 @@
 <body>
 
 <g:render template="/commons/navbar"/>
-
 <g:layoutBody/>
 
 <%--
@@ -25,6 +24,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <asset:javascript src="vanity/results.js"/>
+<g:pageProperty name="page.javascript"/>
 
 </body>
 </html>

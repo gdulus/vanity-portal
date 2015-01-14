@@ -8,13 +8,13 @@
 
 <body>
 
-<g:if test="${viewModel.hottestTags}">
+<g:if test="${viewModel.popularTags}">
     <div id="celebrities-popular" class="row">
         <div class="col-md-10 col-md-offset-1">
             <h2><g:message code="portal.mainPage.mostPopularSectionTitle"/></h2>
 
             <p class="tag-container">
-                <g:each in="${viewModel.hottestTags}" var="hottestTag">
+                <g:each in="${viewModel.popularTags}" var="hottestTag">
                     <g:link controller="search"
                             action="searchByTag"
                             params="[tagName: hottestTag.tag.normalizedName]"
@@ -68,9 +68,9 @@
             <div class="col-md-6">
                 <div class="column">
                     <h2><g:message code="portal.mainPage.newestArticlesSectionTitle"/></h2>
-                    <g:if test="${viewModel.newestArticles}">
+                    <g:if test="${viewModel.newestArticles.content}">
                         <ol class="positions">
-                            <g:each in="${viewModel.newestArticles}" var="article">
+                            <g:each in="${viewModel.newestArticles.content}" var="article">
                                 <li>
                                     <g:link controller="result"
                                             action="showPreview"
