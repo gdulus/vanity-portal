@@ -16,10 +16,10 @@
 
     <div class="source">
         <g:message code="portal.searchResult.readRest"/>
-        <a href="${article.url}" target="_blank"><g:message code="${article.sourceName}"/></a>
+        <a href="${article.url}" target="_blank"><g:message code="${article.source.target.name()}"/></a>
 
         <div class="tags">
-            <g:each in="${article.rootTags}" var="articleTag">
+            <g:each in="${article.publicTags}" var="articleTag">
                 <g:link controller="search"
                         action="searchByTag"
                         params="${[tagName: articleTag.normalizedName]}">${articleTag.name}

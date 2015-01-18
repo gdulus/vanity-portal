@@ -26,7 +26,6 @@ class UrlMappings {
         /**
          * Search api
          */
-        "/szukaj/api"(controller: 'search', action: 'api')
         "/szukaj/$offset?/$max?"(controller: 'search', action: 'searchByTerm')
 
         /**

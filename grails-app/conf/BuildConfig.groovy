@@ -32,13 +32,6 @@ grails.project.dependency.resolution = {
     dependencies {
         compile('postgresql:postgresql:9.1-901.jdbc4')
         compile('commons-lang:commons-lang:2.6')
-        compile('com.jcabi:jcabi-http:1.9.1')
-        compile('com.sun.jersey:jersey-core:1.18.1')
-        compile('com.sun.jersey:jersey-client:1.18.1')
-        compile('org.aspectj:aspectjrt:1.8.1')
-        compile('javax.json:javax.json-api:1.0')
-        compile('com.netflix.hystrix:hystrix-core:1.3.18')
-        runtime('org.glassfish:javax.json:1.0.3')
     }
 
     plugins {
@@ -49,6 +42,7 @@ grails.project.dependency.resolution = {
         compile ":cache:1.1.1"
         compile ":asset-pipeline:1.7.1"
         compile ":less-asset-pipeline:1.7.0"
+        compile ':jaxrs:0.10'
         compile ":mail:1.0.4"
     }
 }
