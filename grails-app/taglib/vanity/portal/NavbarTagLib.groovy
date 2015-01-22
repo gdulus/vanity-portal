@@ -6,7 +6,7 @@ class NavbarTagLib {
 
     static namespace = 'v'
 
-    def menuItem = { attrs ->
+    def menuItem = { attrs, body ->
         String code = attrs.remove('code')
         String controller = attrs.remove('controller')
         String action = attrs.remove('action')

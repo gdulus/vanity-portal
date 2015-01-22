@@ -51,9 +51,9 @@ V.Search = (function (undefined) {
         }
 
         var offset = $searchInput.offset();
-        $resultContainer.css('left', offset.left);
+        $resultContainer.css('left', offset.left + 1);
         $resultContainer.css('top', offset.top + $searchInput.outerHeight());
-        $resultContainer.width($searchInput.outerWidth());
+        $resultContainer.width($searchInput.outerWidth() + $searchButton.outerWidth() - 1);
         $resultContainer.show();
     }
 
@@ -102,6 +102,10 @@ V.Search = (function (undefined) {
         $searchInput.keydown(function (e) {
             var keyCode = e.keyCode || e.which;
             switch (keyCode) {
+                case 27: //esc
+                    hide = true;
+                    hideResult();
+                    break;
                 case 38: //up
                     var current = $resultContainer.find('.selected');
 
@@ -226,6 +230,16 @@ V.Search = (function (undefined) {
                 bindEvents();
                 V.Logger.info('Search widget initialized for endpoint ' + apiUrl);
             }
+        },
+        focus: function () {
+            V.Logger.info('Focusing on search');
+            $searchInput.focus();
+        },
+        clear: function () {
+            V.Logger.info('Clearing search');
+            hide = true;
+            hideResult();
+            $searchInput.val('');
         }
     }
 })();
