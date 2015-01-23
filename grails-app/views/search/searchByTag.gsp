@@ -9,14 +9,14 @@
 
 <body>
 <div id="summary" class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12">
         <h2><g:message code="portal.searchResult.foundTag.h1" args="[viewModel.tag.name]"/></h2>
     </div>
 </div>
 
 <g:if test="${viewModel.celebrity}">
     <div id="cellebrity" class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12">
             <div class="wrapper">
                 <div class="row">
                     <g:if test="${viewModel.celebrity.hasImage()}">
@@ -44,7 +44,7 @@
 </g:if>
 
 <div id="articles" class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12">
         <ul>
             <g:each in="${viewModel.articles}" var="article">
                 <g:render template="/commons/article" model="[article: article]"/>
@@ -54,7 +54,7 @@
 </div>
 
 <div id="pagination" class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12">
         <v:paginateDefault next="${g.message(code: 'portal.paginate.next')}"
                            prev="${g.message(code: 'portal.paginate.prev')}"
                            params="[tagName: viewModel.tag.normalizedName]"

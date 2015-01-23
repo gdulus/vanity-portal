@@ -22,16 +22,21 @@
 
 <g:render template="/commons/navbar"/>
 
-<div id="main" class="container" role="main">
+<div id="error" class="container">
     <div class="row">
-        <div id="error" class="col-md-10 col-md-offset-1 error-${errorImage}">
-            <div class="row">
-                <div class="col-md-7 col-md-offset-5">
-                    <h1><g:message code="error.info"/> <span>${status}</span></h1>
+        <div class="col-md-12">
+            <div class="canvas">
+                <h1><g:message code="error.info"/> <span>${status}</span></h1>
+
+                <div>
+                    <asset:image src="error-${errorImage}.jpg" class="img-responsive pull-right img-${errorImage}"/>
                 </div>
+                <div class="clearfix"></div>
+
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <g:render template="/commons/footer"/>

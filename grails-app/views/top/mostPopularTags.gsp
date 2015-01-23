@@ -10,13 +10,13 @@
 <body>
 
 <div id="summary" class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12">
         <h2><g:message code="portal.top.mostPopularTags"/></h2>
     </div>
 </div>
 
 <div id="articles" class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12">
         <p class="tag-container">
             <g:each in="${viewModel.tags}" var="hottestTag">
                 <g:link controller="search"

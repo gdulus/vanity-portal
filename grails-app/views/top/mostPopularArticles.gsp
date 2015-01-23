@@ -9,14 +9,14 @@
 
 <body>
 <div id="summary" class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12">
         <h2><g:message code="portal.top.hottestArticles"/></h2>
     </div>
 </div>
 
 
 <div id="articles" class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12">
         <ul>
             <g:each in="${viewModel.articles}" var="article">
                 <g:render template="/commons/article" model="[article: article]"/>
@@ -27,7 +27,7 @@
 
 
 <div id="pagination" class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12">
         <v:paginateDefault next="${g.message(code: 'portal.paginate.next')}"
                            prev="${g.message(code: 'portal.paginate.prev')}"
                            total="${viewModel.total}"/>
