@@ -25,7 +25,8 @@
                  [figwheel "0.1.6-SNAPSHOT"]
                  [org.clojars.frozenlock/reagent-modals "0.2.2"]
                  [reagent-forms "0.4.3"]
-                 [cljs-ajax "0.3.9"]]
+                 [cljs-ajax "0.3.9"]
+                 [jkkramer/verily "0.6.0"]]
 
   :plugins [
             [lein-cljsbuild "1.0.4"]
