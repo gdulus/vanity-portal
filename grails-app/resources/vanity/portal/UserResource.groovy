@@ -25,7 +25,7 @@ class UserResource {
             } as JSON
             return Response.ok(result).build()
         } catch (ValidationException exp) {
-            JSON errors = exp.errors.fieldErrors.collect { "${it.field}.${it.code}" } as JSON
+            JSON errors = exp.errors.fieldErrors.collect { [it.field, it.code] } as JSON
             return Response.status(Response.Status.BAD_REQUEST).entity(errors).build();
         }
     }
