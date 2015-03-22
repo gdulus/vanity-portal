@@ -16,7 +16,7 @@
                     <span class="glyphicon glyphicon-search"></span>
                 </button>
 
-                <button type="button" class="pull-right user icon">
+                <button id="user-button" type="button" class="pull-right user icon">
                     <span class="glyphicon glyphicon-user"></span>
                 </button>
 

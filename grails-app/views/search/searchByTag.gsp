@@ -14,6 +14,8 @@
     </div>
 </div>
 
+<div id="social"></div>
+
 <g:if test="${viewModel.celebrity}">
     <div id="cellebrity" class="row">
         <div class="col-md-12">
@@ -63,8 +65,12 @@
 </div>
 
 <content tag="javascript">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.11.2/react.js"></script>
+    <asset:javascript src="social/out/goog/base.js"/>
+    <asset:javascript src="social/app.js"/>
     <g:javascript>
-    V.Tracking.tag(${viewModel.tag.id});
+        goog.require("social_app.dev");
+        V.Tracking.tag(${viewModel.tag.id});
     </g:javascript>
 </content>
 
