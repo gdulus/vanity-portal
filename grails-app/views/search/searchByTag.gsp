@@ -9,10 +9,6 @@
 
 <body>
 
-<v:withFeature name="biography">
-    test
-</v:withFeature>
-
 <div id="summary" class="row">
     <div class="col-md-12">
         <h2><g:message code="portal.searchResult.foundTag.h1" args="[viewModel.tag.name]"/></h2>
@@ -23,34 +19,87 @@
     <div id="social"></div>
 </v:withFeature>
 
-<g:if test="${viewModel.celebrity}">
-    <div id="cellebrity" class="row">
-        <div class="col-md-12">
-            <div class="wrapper">
-                <div class="row">
-                    <g:if test="${viewModel.celebrity.hasImage()}">
-                        <div class="col-md-3 picture">
-                            <v:celebrityImg bean="${viewModel.celebrity}" class="img-responsive"/>
-                        </div>
-
-                        <div class="col-md-9 description">
-                            <h3>${viewModel.celebrity.fullName}</h3>
-
-                            <p>${viewModel.celebrity.description}</p>
-                        </div>
-                    </g:if>
-                    <g:else>
-                        <div class="col-md-12 description">
-                            <h3>${viewModel.celebrity.fullName}</h3>
-
-                            <p>${viewModel.celebrity.description}</p>
-                        </div>
-                    </g:else>
+<v:withFeature name="biography">
+    <g:if test="${viewModel.celebrity}">
+        <div id="quotations" class="row desktop">
+            <g:if test="${viewModel.celebrity.hasImage()}">
+                <div class="col-md-3 picture">
+                    <v:celebrityImg bean="${viewModel.celebrity}" class="img-responsive"/>
                 </div>
+
+                <div class="col-md-9 description">
+                    <g:each in="${viewModel.celebrity.quotations}" var="quotation">
+                        <li>
+                            <p>${quotation.content}</p>
+                        </li>
+                    </g:each>
+                </div>
+            </g:if>
+            <g:else>
+                <ul>
+                    <g:each in="${viewModel.celebrity.quotations}" var="quotation">
+                        <li>
+                            <p>${quotation.content}</p>
+                        </li>
+                    </g:each>
+                </ul>
+            </g:else>
+        </div>
+
+        <div id="biography" class="row desktop">
+            <div class="col-md-4">
+                <h3>Pełne imię i nazwisko</h3>
+
+                <p>${viewModel.celebrity.fullName}</p>
+
+                <h3>Płeć</h3>
+
+                <p><g:message code="${viewModel.celebrity.gender}"/></p>
+
+                <h3>Wzrost</h3>
+
+                <p>${viewModel.celebrity.height}</p>
+
+                <h3>Znak zodiaku</h3>
+
+                <p>${viewModel.celebrity.zodiacSign}</p>
+            </div>
+
+            <div class="col-md-4">
+                <h3>Data urodzin</h3>
+
+                <p><g:formatDate format="dd-MM-yyyy" date="${viewModel.celebrity.birth.date}"/></p>
+
+                <h3>Miejsce urodzin</h3>
+
+                <p>${viewModel.celebrity.birth.location}</p>
+
+                <h3>Wiek</h3>
+
+                <p>${viewModel.celebrity.age}</p>
+                <g:if test="${!viewModel.celebrity.alive}">
+                    <h3>Data śmierci</h3>
+
+                    <p><g:formatDate format="dd-MM-yyyy" date="${viewModel.celebrity.death.date}"/></p>
+
+                    <h3>Miejsce śmierci</h3>
+
+                    <p>${viewModel.celebrity.death.location}</p>
+                </g:if>
+            </div>
+
+            <div class="col-md-4">
+                <h3>Zawód</h3>
+
+                <p>${viewModel.celebrity.jobs*.name?.join(', ')}</p>
+
+                <h3>Kraj</h3>
+
+                <p>${viewModel.celebrity.countries*.name?.join(', ')}</p>
             </div>
         </div>
-    </div>
-</g:if>
+    </g:if>
+</v:withFeature>
 
 <div id="articles" class="row">
     <div class="col-md-12">
