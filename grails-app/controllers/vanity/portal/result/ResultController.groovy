@@ -1,5 +1,6 @@
 package vanity.portal.result
 
+import grails.util.Mixin
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus

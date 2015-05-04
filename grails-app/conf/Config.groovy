@@ -136,3 +136,10 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/**/images/**': ['permitAll'],
     '/**/favicon.ico': ['permitAll']
 ]
+
+// ##########################3
+// features
+// ##########################3
+fetures.biography = false
+fetures.social = false
+

@@ -8,13 +8,20 @@
 </head>
 
 <body>
+
+<v:withFeature name="biography">
+    test
+</v:withFeature>
+
 <div id="summary" class="row">
     <div class="col-md-12">
         <h2><g:message code="portal.searchResult.foundTag.h1" args="[viewModel.tag.name]"/></h2>
     </div>
 </div>
 
-<div id="social"></div>
+<v:withFeature name="social">
+    <div id="social"></div>
+</v:withFeature>
 
 <g:if test="${viewModel.celebrity}">
     <div id="cellebrity" class="row">
@@ -64,15 +71,17 @@
     </div>
 </div>
 
-<content tag="javascript">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.11.2/react.js"></script>
-    <asset:javascript src="social/out/goog/base.js"/>
-    <asset:javascript src="social/app.js"/>
-    <g:javascript>
-        goog.require("social_app.dev");
-        V.Tracking.tag(${viewModel.tag.id});
-    </g:javascript>
-</content>
+<v:withFeature name="social">
+    <content tag="javascript">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.11.2/react.js"></script>
+        <asset:javascript src="social/out/goog/base.js"/>
+        <asset:javascript src="social/app.js"/>
+        <g:javascript>
+            goog.require("social_app.dev");
+            V.Tracking.tag(${viewModel.tag.id});
+        </g:javascript>
+    </content>
+</v:withFeature>
 
 </body>
 </html>

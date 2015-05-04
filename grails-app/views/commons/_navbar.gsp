@@ -16,9 +16,11 @@
                     <span class="glyphicon glyphicon-search"></span>
                 </button>
 
-                <button id="user-button" type="button" class="pull-right user icon">
-                    <span class="glyphicon glyphicon-user"></span>
-                </button>
+                <v:withFeature name="social">
+                    <button id="user-button" type="button" class="pull-right user icon">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </button>
+                </v:withFeature>
 
                 <button type="button" class="pull-left menu-item desktop">
                     <h2>celebryci <span class="glyphicon glyphicon-menu-down"></span></h2>

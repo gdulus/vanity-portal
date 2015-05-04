@@ -6,13 +6,12 @@ grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
-// uncomment (and adjust settings) to fork the JVM to isolate classpaths
-//grails.project.fork = [
-//   run: [maxMemory:1024, minMemory:64, debug:false, maxPerm:256]
-//]
+//uncomment (and adjust settings) to fork the JVM to isolate classpaths
+grails.project.fork = [
+        run: [maxMemory: 1024, minMemory: 64, debug: false, maxPerm: 256, jvmArgs: ['-Dconfig.external.location=/home/gdulus/Workspace/projects/vanity/_config']]
+]
 
 grails.project.dependency.resolution = {
-
     inherits("global") {}
     log "error"          // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true       // Whether to verify checksums on resolve
@@ -26,7 +25,9 @@ grails.project.dependency.resolution = {
         grailsCentral()
         mavenLocal()
         mavenCentral()
-        mavenRepo 'http://maven.restlet.org'
+        mavenRepo "http://repo.grails.org/grails/core"
+        mavenRepo "http://repo.grails.org/grails/plugins"
+        mavenRepo "http://repo.spring.io/milestone/"
     }
 
     dependencies {

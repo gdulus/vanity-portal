@@ -1,5 +1,6 @@
 package vanity.portal.search
 
+import grails.util.Mixin
 import grails.web.RequestParameter
 import vanity.portal.commons.ControllerMixin
 

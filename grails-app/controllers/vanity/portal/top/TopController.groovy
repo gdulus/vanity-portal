@@ -1,5 +1,6 @@
 package vanity.portal.top
 
+import grails.util.Mixin
 import vanity.portal.commons.ControllerMixin
 
 @Mixin(ControllerMixin)
