@@ -1,15 +1,13 @@
 package vanity.portal.result
 
-import grails.util.Mixin
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import vanity.article.Article
-import vanity.portal.commons.ControllerMixin
+import vanity.portal.AbstractController
 
 @Slf4j
-@Mixin(ControllerMixin)
-class ResultController {
+class ResultController extends AbstractController {
 
     def resultService
 
@@ -32,12 +30,12 @@ class ResultController {
 
     def showPreview(final Long id) {
         def model = resultService.buildShowPreview(id, "${serverURL}${request.forwardURI}")
-        return getModelOrNotFound(model)
+        return getModelOrNotFound(model, response)
     }
 
     def showArticle(final Long id) {
         def model = resultService.buildShowArticleModel(id)
-        return getModelOrNotFound(model)
+        return getModelOrNotFound(model, response)
     }
 
 }

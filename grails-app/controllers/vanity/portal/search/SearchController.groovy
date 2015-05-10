@@ -1,18 +1,16 @@
 package vanity.portal.search
 
-import grails.util.Mixin
 import grails.web.RequestParameter
-import vanity.portal.commons.ControllerMixin
+import vanity.portal.AbstractController
 
-@Mixin(ControllerMixin)
-class SearchController {
+class SearchController extends AbstractController {
 
     def searchService
 
     def searchByTag(final String tagName, final Integer offset) {
         try {
             def model = searchService.buildSearchByTagModel(tagName, offset)
-            return getModelOrNotFound(model)
+            return getModelOrNotFound(model, response)
         } catch (NotARootTagException exp) {
             redirect(action: 'searchByTag', params: [tagName: exp.relatedRoot.normalizedName])
         }
@@ -20,7 +18,7 @@ class SearchController {
 
     def searchByTerm(@RequestParameter('q') final String term, final Integer offset) {
         def model = searchService.buildSearchByTermModel(term, offset)
-        return getModelOrNotFound(model)
+        return getModelOrNotFound(model, response)
     }
 
 }
