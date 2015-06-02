@@ -120,17 +120,19 @@
     </div>
 </div>
 
-<v:withFeature name="social">
-    <content tag="javascript">
+<content tag="javascript">
+    <v:withFeature name="social">
         <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.11.2/react.js"></script>
         <asset:javascript src="social/out/goog/base.js"/>
         <asset:javascript src="social/app.js"/>
         <g:javascript>
             goog.require("social_app.dev");
-            V.Tracking.tag(${viewModel.tag.id});
         </g:javascript>
-    </content>
-</v:withFeature>
+    </v:withFeature>
+    <g:javascript>
+        V.Tracking.tag(${viewModel.tag.id});
+    </g:javascript>
+</content>
 
 </body>
 </html>
