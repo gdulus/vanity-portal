@@ -137,9 +137,24 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/**/favicon.ico': ['permitAll']
 ]
 
-// ##########################3
+// ##########################
 // features
-// ##########################3
+// ##########################
 fetures.biography = false
 fetures.social = false
+
+// ##########################
+// caches
+// ##########################
+grails.cache.message.ttl = 1000 * 60 * 5
+grails.cache.config = {
+    enabled = true
+    cache {
+        name 'message'
+        eternal false
+        overflowToDisk false
+        maxElementsInMemory 10000
+        maxElementsOnDisk 10000000
+    }
+}
 
