@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value
 import vanity.i18n.Message
 
 @Slf4j
-class MessageService {
+class PortalMessageService {
 
     static transactional = false
 

@@ -12,7 +12,7 @@ class DatabaseMessageSource extends AbstractMessageSource {
     private static final Locale PL_LOCALE = new Locale('pl', 'PL')
 
     @Autowired
-    MessageService messageService
+    PortalMessageService messageService
 
     @Override
     protected MessageFormat resolveCode(final String code, final Locale locale) {
