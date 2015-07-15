@@ -71,6 +71,7 @@
 
                    :figwheel {:http-server-root "public"
                               :server-port 3449
+                              :autoload false
                               :css-dirs ["resources/public/css"]
                               :ring-handler social-app.handler/app}
 

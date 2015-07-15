@@ -63,8 +63,6 @@
 
 ;; -------------------------
 ;; Js hooks
-
-;; TODO move that to event related namespace
 (defn- add-listener
   [element-id event-type listener]
   (events/listen
@@ -72,7 +70,6 @@
     event-type
     listener))
 
-;; TODO move that rouute related namespace
 (defn init-register-button! []
   (add-listener "user-button"
                 EventType/CLICK
