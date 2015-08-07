@@ -74,12 +74,12 @@
                 <h3>Zawód</h3>
                 <g:each in="${viewModel.celebrity.jobs}" var="job" status="status">
                     <translate:job job="${job}" gender="${viewModel.celebrity.gender}"/>
-                    <g:if test="${job != viewModel.celebrity.jobs.last()}"></g:if>
+                    <g:if test="${job != viewModel.celebrity.jobs.last()}">,</g:if>
                 </g:each>
                 <h3>Kraj</h3>
                 <g:each in="${viewModel.celebrity.countries}" var="country" status="status">
                     <translate:country country="${country}"/>
-                    <g:if test="${country != viewModel.celebrity.countries.last()}"></g:if>
+                    <g:if test="${country != viewModel.celebrity.countries.last()}">,</g:if>
                 </g:each>
             </div>
         </div>
