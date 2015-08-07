@@ -6,9 +6,16 @@ import org.codehaus.groovy.grails.web.util.WebUtils
 final class FeatureUtils {
 
     public static boolean isEnabled(final String featureName) {
+        return (params.containsKey("features.${featureName}".toString()) || Holders.config.fetures."${featureName}")
+    }
+
+    public static boolean isPreviewRequested() {
+        return (params.containsKey("features.".toString()))
+    }
+
+    private static Map<String, ?> getParams() {
         def webUtils = WebUtils.retrieveGrailsWebRequest()
-        return (webUtils.getCurrentRequest().parameterMap.containsKey("fetures.${featureName}".toString()) ||
-                Holders.config.fetures."${featureName}")
+        return webUtils.getCurrentRequest().parameterMap
     }
 
 }

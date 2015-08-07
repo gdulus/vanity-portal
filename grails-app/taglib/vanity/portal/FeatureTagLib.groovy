@@ -13,4 +13,10 @@ class FeatureTagLib {
         }
     }
 
+    def outsideFeatureRequest = { attrs, body ->
+        if (!FeatureUtils.isPreviewRequested()) {
+            out << body()
+        }
+    }
+
 }
