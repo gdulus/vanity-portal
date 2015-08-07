@@ -48,12 +48,10 @@
                 <h3>Pełne imię i nazwisko</h3>
                 <p>${viewModel.celebrity.fullName}</p>
                 <h3>Płeć</h3>
-
                 <p><g:message code="vanity.user.Gender.${viewModel.celebrity.gender.name()}"/></p>
                 <h3>Wzrost</h3>
                 <p>${viewModel.celebrity.height} cm</p>
                 <h3>Znak zodiaku</h3>
-
                 <p><g:message code="vanity.celebrity.ZodiacSign.${viewModel.celebrity.zodiacSign.name()}"/></p>
             </div>
 
@@ -74,9 +72,15 @@
 
             <div class="col-md-4">
                 <h3>Zawód</h3>
-                <p>${viewModel.celebrity.jobs*.name?.join(', ')}</p>
+                <g:each in="${viewModel.celebrity.jobs}" var="job" status="status">
+                    <translate:job job="${job}" gender="${viewModel.celebrity.gender}"/>
+                    <g:if test="${job != viewModel.celebrity.jobs.last()}"></g:if>
+                </g:each>
                 <h3>Kraj</h3>
-                <p>${viewModel.celebrity.countries*.name?.join(', ')}</p>
+                <g:each in="${viewModel.celebrity.countries}" var="country" status="status">
+                    <translate:country country="${country}"/>
+                    <g:if test="${country != viewModel.celebrity.countries.last()}"></g:if>
+                </g:each>
             </div>
         </div>
     </g:if>
