@@ -50,26 +50,24 @@
                 <h3>Płeć</h3>
                 <p><g:message code="${viewModel.celebrity.gender}"/></p>
                 <h3>Wzrost</h3>
-                <p>${viewModel.celebrity.height}</p>
+
+                <p>${viewModel.celebrity.height} cm</p>
                 <h3>Znak zodiaku</h3>
-                <p>${viewModel.celebrity.zodiacSign}</p>
+
+                <p><g:message code="${viewModel.celebrity.zodiacSign}"/></p>
             </div>
 
             <div class="col-md-4">
                 <h3>Data urodzin</h3>
-
                 <p><g:formatDate format="dd-MM-yyyy" date="${viewModel.celebrity.birthDate}"/></p>
                 <h3>Miejsce urodzin</h3>
-
                 <p>${viewModel.celebrity.birthLocation}</p>
                 <h3>Wiek</h3>
                 <p>${viewModel.celebrity.age}</p>
                 <g:if test="${viewModel.celebrity.dead}">
                     <h3>Data śmierci</h3>
-
                     <p><g:formatDate format="dd-MM-yyyy" date="${viewModel.celebrity.deathDate}"/></p>
                     <h3>Miejsce śmierci</h3>
-
                     <p>${viewModel.celebrity.deathLocation}</p>
                 </g:if>
             </div>
