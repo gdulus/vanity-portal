@@ -48,13 +48,13 @@
                 <h3>Pełne imię i nazwisko</h3>
                 <p>${viewModel.celebrity.fullName}</p>
                 <h3>Płeć</h3>
-                <p><g:message code="${viewModel.celebrity.gender}"/></p>
-                <h3>Wzrost</h3>
 
+                <p><g:message code="vanity.user.Gender.${viewModel.celebrity.gender.name()}"/></p>
+                <h3>Wzrost</h3>
                 <p>${viewModel.celebrity.height} cm</p>
                 <h3>Znak zodiaku</h3>
 
-                <p><g:message code="${viewModel.celebrity.zodiacSign}"/></p>
+                <p><g:message code="vanity.celebrity.ZodiacSign.${viewModel.celebrity.zodiacSign.name()}"/></p>
             </div>
 
             <div class="col-md-4">
