@@ -10,12 +10,12 @@ class TranslationsTagLib {
     def job = { attrs, body ->
         TranslationKeyAware job = attrs.remove('job')
         Gender gender = attrs.remove('gender')
-        g.message(code: "vanity.job.${gender.name().toLowerCase()}.${job.translationKey}")
+        out << g.message(code: "vanity.job.${gender.name().toLowerCase()}.${job.translationKey}")
     }
 
     def country = { attrs, body ->
         TranslationKeyAware job = attrs.remove('country')
-        g.message(code: "vanity.country.${job.translationKey}")
+        out << g.message(code: "vanity.country.${job.translationKey}")
     }
 
 }
