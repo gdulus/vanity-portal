@@ -26,21 +26,18 @@
                 <div class="col-md-3 picture">
                     <v:celebrityImg bean="${viewModel.celebrity}" class="img-responsive"/>
                 </div>
-
                 <div class="col-md-9 description">
-                    <g:each in="${viewModel.celebrity.quotations}" var="quotation">
-                        <li>
-                            <p>${quotation.content}</p>
-                        </li>
-                    </g:each>
+                    <ul>
+                        <g:each in="${viewModel.celebrity.quotations}" var="quotation">
+                            <li><p>${quotation.content}</p></li>
+                        </g:each>
+                    </ul>
                 </div>
             </g:if>
             <g:else>
                 <ul>
                     <g:each in="${viewModel.celebrity.quotations}" var="quotation">
-                        <li>
-                            <p>${quotation.content}</p>
-                        </li>
+                        <li><p>${quotation.content}</p></li>
                     </g:each>
                 </ul>
             </g:else>
@@ -49,52 +46,34 @@
         <div id="biography" class="row desktop">
             <div class="col-md-4">
                 <h3>Pełne imię i nazwisko</h3>
-
                 <p>${viewModel.celebrity.fullName}</p>
-
                 <h3>Płeć</h3>
-
                 <p><g:message code="${viewModel.celebrity.gender}"/></p>
-
                 <h3>Wzrost</h3>
-
                 <p>${viewModel.celebrity.height}</p>
-
                 <h3>Znak zodiaku</h3>
-
                 <p>${viewModel.celebrity.zodiacSign}</p>
             </div>
 
             <div class="col-md-4">
                 <h3>Data urodzin</h3>
-
                 <p><g:formatDate format="dd-MM-yyyy" date="${viewModel.celebrity.birth.date}"/></p>
-
                 <h3>Miejsce urodzin</h3>
-
                 <p>${viewModel.celebrity.birth.location}</p>
-
                 <h3>Wiek</h3>
-
                 <p>${viewModel.celebrity.age}</p>
-                <g:if test="${!viewModel.celebrity.alive}">
+                <g:if test="${viewModel.celebrity.dead}">
                     <h3>Data śmierci</h3>
-
                     <p><g:formatDate format="dd-MM-yyyy" date="${viewModel.celebrity.death.date}"/></p>
-
                     <h3>Miejsce śmierci</h3>
-
                     <p>${viewModel.celebrity.death.location}</p>
                 </g:if>
             </div>
 
             <div class="col-md-4">
                 <h3>Zawód</h3>
-
                 <p>${viewModel.celebrity.jobs*.name?.join(', ')}</p>
-
                 <h3>Kraj</h3>
-
                 <p>${viewModel.celebrity.countries*.name?.join(', ')}</p>
             </div>
         </div>
