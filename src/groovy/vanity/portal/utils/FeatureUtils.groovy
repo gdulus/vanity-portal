@@ -10,7 +10,7 @@ final class FeatureUtils {
     }
 
     public static boolean isPreviewRequested() {
-        return (params.containsKey("features.".toString()))
+        return (params.keySet().find { it.contains("features.".toString()) })
     }
 
     private static Map<String, ?> getParams() {
