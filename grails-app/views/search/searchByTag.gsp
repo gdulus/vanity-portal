@@ -47,6 +47,10 @@
             <div class="col-md-4">
                 <h3>Pełne imię i nazwisko</h3>
                 <p>${viewModel.celebrity.fullName}</p>
+
+                <h3>Nick name</h3>
+
+                <p>${viewModel.celebrity.nickName}</p>
                 <h3>Płeć</h3>
                 <p><g:message code="vanity.user.Gender.${viewModel.celebrity.gender.name()}"/></p>
                 <h3>Wzrost</h3>
@@ -57,14 +61,16 @@
 
             <div class="col-md-4">
                 <h3>Data urodzin</h3>
-                <p><g:formatDate format="dd-MM-yyyy" date="${viewModel.celebrity.birthDate}"/></p>
+
+                <p><g:formatDate format="d MMMM yyyy 'r.'" locale="pl" date="${viewModel.celebrity.birthDate}"/></p>
                 <h3>Miejsce urodzin</h3>
                 <p>${viewModel.celebrity.birthLocation}</p>
                 <h3>Wiek</h3>
                 <p>${viewModel.celebrity.age}</p>
                 <g:if test="${viewModel.celebrity.dead}">
                     <h3>Data śmierci</h3>
-                    <p><g:formatDate format="dd-MM-yyyy" date="${viewModel.celebrity.deathDate}"/></p>
+
+                    <p><g:formatDate format="d MMMM yyyy 'r.'" locale="pl" date="${viewModel.celebrity.deathDate}"/></p>
                     <h3>Miejsce śmierci</h3>
                     <p>${viewModel.celebrity.deathLocation}</p>
                 </g:if>

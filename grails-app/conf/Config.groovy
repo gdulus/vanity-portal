@@ -140,8 +140,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 // ##########################
 // features
 // ##########################
-fetures.biography = false
-fetures.social = false
+features.biography = false
+features.social = false
 
 // ##########################
 // caches

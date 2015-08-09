@@ -6,7 +6,7 @@ import org.codehaus.groovy.grails.web.util.WebUtils
 final class FeatureUtils {
 
     public static boolean isEnabled(final String featureName) {
-        return (params.containsKey("features.${featureName}".toString()) || Holders.config.fetures."${featureName}")
+        return (params.containsKey("features.${featureName}".toString()) || Holders.config.features."${featureName}")
     }
 
     public static boolean isPreviewRequested() {
