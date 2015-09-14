@@ -236,6 +236,8 @@ V.Search = (function (undefined) {
             $searchInput.focus();
             if($("#main-menu").css("position")=="fixed"){
                 $("#main").css("margin-top", "110px");
+            }else{
+                $("#main").css("margin-top", "0px");
             }
         },
         clear: function () {
@@ -245,7 +247,32 @@ V.Search = (function (undefined) {
             $searchInput.val('');
             if($("#main-menu").css("position")=="fixed"){
                 $("#main").css("margin-top", "50px");
+            }else{
+                $("#main").css("margin-top", "0px");
             }
         }
+
+
+
+
     }
+
+
+
 })();
+
+
+$(window).resize(function(){
+    if($("#main-menu").css("position")=="fixed") {
+        if ($("#search-menu").hasClass("hidden")) {
+
+            $("#main").css("margin-top", "50px");
+        }
+
+    else {
+        $("#main").css("margin-top", "110px");
+    }
+    }else{
+        $("#main").css("margin-top", "0px");
+    }
+});
