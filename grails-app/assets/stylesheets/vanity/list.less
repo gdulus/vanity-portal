@@ -8,18 +8,32 @@
 
   margin-bottom: 25px;
 
-  h2 {
+  h1 {
     .reset;
-    font-size: 26px;
+    font-size: 36px;
     font-weight: bold;
     color: @main-color;
-    padding-top: 24px;
+    padding-top:24px;
 
     span {
       color: #535353;
     }
+
+
+  }
+
+}
+
+#main{
+  magin-top:0;
+}
+
+@media (min-width:768px){
+  #main{
+    margin-top: @menu-height;
   }
 }
+
 
 #cellebrity {
 
@@ -50,7 +64,10 @@
 }
 
 #biography {
-
+ background: #fff;
+  overflow:auto;
+  margin-bottom:40px;
+  padding-bottom:10px;
 }
 
 #pagination {
