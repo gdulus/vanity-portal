@@ -45,71 +45,68 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h2>Życiorys</h2>
+                <h2><g:message code="vanity.biography"/></h2>
                 <div id="biography">
             <div class="col-sm-6 col-md-4">
-                <h3>Pełne imię i nazwisko</h3>
+                <h3><g:message code="vanity.biography.fullName"/></h3>
                 <p>${viewModel.celebrity.fullName}</p>
                 </div>
-
-
-
                 <g:if test="${viewModel.celebrity.nickName != null}">
                     <div class="col-sm-6 col-md-4">
-                    <h3>Nick name</h3>
+                        <h3><g:message code="vanity.biography.nick"/></h3>
 
                     <p>${viewModel.celebrity.nickName}</p>
                     </div>
                 </g:if>
             <div class="col-sm-6 col-md-4">
-                <h3>Płeć</h3>
+                <h3><g:message code="vanity.biography.gender"/></h3>
                 <p><g:message code="vanity.user.Gender.${viewModel.celebrity.gender.name()}"/></p>
                 </div>
             <div class="col-sm-6 col-md-4">
-                <h3>Wzrost</h3>
+                <h3><g:message code="vanity.biography.height"/></h3>
                 <p>${viewModel.celebrity.height} cm</p>
                 </div>
             <div class="col-sm-6 col-md-4">
-                <h3>Znak zodiaku</h3>
+                <h3><g:message code="vanity.biography.zodiacSign"/></h3>
                 <p><g:message code="vanity.celebrity.ZodiacSign.${viewModel.celebrity.zodiacSign.name()}"/></p>
             </div>
 
             <div class="col-sm-6 col-md-4">
-                <h3>Data urodzin</h3>
+                <h3><g:message code="vanity.biography.birthDate"/></h3>
 
                 <p><g:formatDate format="d MMMM yyyy 'r.'" locale="pl" date="${viewModel.celebrity.birthDate}"/></p>
                 </div>
             <div class="col-sm-6 col-md-4">
-                <h3>Miejsce urodzin</h3>
+                <h3><g:message code="vanity.biography.birthPlace"/></h3>
                 <p>${viewModel.celebrity.birthLocation}</p>
                 </div>
             <div class="col-sm-6 col-md-4">
-                <h3>Wiek</h3>
+                <h3><g:message code="vanity.biography.age"/></h3>
                 <p>${viewModel.celebrity.age}</p>
                 </div>
 
                 <g:if test="${viewModel.celebrity.dead}">
                     <div class="col-sm-6 col-md-4">
-                    <h3>Data śmierci</h3>
+                        <h3><g:message code="vanity.biography.deathDate"/></h3>
 
                     <p><g:formatDate format="d MMMM yyyy 'r.'" locale="pl" date="${viewModel.celebrity.deathDate}"/></p>
                     </div>
                     <div class="col-sm-6 col-md-4">
-                    <h3>Miejsce śmierci</h3>
+                        <h3><g:message code="vanity.biography.deathPlace"/></h3>
                     <p>${viewModel.celebrity.deathLocation}</p>
                     </div>
                 </g:if>
 
 
             <div class="col-sm-6 col-md-4">
-                <h3>Zawód</h3>
+                <h3><g:message code="vanity.biography.job"/></h3>
                 <p><g:each in="${viewModel.celebrity.jobs}" var="job" status="status">
                     <translate:job job="${job}" gender="${viewModel.celebrity.gender}"/>
                     <g:if test="${job != viewModel.celebrity.jobs.last()}">,</g:if>
                 </g:each></p>
                 </div>
             <div class="col-sm-6 col-md-4">
-                <h3>Kraj</h3>
+                <h3><g:message code="vanity.biography.country"/></h3>
                 <p><g:each in="${viewModel.celebrity.countries}" var="country" status="status">
                     <translate:country country="${country}"/>
                     <g:if test="${country != viewModel.celebrity.countries.last()}">,</g:if>
@@ -123,7 +120,7 @@
 
 <div id="articles" class="row">
     <div class="col-md-12">
-        <h2>Plotki i ploteczki</h2>
+        <h2><g:message code="vanity.gossips"/></h2>
         <ul>
             <g:each in="${viewModel.articles}" var="article">
                 <g:render template="/commons/article" model="[article: article]"/>
