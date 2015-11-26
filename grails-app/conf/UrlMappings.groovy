@@ -44,6 +44,12 @@ class UrlMappings {
         "/kontakt/wyslij"(controller: 'info', action: 'contactSend')
 
         /**
+         * Biography
+         */
+        "/biografie"(controller: 'biography')
+        "/biografie/${letter}"(controller: 'biography', action: 'details')
+
+        /**
          * Error pages
          */
         "500"(controller: 'error', action: 'serverError')
