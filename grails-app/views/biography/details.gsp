@@ -3,7 +3,7 @@
 <head>
     <title><g:message code="portal.biography.title"/></title>
     <meta name="layout" content="list"/>
-    <meta name="robots" content="index,follow"/>
+    <meta name="robots" content="noindex,follow"/>
     <asset:stylesheet href="vanity/biography.less"/>
 </head>
 
@@ -17,7 +17,7 @@
 <div class="row section">
     <div class="col-md-12">
         <ul class="list-inline text-center alphabet">
-            <g:each in="${('a'..'z')}" var="letter">
+            <g:each in="${viewModel.letters}" var="letter">
                 <li class="${currentLetter == letter ? "selected" : ""}">
                     <g:link action="details" params="${[letter: letter]}">${letter}</g:link>
                 </li>
@@ -34,7 +34,7 @@
 
 <div class="row section">
     <div class="col-md-12">
-        <g:each in="${celebrities}" var="celebrity">
+        <g:each in="${viewModel.celebrities}" var="celebrity">
             <g:link controller="search" action="searchByTag"
                     params="${[tagName: celebrity.tag.normalizedName]}">${celebrity.fullName}</g:link>
         </g:each>

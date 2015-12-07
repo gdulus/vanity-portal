@@ -26,6 +26,7 @@
                     <h2>celebryci <span class="glyphicon glyphicon-menu-down"></span></h2>
                     <ul class="navigation pull-right">
                         <li><v:menuItem controller="top" action="mostPopularTags" code="portal.menu.mostPopularCelebrities"/></li>
+                        <li><v:menuItem controller="biography" action="index" code="portal.menu.biographies"/></li>
                     </ul>
                 </button>
 

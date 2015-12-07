@@ -3,7 +3,7 @@
 <head>
     <title><g:message code="portal.biography.title"/></title>
     <meta name="layout" content="list"/>
-    <meta name="robots" content="noindex, follow"/>
+    <meta name="robots" content="index, follow"/>
     <asset:stylesheet href="vanity/biography.less"/>
 </head>
 
@@ -15,13 +15,16 @@
 </div>
 
 <div class="row section">
-    <div class="col-md-12">
-        <p><g:message code="portal.biography.description" default=""/></p>
-    </div>
+    <g:set var="description" value="${message(code: 'portal.biography.description', default: null)}"/>
+    <g:if test="${description && description != 'portal.biography.description'}">
+        <div class="col-md-12">
+            <p>${description}</p>
+        </div>
+    </g:if>
 
     <div class="col-md-12">
         <ul class="list-inline text-center alphabet">
-            <g:each in="${('a'..'z')}" var="letter">
+            <g:each in="${viewModel.letters}" var="letter">
                 <li><g:link action="details" params="${[letter: letter]}">${letter}</g:link></li>
             </g:each>
         </ul>
@@ -36,7 +39,7 @@
 
 <div class="row section">
     <div class="col-md-12">
-        <g:each in="${celebrities}" var="celebrity">
+        <g:each in="${viewModel.celebrities}" var="celebrity">
             <g:link controller="search" action="searchByTag"
                     params="${[tagName: celebrity.tag.normalizedName]}">${celebrity.fullName}</g:link>
         </g:each>
