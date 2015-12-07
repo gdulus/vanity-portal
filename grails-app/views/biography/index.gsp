@@ -3,7 +3,7 @@
 <head>
     <title><g:message code="portal.biography.title"/></title>
     <meta name="layout" content="list"/>
-    <meta name="robots" content="index,follow"/>
+    <meta name="robots" content="noindex, follow"/>
     <asset:stylesheet href="vanity/biography.less"/>
 </head>
 

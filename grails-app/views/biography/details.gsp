@@ -16,10 +16,6 @@
 
 <div class="row section">
     <div class="col-md-12">
-        <p><g:message code="portal.biography.description" default=""/></p>
-    </div>
-
-    <div class="col-md-12">
         <ul class="list-inline text-center alphabet">
             <g:each in="${('a'..'z')}" var="letter">
                 <li class="${currentLetter == letter ? "selected" : ""}">
