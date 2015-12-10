@@ -68,6 +68,7 @@
     <ul>
         <li><h2>celebryci <span class="glyphicon glyphicon-menu-down"></span></h2></li>
         <li><v:menuItem controller="top" action="mostPopularTags" code="portal.menu.mostPopularCelebrities"/></li>
+        <li><v:menuItem controller="biography" action="index" code="portal.menu.biographies"/></li>
         <li><h2>plotki <span class="glyphicon glyphicon-menu-down"></span></h2></li>
         <li><v:menuItem controller="top" action="mostPopularArticles" code="portal.menu.mostImportantArticles"/></li>
         <li><v:menuItem controller="top" action="newestArticles" code="portal.menu.newestArticles"/></li>

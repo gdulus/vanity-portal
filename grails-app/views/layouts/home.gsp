@@ -44,6 +44,8 @@
                                 code="portal.menu.mostImportantArticles"/></g:link></li>
                         <li><g:link controller="top" action="mostPopularTags"><g:message
                                 code="portal.menu.mostPopularCelebrities"/></g:link></li>
+                        <li><g:link controller="biography" action="index"><g:message
+                                code="portal.menu.biographies"/></g:link></li>
                     </ul>
                 </div>
             </div>
