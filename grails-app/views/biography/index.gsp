@@ -9,7 +9,8 @@
 
 <body>
 <div id="summary" class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" id="biography-header">
+
         <h2><g:message code="portal.biography.header"/></h2>
     </div>
 </div>
