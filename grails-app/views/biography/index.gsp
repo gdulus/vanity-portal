@@ -40,8 +40,10 @@
 <div class="row section">
     <div class="col-md-12">
         <g:each in="${viewModel.celebrities}" var="celebrity">
+            <div class = "col-xs-6 col-md-4 biography-entry">
             <g:link controller="search" action="searchByTag"
                     params="${[tagName: celebrity.tag.normalizedName]}">${celebrity.fullName}</g:link>
+            </div>
         </g:each>
     </div>
 </div>

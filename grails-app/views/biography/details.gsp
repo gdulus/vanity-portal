@@ -9,7 +9,8 @@
 
 <body>
 <div id="summary" class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" id="biography-header">
+
         <h2><g:message code="portal.biography.header"/></h2>
     </div>
 </div>
@@ -35,8 +36,10 @@
 <div class="row section">
     <div class="col-md-12">
         <g:each in="${viewModel.celebrities}" var="celebrity">
+            <div class = "col-xs-12 col-sm-6 col-md-4 biography-entry">
             <g:link controller="search" action="searchByTag"
                     params="${[tagName: celebrity.tag.normalizedName]}">${celebrity.fullName}</g:link>
+            </div>
         </g:each>
     </div>
 </div>
