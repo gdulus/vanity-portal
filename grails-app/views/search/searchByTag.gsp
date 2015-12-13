@@ -49,7 +49,11 @@
                 <div id="biography">
             <div class="col-sm-6 col-md-4">
                 <h3>Pełne imię i nazwisko</h3>
-                <p>${viewModel.celebrity.fullName}</p>
+                <p>${viewModel.celebrity.firstName}
+        <g:if test="${viewModel.celebrity.nickName != null}">
+            ${viewModel.celebrity.nickName}
+        </g:if>
+                   ${viewModel.celebrity.lastName}</p>
                 </div>
 
 
