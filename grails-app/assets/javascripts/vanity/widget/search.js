@@ -248,14 +248,7 @@ V.Search = (function (undefined) {
                 $("#main").css("margin-top", "50px");
             }
         }
-
-
-
-
     }
-
-
-
 })();
 
 
@@ -284,19 +277,9 @@ $(window).resize(function(){
 }
 );
 
-
-
 $("#fb-button").click(function(){
     $("#fb-widget").toggle();
     $("#search-menu").addClass("hidden");
     $("#search-button").removeClass("selected");
     $("#main").css("margin-top", "50px");
-
-    /*if($(window).width()<768){
-        if($("#fb-widget").css("display")=="none"){
-            $("#main").css("margin-top", "50px");
-        }else{
-            $("#main").css("margin-top", "240px");
-        }
-    }*/
-})
+});
