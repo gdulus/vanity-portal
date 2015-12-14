@@ -39,22 +39,28 @@
   background-color: @menu-main-section-primary-color;
   margin-bottom: 0px;
   height: @menu-height;
-
+  top:0px;
+  position:fixed;
+  z-index:10;
+  width:100%;
 }
 
-@media (min-width:768px){
-  #main-menu{
-    top:0px;
-    position:fixed;
-    z-index:10;
-    width:100%;
-  }
-}
+
+
+
+
 
 
 #search-menu {
   padding: 5px 0px 10px 0px;
   background-color: @menu-sub-section-color;
+
+  position:fixed;
+  z-index:1;
+  width:100%;
+  top: @menu-height;
+
+
   //display: none;
 
   form {
@@ -90,14 +96,7 @@
   }
 }
 
-@media (min-width:768px){
-  #search-menu{
-    position:fixed;
-    z-index:10;
-    width:100%;
-    top: @menu-height;
-  }
-}
+
 
 
 .dropdown-toggle {
@@ -278,3 +277,44 @@ button.menu-item:hover {
 }
 
 
+#fb-button svg{
+  margin-top:4px;
+}
+
+#fb-widget{
+  display:none;
+  margin-top:0px;
+  position:fixed;
+  z-index:10;
+  top:50px;
+}
+
+.fb-page{
+  border-width:3px;
+  border-style:solid;
+  border-color: #e7e7e7;
+  background: #e7e7e7;
+}
+
+#fb-small{
+  display:none;
+}
+
+#fb-big{
+  display:block;
+}
+
+@media(max-width:768px){
+  #fb-widget{
+    right:0;
+  }
+
+  #fb-small{
+    display:block;
+  }
+
+  #fb-big{
+    display:none;
+  }
+
+}

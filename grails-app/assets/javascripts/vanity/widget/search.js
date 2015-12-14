@@ -236,8 +236,7 @@ V.Search = (function (undefined) {
             $searchInput.focus();
             if($("#main-menu").css("position")=="fixed"){
                 $("#main").css("margin-top", "110px");
-            }else{
-                $("#main").css("margin-top", "0px");
+                $("#fb-widget").hide();
             }
         },
         clear: function () {
@@ -247,8 +246,6 @@ V.Search = (function (undefined) {
             $searchInput.val('');
             if($("#main-menu").css("position")=="fixed"){
                 $("#main").css("margin-top", "50px");
-            }else{
-                $("#main").css("margin-top", "0px");
             }
         }
 
@@ -275,4 +272,31 @@ $(window).resize(function(){
     }else{
         $("#main").css("margin-top", "0px");
     }
-});
+
+        if($(window).width()<768){
+            if($("#fb-widget").css("display")=="none"){
+                $("#main").css("margin-top", "50px");
+            }else{
+                $("#main").css("margin-top", "240px");
+            }
+        }
+
+}
+);
+
+
+
+$("#fb-button").click(function(){
+    $("#fb-widget").toggle();
+    $("#search-menu").addClass("hidden");
+    $("#search-button").removeClass("selected");
+    $("#main").css("margin-top", "50px");
+
+    /*if($(window).width()<768){
+        if($("#fb-widget").css("display")=="none"){
+            $("#main").css("margin-top", "50px");
+        }else{
+            $("#main").css("margin-top", "240px");
+        }
+    }*/
+})
