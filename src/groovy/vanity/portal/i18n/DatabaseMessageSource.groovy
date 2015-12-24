@@ -25,5 +25,4 @@ class DatabaseMessageSource extends AbstractMessageSource {
 
         return dto ? new MessageFormat(dto.message, PL_LOCALE) : new MessageFormat(code, locale)
     }
-
 }

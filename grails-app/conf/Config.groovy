@@ -141,7 +141,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 // features
 // ##########################
 features.biography = true
-features.social = false
+features.social = true
 
 // ##########################
 // caches
@@ -151,6 +151,14 @@ grails.cache.config = {
     enabled = true
     cache {
         name 'message'
+        eternal false
+        overflowToDisk false
+        maxElementsInMemory 10000
+        maxElementsOnDisk 10000000
+    }
+
+    cache {
+        name 'messages'
         eternal false
         overflowToDisk false
         maxElementsInMemory 10000
