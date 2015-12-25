@@ -5,8 +5,8 @@
                    [re-frame "0.6.0"]
                    [secretary "1.2.3"]
                    [org.clojars.frozenlock/reagent-modals "0.2.3"]
-                   [reagent-forms "0.5.13"]
-                   [bouncer "1.0.0"]]
+                   [bouncer "1.0.0"]
+                   [cljs-ajax "0.3.14"]]
 
     :min-lein-version "2.5.3"
 

@@ -23,7 +23,9 @@
                          "username.bouncer.validators.required"    "Pole 'Nazwa twojego konta' jest wymagane"
                          "password.bouncer.validators.required"    "Pole 'Hasło dostępu' jest wymagane"
                          "regulations.bouncer.validators.required" "Musisz zaakceptować regulamin"
-                         "regulations.bouncer.validators.member"   "Musisz zaakceptować regulamin"})
+                         "regulations.bouncer.validators.member"   "Musisz zaakceptować regulamin"
+                         "vanity.user.user.email.unique"           "Email jest już zajęty"
+                         "vanity.user.user.username.unique"        "Nazwa użytkownika jest już zajęta"})
 
 (defn message
     [code]
