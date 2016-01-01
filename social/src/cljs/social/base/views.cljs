@@ -5,5 +5,4 @@
 (defn main-panel []
     (let [active-panel (re-frame/subscribe [:active-panel])]
         (fn []
-            [reagent-modals/modal-window
-             (reagent-modals/modal! @active-panel {:size :lg})])))
+            [reagent-modals/modal-window (reagent-modals/modal! @active-panel {:size :lg})])))

@@ -1,7 +1,13 @@
 (ns social.i18n
     (:require [clojure.string :as s]))
 
-(def ^:private messages {"social.form.error.email.nullable"        "Email nie może być pusty"
+(def ^:private messages {"social.welcome.header.1"                 "Dołącz do loży hejterów"
+                         "social.welcome.header.2"                 "Załóż szybko darmowy profil i rzucaj bombami z farbą w celebrytów i innych użytkowników. Utwórz swoją białą i czarną listę oraz otrzymuj powiadomienia o ustawkach i ważnych wydarzeniach."
+                         "social.welcome.register.fb"              "Rejestruj przez Facebook"
+                         "social.welcome.register.self"            "Rejestruj samodzielnie"
+                         "social.welcome.login.1"                  "Jeśli posiadasz już konto "
+                         "social.welcome.login.2"                  "kliknij i zaloguj się"
+                         "social.form.error.email.nullable"        "Email nie może być pusty"
                          "social.form.error.default"               "Pole wymagane lub nie poprawny format"
                          "social.form.username.label"              "Nazwa Twojego konta"
                          "social.form.username.info"               "Pod tą nazwą twój profil będzie widoczny dla użytkowników."
@@ -25,7 +31,8 @@
                          "regulations.bouncer.validators.required" "Musisz zaakceptować regulamin"
                          "regulations.bouncer.validators.member"   "Musisz zaakceptować regulamin"
                          "vanity.user.user.email.unique"           "Email jest już zajęty"
-                         "vanity.user.user.username.unique"        "Nazwa użytkownika jest już zajęta"})
+                         "vanity.user.user.username.unique"        "Nazwa użytkownika jest już zajęta"
+                         "social.register.errors"                  "W formularzu wystąpiły błędy"})
 
 (defn message
     [code]

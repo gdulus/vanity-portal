@@ -6,7 +6,8 @@
               [goog.history.EventType :as EventType]
               [re-frame.core :as re-frame]
               [social.welcome.views :as welcome]
-              [social.registration.views :as registration]))
+              [social.registration.views :as registration]
+              [social.registration-details.views :as registration-details]))
 
 (defn- hook-browser-navigation! []
     (doto (History.)
@@ -16,20 +17,41 @@
                 (secretary/dispatch! (.-token event))))
         (.setEnabled true)))
 
+;; ----------------------------------------------------------------------------------------------
+
+(defn route
+    [route]
+    (case route
+        :welcome "#/izba-przyjec"
+        :registration "#/porodowka"
+        :registration-details "#/registration-details"
+        :login "#/login"
+        :regulations "/regulamin"))
+
+;; ----------------------------------------------------------------------------------------------
+
 (defn app-routes []
+    ;; --------------------
+    ;; Config
+    ;; --------------------
     (secretary/set-config! :prefix "#")
 
     ;; --------------------
-    ;; ROUTES START
+    ;; Routes
     ;; --------------------
-    (defroute "/izba-przyjec" []
+    (defroute "/izba-przyjec"
+              []
               (re-frame/dispatch [:set-active-panel [welcome/main-panel]]))
 
-    (defroute "/porodowka" []
+    (defroute "/porodowka"
+              []
               (re-frame/dispatch [:set-active-panel [registration/main-panel]]))
 
-    ;; --------------------
-    ;; ROUTES END
-    ;; --------------------
+    (defroute "/registration-details"
+              []
+              (re-frame/dispatch [:set-active-panel [registration-details/main-panel]]))
 
+    ;; --------------------
+    ;; Start
+    ;; --------------------
     (hook-browser-navigation!))

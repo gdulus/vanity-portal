@@ -1,19 +1,20 @@
 (ns social.welcome.views
-    (:require [re-frame.core :as re-frame]
-              [social.welcome.subs]
-              [social.welcome.handlers]))
+    (:require [social.welcome.subs]
+              [social.welcome.handlers]
+              [social.base.routes :refer [route]]
+              [social.i18n :as i18n]))
 
 (defn main-panel []
     (let []
         (fn []
             [:div.row {:id "intro"}
              [:div.col-md-12
-              [:h1.text-center "Dołącz do loży hejterów"]
-              [:h2.text-center "Załóż szybko darmowy profil i rzucaj bombami z farbą w celebrytów i innych użytkowników. Utwórz swoją białą i czarną listę oraz otrzymuj powiadomienia o ustawkach i ważnych wydarzeniach."]]
+              [:h1.text-center (i18n/message "social.welcome.header.1")]
+              [:h2.text-center (i18n/message "social.welcome.header.2")]]
              [:div.col-md-12.text-center
-              [:a.btn.btn-default.facebook {:on-click #(.alert js/window "fb login")} "Rejestruj przez Facebook"]
-              [:a.btn.btn-default.register {:href "#/porodowka"} "Rejestruj samodzielnie"]]
+              [:a.btn.btn-default.facebook {:on-click #(.alert js/window "fb login")} (i18n/message "social.welcome.register.fb")]
+              [:a.btn.btn-default.register {:href (route :registration)} (i18n/message "social.welcome.register.self")]]
              [:div.col-md-12.text-center.footer
-              [:span "Jeśli posiadasz już konto "
-               [:a {:href "#/login"} "kliknij i zaloguj się"]]]])))
+              [:span (i18n/message "social.welcome.login.1")
+               [:a {:href (route :login)} (i18n/message "social.welcome.login.2")]]]])))
 

@@ -53,3 +53,22 @@
                 (log/info "Handling AJAX errors for the path" path comverted-errors)
                 (re-frame/dispatch [:form-errors path comverted-errors])
                 (assoc-in db [:loader] false)))))
+
+
+;; --------------------------------------------------------------------------------------------
+
+(re-frame/register-handler
+    :user-login
+    (fn [db [_ user]]
+        (do
+            (log/info "User" user "logged in")
+            (assoc-in db [:user] user))))
+
+;; --------------------------------------------------------------------------------------------
+
+(re-frame/register-handler
+    :user-logout
+    (fn [db _]
+        (do
+            (log/info "User logout")
+            (assoc-in db [:user] nil))))
