@@ -2,7 +2,8 @@
     (:require [re-frame.core :as re-frame]
               [social.base.db :as db]
               [social.logger :as log]
-              [social.i18n :as i18n]))
+              [social.i18n :as i18n]
+              [social.base.routes :refer [get-panel get-route get-acl get-default-route]]))
 
 ;; ----------------------------------------------------------------------------------------------
 
@@ -15,8 +16,30 @@
 
 (re-frame/register-handler
     :set-active-panel
-    (fn [db [_ active-panel]]
-        (assoc db :active-panel active-panel)))
+    (fn [db [_ panel-name]]
+        (let [panel (get-panel panel-name)
+              acl (get-acl panel-name)
+              user-status (db/get-user-status db)
+              default-route (get-default-route user-status)]
+            (if (some #{user-status} acl)
+                (do
+                    (log/info "User status" user-status "Current panel" panel-name "meet ACL" acl)
+                    (assoc db :active-panel panel))
+                (do
+                    (log/info "User status" user-status "Current panel" panel-name "doesn't meet ACL" acl "Redirecting to" default-route)
+                    (re-frame/dispatch [:redirect default-route])
+                    db)))))
+
+;; ----------------------------------------------------------------------------------------------
+
+(re-frame/register-handler
+    :redirect
+    (fn [db [_ panel-name]]
+        (let [route (get-route panel-name)]
+            (do
+                (log/info "Selecting route" route)
+                (set! (.-location js/window) route)
+                db))))
 
 ;; ----------------------------------------------------------------------------------------------
 

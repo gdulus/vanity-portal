@@ -60,4 +60,5 @@
         (do
             (log/info "User created" user)
             (re-frame/dispatch [:user-login user])
+            (re-frame/dispatch [:redirect :registration-details])
             (assoc-in db [:loader] false))))

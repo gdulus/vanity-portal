@@ -6,7 +6,7 @@
               [social.i18n :as i18n]
               [re-frame.core :as re-frame]
               [social.logger :as log]
-              [social.base.routes :refer [route]]))
+              [social.base.routes :refer [get-route]]))
 
 ;; ----------------------------------------------------------------------------------------------
 
@@ -42,7 +42,7 @@
      [forms/input :email :registeration :email "social.form.email.label" "social.form.email.info"]
      [forms/radio :registeration :gender "social.form.gender.label" [{:v "WOMAN" :l "social.form.woman"} {:v "MAN" :l "social.form.man"}]]
      [forms/checkbox :registeration :regulations [:span (i18n/message "social.register.confirm.info")
-                                                  [:a.link {:href (route :regulations)} (i18n/message "social.register.confirm.link")]]]])
+                                                  [:a.link {:href (get-route :regulations) :target "_blank"} (i18n/message "social.register.confirm.link")]]]])
 
 ;; ----------------------------------------------------------------------------------------------
 
@@ -59,7 +59,7 @@
                [form]
                [:div.form-group
                 [:div.buttons
-                 [:a.link {:href (route :welcome)} (i18n/message "social.button.cancel")]
+                 [:a.link {:href (get-route :welcome)} (i18n/message "social.button.cancel")]
                  (if @loading
                      [:button.btn.btn-default.pull-right.loader {:disabled "disabled"} (i18n/message "social.button.register")]
                      [:button.btn.btn-default.pull-right (i18n/message "social.button.register")])]]]]])))
