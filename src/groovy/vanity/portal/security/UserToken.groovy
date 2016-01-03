@@ -19,7 +19,7 @@ class UserToken {
         this.timeStamp = timeStamp;
     }
 
-    public static UserToken buildFromPrincipal(final User principal) {
+    public static UserToken buildFromUser(final User principal) {
         return new UserToken(principal.id, new Date());
     }
 
@@ -35,7 +35,7 @@ class UserToken {
         return new UserToken(id, timeStamp);
     }
 
-    public String serlialize() {
+    public String serialize() {
         return (id + SEPARATOR + timeStamp);
     }
 

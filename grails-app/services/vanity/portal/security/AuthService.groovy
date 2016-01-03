@@ -1,15 +1,63 @@
 package vanity.portal.security
 
-import grails.plugin.springsecurity.SpringSecurityService
 import org.springframework.beans.factory.annotation.Autowired
+import vanity.portal.user.UserActivityService
+import vanity.portal.user.UserService
+import vanity.user.User
+import vanity.user.UserActivityType
 
 class AuthService {
 
-    @Autowired
-    SpringSecurityService springSecurityService
+    static transactional = false
 
-    public String auth(final String login, final String password) {
-        springSecurityService.reauthenticate()
+    UserActivityService userActivityService
+
+    @Autowired
+    UserService userService
+
+    @Autowired
+    UserTokenProvider userTokenProvider
+
+    def passwordEncoder
+
+    public AuthDto auth(final String token) {
+        if (!token) {
+            throw new SecurityException('Token empty or null')
+        }
+
+        try {
+            UserToken userToken = userTokenProvider.encode(token)
+            User user = userService.read(userToken.id)
+
+            if (!user.enabled || user.accountLocked) {
+                throw new SecurityException("User ${user} is disabled or password is locked")
+            }
+
+            return AuthDto.build(userTokenProvider.decode(user), user)
+
+        } catch (IllegalStateException exp) {
+            throw new SecurityException("Token ${token} is invalid")
+        }
+    }
+
+    public AuthDto auth(final String username, final String password) {
+        User user = userService.findByUsername(username)
+
+        if (!user) {
+            throw new SecurityException("User ${username} doesn't exits")
+        }
+
+        if (!passwordEncoder.isPasswordValid(user.password, password, null)) {
+            throw new SecurityException("Invalid password for user ${user}")
+        }
+
+        if (!user.enabled || user.accountLocked) {
+            throw new SecurityException("User ${user} is disabled or password is locked")
+        }
+
+        userActivityService.create(user, UserActivityType.LOG_IN)
+        return AuthDto.build(userTokenProvider.decode(user), user)
+
     }
 
 }

@@ -22,7 +22,7 @@
                          "social.register.explanation"             "Podaj kilka informacji, aby korzystać ze wszystkich funkcji portalu"
                          "social.button.cancel"                    "Anuluj"
                          "social.button.register"                  "Załóż darmowe konto"
-                         "social.button.login"                     "Zalguj się"
+                         "social.button.login"                     "Zaloguj się"
                          "social.login.register.button"            "Kliknij i zarejestruj się za darmo"
                          "social.login.register.question"          "Nie masz jeszcze konta? "
                          "social.login.forgot-password.question"   "Nie pamiętasz hasła lub nazwy konta? "

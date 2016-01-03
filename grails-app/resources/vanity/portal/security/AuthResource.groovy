@@ -1,38 +1,31 @@
 package vanity.portal.security
 
 import grails.converters.JSON
-import grails.validation.ValidationException
 import groovy.util.logging.Slf4j
-import vanity.portal.user.UserDto
-import vanity.portal.user.UserService
 import vanity.portal.utils.JSONUtils
-import vanity.user.Gender
-import vanity.user.User
 
 import javax.ws.rs.Consumes
 import javax.ws.rs.POST
 import javax.ws.rs.Path
+import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 
 @Slf4j
 @Path('/api/auth')
 class AuthResource {
 
-    UserService userService
+    AuthService authService
 
     @POST
-    @Consumes(['application/json'])
-    public Response create(final Map dto) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response auth(final Map json) {
         try {
-            UserDto user = userService.create(dto.username, dto.password) {
-                gender = Gender.parseStr(dto.gender)
-                email = dto.email
-            }
-            log.info('User created {}', user.id)
-            return Response.ok(user as JSON).build()
-        } catch (ValidationException exp) {
-            log.warn('Error while creating of the user: {}', exp.errors)
-            return Response.status(Response.Status.BAD_REQUEST).entity(JSONUtils.convert(User, exp.errors)).build();
+            AuthDto result = authService.auth(json.username, json.password)
+            log.info('User {} authenticated', json.username)
+            return Response.ok(result as JSON).build()
+        } catch (SecurityException exp) {
+            log.warn('User unauthorized: {}', exp.message)
+            return Response.status(Response.Status.UNAUTHORIZED).entity(JSONUtils.EMPTY).build();
         }
     }
 

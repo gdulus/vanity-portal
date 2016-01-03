@@ -23,12 +23,18 @@ class UserTokenProvider {
 
     public UserToken encode(final String publicToken) throws Exception {
         String serializedToken = decrypt(publicToken);
-        return UserToken.buildFromSerializedString(serializedToken);
+        UserToken userToken = UserToken.buildFromSerializedString(serializedToken);
+
+        if (!userToken.isValid(timeToLive)) {
+            throw new IllegalStateException('Token is invalidated')
+        }
+
+        return userToken
     }
 
     public String decode(final User user) throws Exception {
-        UserToken userToken = UserToken.buildFromPrincipal(user);
-        return encrypt(userToken.serlialize());
+        UserToken userToken = UserToken.buildFromUser(user);
+        return encrypt(userToken.serialize());
     }
 
     private String encrypt(final String token) throws Exception {
