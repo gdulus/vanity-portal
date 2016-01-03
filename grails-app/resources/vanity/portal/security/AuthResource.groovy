@@ -1,4 +1,4 @@
-package vanity.portal
+package vanity.portal.security
 
 import grails.converters.JSON
 import grails.validation.ValidationException
@@ -15,8 +15,8 @@ import javax.ws.rs.Path
 import javax.ws.rs.core.Response
 
 @Slf4j
-@Path('/api/user')
-class UserResource {
+@Path('/api/auth')
+class AuthResource {
 
     UserService userService
 

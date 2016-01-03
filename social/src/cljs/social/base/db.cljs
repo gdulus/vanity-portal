@@ -1,7 +1,7 @@
 (ns social.base.db)
 
 (def default-db
-    {:name "re-frame"})
+    {})
 
 (defn get-user-status
     [db]

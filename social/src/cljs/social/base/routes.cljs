@@ -5,39 +5,33 @@
               [goog.events :as events]
               [goog.history.EventType :as EventType]
               [re-frame.core :as re-frame]
-              [social.welcome.views :as welcome]
-              [social.registration.views :as registration]
-              [social.registration-details.views :as registration-details]))
+              [social.config :as config]
+              [social.logger :as log]))
 
 ;; ----------------------------------------------------------------------------------------------
 
-(def config {:routes   {:welcome              {:uri   "/izba-przyjec"
-                                               :panel [welcome/main-panel]
-                                               :acl   [:not-logged-in]}
-
-                        :registration         {:uri   "/porodowka"
-                                               :panel [registration/main-panel]
-                                               :acl   [:not-logged-in]}
-
-                        :registration-details {:uri   "/registration-details"
-                                               :panel [registration-details/main-panel]
-                                               :acl   [:logged-in :first-time-logged-in]}
-
-                        :login                {:uri   "/login"
-                                               :panel [registration-details/main-panel]
-                                               :acl   [:not-logged-in]}
-
-                        :regulations          {:uri "/regulamin"}
-
-                        }
-
-             :defaults {:not-logged-in        :welcome
-                        :first-time-logged-in :registration-details
-                        :logged-in            :registration-details}})
+(defn get-route
+    [name]
+    (let [route (get-in config/url-mapping [:routes name])]
+        (if (route :external)
+            (route :uri)
+            (str "#" (route :uri)))))
 
 ;; ----------------------------------------------------------------------------------------------
 
-(defn- hook-browser-navigation! []
+(defn get-default-route
+    [user-status]
+    (get-in config/url-mapping [:defaults user-status]))
+
+;; ----------------------------------------------------------------------------------------------
+
+(defn get-acl
+    [name]
+    (get-in config/url-mapping [:routes name :acl]))
+
+;; ----------------------------------------------------------------------------------------------
+
+(defn- hook-browser-navigation []
     (doto (History.)
         (events/listen
             EventType/NAVIGATE
@@ -45,57 +39,13 @@
                 (secretary/dispatch! (.-token event))))
         (.setEnabled true)))
 
-;; ----------------------------------------------------------------------------------------------
-
-(defn get-route
-    [name]
-    (let [route (get-in config [:routes name])]
-        (if (nil? (route :panel))
-            (route :uri)
-            (str "#" (route :uri)))))
-
-;; ----------------------------------------------------------------------------------------------
-
-(defn get-panel
-    [name]
-    (get-in config [:routes name :panel]))
-
-;; ----------------------------------------------------------------------------------------------
-
-(defn get-acl
-    [name]
-    (get-in config [:routes name :acl]))
-
-;; ----------------------------------------------------------------------------------------------
-
-(defn get-default-route
-    [user-status]
-    (get-in config [:defaults user-status]))
-
-;; ----------------------------------------------------------------------------------------------
+(defn- register-route
+    [route-name route-uri]
+    (log/debug "Registering route" route-name "->" route-uri)
+    (defroute (str route-uri) [] (re-frame/dispatch [:set-active-panel route-name])))
 
 (defn app-routes []
-    ;; --------------------
-    ;; Config
-    ;; --------------------
-    (secretary/set-config! :prefix "#")
-
-    ;; --------------------
-    ;; Routes
-    ;; --------------------
-    (defroute "/izba-przyjec"
-              []
-              (re-frame/dispatch [:set-active-panel :welcome]))
-
-    (defroute "/porodowka"
-              []
-              (re-frame/dispatch [:set-active-panel :registration]))
-
-    (defroute "/registration-details"
-              []
-              (re-frame/dispatch [:set-active-panel :registration-details]))
-
-    ;; --------------------
-    ;; Start
-    ;; --------------------
-    (hook-browser-navigation!))
+    (let [routes (filter #(not (:external (val %))) (:routes config/url-mapping))]
+        (secretary/set-config! :prefix "#")
+        (doall (map #(register-route (key %) (:uri (val %))) routes))
+        (hook-browser-navigation)))

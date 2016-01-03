@@ -8,6 +8,8 @@
                    [bouncer "1.0.0"]
                    [cljs-ajax "0.3.14"]]
 
+    :jvm-opts []
+
     :min-lein-version "2.5.3"
 
     :source-paths ["src/clj"]

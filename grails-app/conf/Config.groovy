@@ -19,18 +19,18 @@ grails.project.groupId = appName // change this to alter the default package nam
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
 grails.mime.types = [
-    all: '*/*',
-    atom: 'application/atom+xml',
-    css: 'text/css',
-    csv: 'text/csv',
-    form: 'application/x-www-form-urlencoded',
-    html: ['text/html', 'application/xhtml+xml'],
-    js: 'text/javascript',
-    json: ['application/json', 'text/json'],
-    multipartForm: 'multipart/form-data',
-    rss: 'application/rss+xml',
-    text: 'text/plain',
-    xml: ['text/xml', 'application/xml']
+        all          : '*/*',
+        atom         : 'application/atom+xml',
+        css          : 'text/css',
+        csv          : 'text/csv',
+        form         : 'application/x-www-form-urlencoded',
+        html         : ['text/html', 'application/xhtml+xml'],
+        js           : 'text/javascript',
+        json         : ['application/json', 'text/json'],
+        multipartForm: 'multipart/form-data',
+        rss          : 'application/rss+xml',
+        text         : 'text/plain',
+        xml          : ['text/xml', 'application/xml']
 ]
 
 // URL Mapping Cache Max Size, defaults to 5000
@@ -80,16 +80,16 @@ log4j = {
     info 'vanity'
 
     error 'org.codehaus.groovy.grails.web.servlet',        // controllers
-        'org.codehaus.groovy.grails.web.pages',          // GSP
-        'org.codehaus.groovy.grails.web.sitemesh',       // layouts
-        'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-        'org.codehaus.groovy.grails.web.mapping',        // URL mapping
-        'org.codehaus.groovy.grails.commons',            // core / classloading
-        'org.codehaus.groovy.grails.plugins',            // plugins
-        'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
-        'org.springframework',
-        'org.hibernate',
-        'net.sf.ehcache.hibernate'
+            'org.codehaus.groovy.grails.web.pages',          // GSP
+            'org.codehaus.groovy.grails.web.sitemesh',       // layouts
+            'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+            'org.codehaus.groovy.grails.web.mapping',        // URL mapping
+            'org.codehaus.groovy.grails.commons',            // core / classloading
+            'org.codehaus.groovy.grails.plugins',            // plugins
+            'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
+            'org.springframework',
+            'org.hibernate',
+            'net.sf.ehcache.hibernate'
 
     root {
         info 'console'
@@ -128,13 +128,13 @@ grails.plugin.springsecurity.authority.className = 'vanity.user.Role'
 grails.plugin.springsecurity.securityConfigType = "Annotation"
 grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-    '/': ['permitAll'],
-    '/index': ['permitAll'],
-    '/index.gsp': ['permitAll'],
-    '/**/js/**': ['permitAll'],
-    '/**/css/**': ['permitAll'],
-    '/**/images/**': ['permitAll'],
-    '/**/favicon.ico': ['permitAll']
+        '/'              : ['permitAll'],
+        '/index'         : ['permitAll'],
+        '/index.gsp'     : ['permitAll'],
+        '/**/js/**'      : ['permitAll'],
+        '/**/css/**'     : ['permitAll'],
+        '/**/images/**'  : ['permitAll'],
+        '/**/favicon.ico': ['permitAll']
 ]
 
 // ##########################
@@ -166,3 +166,9 @@ grails.cache.config = {
     }
 }
 
+// ##########################
+// token generation
+// ##########################
+token.algorithm = "Blowfish"
+token.secretKey = "1029384756qwerty"
+token.timeToLive = (60000 * 60) // 1h

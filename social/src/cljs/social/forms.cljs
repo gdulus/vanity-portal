@@ -9,8 +9,9 @@
     ([type context name label info]
      (let [errors (re-frame/subscribe [:form-errors [context name]])]
          (fn [type context name label info]
-             [:label {:for name :class (if (not-empty @errors) "error" "")} (i18n/message label)
-              [:div.input-group
+             [:div
+              [:label {:for name :class (if (not-empty @errors) "error" "")} (i18n/message label)]
+              [:div {:class (if (not (str/blank? info)) "input-group" "input")}
                [:input.form-control {:type type :id name :on-change #(re-frame/dispatch-sync [:form-data [context name] (-> % .-target .-value)])}]
                (if (not-empty @errors) [:div {:class "errors"} @errors])
                (if (not (str/blank? info))
