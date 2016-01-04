@@ -1,7 +1,9 @@
-(ns social.base.db)
+(ns social.base.db
+    (:require [alandipert.storage-atom :refer [local-storage]]))
 
-(def default-db
-    {})
+(def storage (local-storage (atom {}) :token))
+
+(def default-db {})
 
 (defn get-user-status
     [db]

@@ -35,10 +35,9 @@
     :redirect
     (fn [db [_ panel-name]]
         (let [route (routes/get-route panel-name)]
-            (do
-                (log/info "Selecting route" route)
-                (set! (.-location js/window) route)
-                db))))
+            (log/info "H(:redirect): Redirecting to the route" route)
+            (set! (.-location js/window) route)
+            db)))
 
 ;; ----------------------------------------------------------------------------------------------
 
@@ -46,9 +45,8 @@
     :form-data
     (fn [db [_ data-path data]]
         (let [path (into [:data] data-path)]
-            (do
-                (log/debug "Storing data" data "under" path)
-                (assoc-in db path data)))))
+            (log/info "H(:form-data): Storing form data" data "under path" path)
+            (assoc-in db path data))))
 
 ;; ----------------------------------------------------------------------------------------------
 
@@ -56,9 +54,8 @@
     :form-errors
     (fn [db [_ errors-path errors]]
         (let [path (into [:errors] errors-path)]
-            (do
-                (log/debug "Storing errors" errors "under" path)
-                (assoc-in db path errors)))))
+            (log/info "H(:form-errors): Storing form errors" (if (nil? errors) "nil" errors) "under path" path)
+            (assoc-in db path errors))))
 
 ;; ----------------------------------------------------------------------------------------------
 
@@ -71,26 +68,35 @@
     :ajax-errors
     (fn [db [_ path errors]]
         (let [comverted-errors (convert-errors errors)]
-            (do
-                (log/info "Handling AJAX errors for the path" path comverted-errors)
-                (re-frame/dispatch [:form-errors path comverted-errors])
-                (assoc-in db [:loader] false)))))
-
+            (log/info "H(:ajax-errors): Storing ajax error" comverted-errors "under path" path)
+            (re-frame/dispatch [:form-errors path comverted-errors])
+            (assoc-in db [:loader] false))))
 
 ;; --------------------------------------------------------------------------------------------
 
 (re-frame/register-handler
     :user-login
     (fn [db [_ user]]
-        (do
-            (log/info "User" user "logged in")
-            (assoc-in db [:user] user))))
+        (log/info "H(:user-login): Storing user" user)
+        (-> db
+            (assoc-in [:user] user)
+            (assoc-in [:loader] false))))
 
 ;; --------------------------------------------------------------------------------------------
 
 (re-frame/register-handler
     :user-logout
     (fn [db _]
-        (do
-            (log/info "User logout")
-            (assoc-in db [:user] nil))))
+        (log/info "H(:user-logout): Removing user")
+        (-> db
+            (assoc-in [:user] nil)
+            (assoc-in [:loader] false))))
+
+;; --------------------------------------------------------------------------------------------
+
+(re-frame/register-handler
+    :store-token
+    (fn [db [_ token]]
+        (log/info "H(:store-token): Stroing token" token)
+        (swap! db/storage assoc :token token)
+        db))
