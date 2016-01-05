@@ -3,7 +3,6 @@
               [bouncer.validators :as v]
               [social.validation :as validation]
               [social.logger :as log]
-              [ajax.core :refer [GET POST]]
               [social.ajax :as ajax]))
 
 ;; ----------------------------------------------------------------------------------------------
@@ -27,17 +26,9 @@
 
 (defn- handle-authenticate-success
     [response]
-    (let [userId (get response "userId")
-          token (get response "token")]
-        (log/info "Got token" token "and user id" userId)
-        (re-frame/dispatch [:store-token token])
-
-        (GET "/api/user"
-             {:response-format :json
-              :params          {:id userId}
-              :headers         {"X-Auth-Token" token}
-              :handler         #(re-frame/dispatch [:user-login %])
-              :error-handler   #(re-frame/dispatch [:ajax-errors [:login] %])})))
+    (let [user (:data response)]
+        (re-frame/dispatch [:store-user-id (get user "id")])
+        (re-frame/dispatch [:store-user user])))
 
 (re-frame/register-handler
     :login-authenticate
@@ -46,20 +37,14 @@
               errors (validate data)]
             (if (empty? errors)
                 (do
-                    (log/info "Triggering login with data" data)
+                    (log/info "H(:login-authenticate): Triggering login with data" data)
                     (re-frame/dispatch [:form-errors [:login] nil])
                     (ajax/post "/api/auth"
                                data
-                               (fn [rsp] (log/info rsp))
-                               (fn [rsp] (log/info rsp)))
-                    ;(POST "/api/auth"
-                    ;      {:params          data
-                    ;       :format          :json
-                    ;       :response-format :json
-                    ;       :handler         #(handle-authenticate-success %)
-                    ;       :error-handler   #(re-frame/dispatch [:ajax-errors [:login] %])})
+                               #(handle-authenticate-success %)
+                               #(re-frame/dispatch [:ajax-errors [:login] %]))
                     (assoc-in db [:loader] true))
                 (do
-                    (log/info "Validation errors while submiting login data" errors)
+                    (log/info "H(:login-authenticate): Validation errors while submiting login data" errors)
                     (re-frame/dispatch [:form-errors [:login] errors])
                     db)))))

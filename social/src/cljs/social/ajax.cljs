@@ -1,43 +1,61 @@
 (ns social.ajax
-    (:require [clojure.string :as str]))
+    (:require [clojure.string :as str]
+              [re-frame.core :as re-frame]))
+
+;; ----------------------------------------------------------------------------------------------
 
 (defn- parse-response [jqXHR]
     (let [status (.-status jqXHR)
           token (.getResponseHeader jqXHR "X-Auth-Token")
           response (js->clj (.parse js/JSON (.-responseText jqXHR)))]
-        (if (str/blank? token)
-            {:status status
-             :data   response}
-            {:status status
-             :data   response
-             :token  token})))
+        (if (not (str/blank? token))
+            (re-frame/dispatch [:store-token token]))
+        {:status status :data response}))
+
+;; ----------------------------------------------------------------------------------------------
+
+(defn- get-header [token]
+    (if (nil? token)
+        {"Content-Type" "application/json"}
+        {"X-Auth-Token" token "Content-Type" "application/json"}))
+
+;; ----------------------------------------------------------------------------------------------
 
 (defn- json-converter
     [data]
     (.stringify js/JSON (clj->js data)))
 
+;; ----------------------------------------------------------------------------------------------
+
 (defn- null-converter
     [data]
     data)
 
+;; ----------------------------------------------------------------------------------------------
+
 (defn- execute-request
-    [method url converter raw-data headers success error]
+    [method url converter raw-data token success error]
     (let [data (converter raw-data)]
         (.ajax js/$ (clj->js {:dataType "json"
                               :type     method
                               :url      url
                               :data     data
-                              :headers  headers
+                              :headers  (get-header token)
                               :success  (fn [_ _ jqXHR] (success (parse-response jqXHR)))
                               :error    (fn [jqXHR _ _] (error (parse-response jqXHR)))}))))
+
+;; ----------------------------------------------------------------------------------------------
+
 (defn post
     ([url data token success error]
-     (execute-request "POST" url json-converter data {"X-Auth-Token" token "Content-Type" "application/json"} success error))
+     (execute-request "POST" url json-converter data token success error))
     ([url data success error]
-     (execute-request "POST" url json-converter data {"Content-Type" "application/json"} success error)))
+     (post url data nil success error)))
+
+;; ----------------------------------------------------------------------------------------------
 
 (defn get
     ([url data token success error]
-     (execute-request "GET" url null-converter data {"X-Auth-Token" token "Content-Type" "application/json"} success error))
+     (execute-request "GET" url null-converter data token success error))
     ([url data success error]
-     (execute-request "GET" url null-converter data {"Content-Type" "application/json"} success error)))
+     (get url data nil success error)))

@@ -3,6 +3,8 @@
               [social.base.db :as db]
               [social.logger :as log]
               [social.i18n :as i18n]
+              [clojure.string :as str]
+              [social.ajax :as ajax]
               [social.base.routes :as routes]))
 
 ;; ----------------------------------------------------------------------------------------------
@@ -10,7 +12,10 @@
 (re-frame/register-handler
     :initialize-db
     (fn [_ _]
-        db/default-db))
+        (let [token (:token @db/storage)
+              id (:user-id @db/storage)]
+            (log/info "Got token" token)
+            db/default-db)))
 
 ;; ----------------------------------------------------------------------------------------------
 
@@ -75,9 +80,9 @@
 ;; --------------------------------------------------------------------------------------------
 
 (re-frame/register-handler
-    :user-login
+    :store-user
     (fn [db [_ user]]
-        (log/info "H(:user-login): Storing user" user)
+        (log/info "H(:store-user): Storing user" user)
         (-> db
             (assoc-in [:user] user)
             (assoc-in [:loader] false))))
@@ -85,9 +90,9 @@
 ;; --------------------------------------------------------------------------------------------
 
 (re-frame/register-handler
-    :user-logout
+    :delete-user
     (fn [db _]
-        (log/info "H(:user-logout): Removing user")
+        (log/info "H(:delete-user): Removing user")
         (-> db
             (assoc-in [:user] nil)
             (assoc-in [:loader] false))))
@@ -99,4 +104,13 @@
     (fn [db [_ token]]
         (log/info "H(:store-token): Stroing token" token)
         (swap! db/storage assoc :token token)
+        db))
+
+;; --------------------------------------------------------------------------------------------
+
+(re-frame/register-handler
+    :store-user-id
+    (fn [db [_ user-id]]
+        (log/info "H(:store-user-id): Stroing user id" user-id)
+        (swap! db/storage assoc :user-id user-id)
         db))

@@ -2,7 +2,12 @@ package vanity.portal.security
 
 import grails.converters.JSON
 import groovy.util.logging.Slf4j
+import vanity.portal.rest.RestConst
+import vanity.portal.user.UserActivityService
+import vanity.portal.user.UserDto
+import vanity.portal.user.UserService
 import vanity.portal.utils.JSONUtils
+import vanity.user.User
 
 import javax.ws.rs.Consumes
 import javax.ws.rs.POST
@@ -16,13 +21,19 @@ class AuthResource {
 
     AuthService authService
 
+    UserService userService
+
+    UserActivityService userActivityService
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response auth(final Map json) {
         try {
             AuthDto result = authService.auth(json.username, json.password)
             log.info('User {} authenticated', json.username)
-            return Response.ok(result as JSON).build()
+            User user = userService.read(result.userId)
+            UserDto dto = UserDto.build(user, userActivityService.get(user))
+            return Response.ok(dto as JSON).header(RestConst.X_AUTH_TOKEN, result.token).build()
         } catch (SecurityException exp) {
             log.warn('User unauthorized: {}', exp.message)
             return Response.status(Response.Status.UNAUTHORIZED).entity(JSONUtils.EMPTY).build();
