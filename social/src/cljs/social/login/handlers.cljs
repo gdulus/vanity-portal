@@ -17,7 +17,8 @@
     [response]
     (let [user (:data response)]
         (re-frame/dispatch [:store-user-id (get user "id")])
-        (re-frame/dispatch [:store-user user])))
+        (re-frame/dispatch [:store-user user])
+        (re-frame/dispatch [:redirect :registration-details])))
 
 (re-frame/register-handler
     :login-authenticate
@@ -30,7 +31,7 @@
                     (re-frame/dispatch [:form-errors [:login] nil])
                     (ajax/post "/api/auth"
                                data
-                               #(handle-authenticate-success (:data %))
+                               #(handle-authenticate-success %)
                                #(re-frame/dispatch [:ajax-errors [:login] %]))
                     (assoc-in db [:loader] true))
                 (do
