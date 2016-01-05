@@ -6,7 +6,6 @@
                    [secretary "1.2.3"]
                    [org.clojars.frozenlock/reagent-modals "0.2.3"]
                    [bouncer "1.0.0"]
-                   [cljs-ajax "0.3.14"]
                    [alandipert/storage-atom "1.2.4"]]
 
     :jvm-opts []

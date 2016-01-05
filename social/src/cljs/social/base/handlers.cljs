@@ -14,8 +14,26 @@
     (fn [_ _]
         (let [token (:token @db/storage)
               id (:user-id @db/storage)]
+            (if (not (str/blank? token))
+                (ajax/get "/api/user"
+                          {:id id}
+                          token
+                          #(re-frame/dispatch [:store-user (:data %)])
+                          #(re-frame/dispatch [:ajax-errors [:init] %])))
             (log/info "Got token" token)
             db/default-db)))
+
+;; ----------------------------------------------------------------------------------------------
+
+(re-frame/register-handler
+    :clear-component-data
+    (fn [db [_ path]]
+        (log/info "Clearing data for component under path" path)
+        (re-frame/dispatch [:form-errors path nil])
+        (re-frame/dispatch [:form-data path nil])
+        (-> db
+            (assoc-in [:response-status] nil)
+            (assoc-in [:loader] false))))
 
 ;; ----------------------------------------------------------------------------------------------
 
@@ -71,11 +89,14 @@
 
 (re-frame/register-handler
     :ajax-errors
-    (fn [db [_ path errors]]
-        (let [comverted-errors (convert-errors errors)]
-            (log/info "H(:ajax-errors): Storing ajax error" comverted-errors "under path" path)
+    (fn [db [_ path response]]
+        (let [comverted-errors (convert-errors (:data response))
+              status (:status response)]
+            (log/info "H(:ajax-errors): Storing ajax error" comverted-errors "with status" status "under path" path)
             (re-frame/dispatch [:form-errors path comverted-errors])
-            (assoc-in db [:loader] false))))
+            (-> db
+                (assoc-in [:response-status] status)
+                (assoc-in [:loader] false)))))
 
 ;; --------------------------------------------------------------------------------------------
 

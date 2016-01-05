@@ -36,10 +36,9 @@
                                                         (i18n/message (:l element))]])
               (if (not-empty @errors) [:div {:class "errors"} @errors])]])))
 
-
 ;; ----------------------------------------------------------------------------------------------
 
-(defn- checkbox
+(defn checkbox
     [context name label]
     (let [errors (re-frame/subscribe [:form-errors [context name]])
           desc (if (seq? label) label (i18n/message label))]
@@ -48,3 +47,13 @@
              [:label.checkbox-inline {:class (if (not-empty @errors) "error" "")}
               [:input {:type :checkbox :id :regulations :on-change #(re-frame/dispatch-sync [:form-data [context name] (-> % .-target .-checked)])} desc]]
              (if (not-empty @errors) [:div {:class "errors"} @errors])])))
+
+;; ----------------------------------------------------------------------------------------------
+
+(defn response-errors
+    []
+    (let [status (re-frame/subscribe [:response-status])]
+        (fn []
+            (if @status
+                [:div.errors-header
+                 (i18n/message (str "social.error.status." @status))]))))

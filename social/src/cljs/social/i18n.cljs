@@ -31,6 +31,8 @@
                          "social.register.confirm.link"            "regulaminu"
                          "social.login.welcome"                    "Witaj ponownie :)"
                          "social.login.explanation"                "Zaloguj się do swojego konta"
+                         "social.error.status.401"                 "Nazwa konta lub hasło są nie poprawne"
+                         "social.error.status.500"                 "Wystąpił błąd po stronie serwera - spróbuj jeszcze raz"
                          "email.bouncer.validators.required"       "Pole 'Email' jest polem wymaganym"
                          "gender.bouncer.validators.required"      "Proszę wybrać płeć"
                          "username.bouncer.validators.required"    "Pole 'Nazwa twojego konta' jest wymagane"

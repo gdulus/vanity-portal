@@ -33,3 +33,10 @@
             (do
                 (log/debug "Creating form error reaction under the path" path)
                 (reaction (get-in @db path))))))
+
+;; --------------------------------------------------------------------------------------------
+
+(re-frame/register-sub
+    :response-status
+    (fn [db _]
+        (reaction (:response-status @db))))

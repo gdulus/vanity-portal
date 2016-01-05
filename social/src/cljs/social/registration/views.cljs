@@ -22,7 +22,7 @@
     []
     (do
         (log/info "Will unmount registration component")
-        (re-frame/dispatch-sync [:registeration-will-unmount])))
+        (re-frame/dispatch-sync [:clear-component-data [:registeration]])))
 
 ;; ----------------------------------------------------------------------------------------------
 

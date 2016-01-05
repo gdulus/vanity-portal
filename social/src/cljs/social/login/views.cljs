@@ -14,7 +14,7 @@
     []
     (do
         (log/info "Will unmount login component")
-        (re-frame/dispatch-sync [:login-will-unmount])))
+        (re-frame/dispatch-sync [:clear-component-data [:login]])))
 
 ;; ----------------------------------------------------------------------------------------------
 
@@ -43,6 +43,7 @@
               [:h1.text-center (i18n/message "social.login.welcome")]
               [:h2.text-center (i18n/message "social.login.explanation")]]
              [:div.col-md-12
+              [forms/response-errors]
               [:form {:on-submit #(submit-handler %)}
                [form]
                [:div.input

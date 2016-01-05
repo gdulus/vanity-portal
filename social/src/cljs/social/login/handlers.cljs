@@ -7,17 +7,6 @@
 
 ;; ----------------------------------------------------------------------------------------------
 
-(re-frame/register-handler
-    :login-will-unmount
-    (fn [db _]
-        (do
-            (log/info "Clearing login screen data")
-            (re-frame/dispatch [:form-errors [:login] nil])
-            (re-frame/dispatch [:form-data [:login] nil])
-            (assoc-in db [:loader] false))))
-
-;; ----------------------------------------------------------------------------------------------
-
 (defn- validate
     [form-data]
     (validation/validate form-data
@@ -41,7 +30,7 @@
                     (re-frame/dispatch [:form-errors [:login] nil])
                     (ajax/post "/api/auth"
                                data
-                               #(handle-authenticate-success %)
+                               #(handle-authenticate-success (:data %))
                                #(re-frame/dispatch [:ajax-errors [:login] %]))
                     (assoc-in db [:loader] true))
                 (do
