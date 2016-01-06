@@ -6,13 +6,6 @@
 ;; --------------------------------------------------------------------------------------------
 
 (re-frame/register-sub
-    :name
-    (fn [db]
-        (reaction (:name @db))))
-
-;; --------------------------------------------------------------------------------------------
-
-(re-frame/register-sub
     :active-panel
     (fn [db _]
         (reaction (:active-panel @db))))
@@ -40,3 +33,20 @@
     :response-status
     (fn [db _]
         (reaction (:response-status @db))))
+
+;; --------------------------------------------------------------------------------------------
+
+(re-frame/register-sub
+    :user
+    (fn [db _]
+        (reaction (:user @db))))
+
+;; --------------------------------------------------------------------------------------------
+
+(re-frame/register-sub
+    :select
+    (fn [db [_ raw-path]]
+        (let [path (into [:select] raw-path)]
+            (log/info "Creatng reaction get select data for a path" path)
+            (reaction (get-in @db path)))))
+

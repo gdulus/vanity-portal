@@ -1,5 +1,6 @@
 (ns social.i18n
-    (:require [clojure.string :as s]))
+    (:require [clojure.string :as s]
+              [goog.string :as gstring]))
 
 (def ^:private messages {"social.welcome.header.1"                 "Dołącz do loży hejterów"
                          "social.welcome.header.2"                 "Załóż szybko darmowy profil i rzucaj bombami z farbą w celebrytów i innych użytkowników. Utwórz swoją białą i czarną listę oraz otrzymuj powiadomienia o ustawkach i ważnych wydarzeniach."
@@ -23,12 +24,22 @@
                          "social.button.cancel"                    "Anuluj"
                          "social.button.register"                  "Załóż darmowe konto"
                          "social.button.login"                     "Zaloguj się"
+                         "social.button.later"                     "Dokończ później"
+                         "social.button.save"                      "Zapisz dane"
+                         "social.form.country.label"               "Kraj"
+                         "social.form.country.placeholder"         "wybierz pozycję"
+                         "social.form.voivodeship.label"           "Województwo"
+                         "social.form.voivodeship.placeholder"     "wybierz województwo"
+                         "social.form.city.label"                  "Miasto"
+                         "social.form.city.placeholder"            "wybierz miasto"
                          "social.login.register.button"            "Kliknij i zarejestruj się za darmo"
                          "social.login.register.question"          "Nie masz jeszcze konta? "
                          "social.login.forgot-password.question"   "Nie pamiętasz hasła lub nazwy konta? "
                          "social.login.forgot-password.button"     "Kliknij i zresetuj hasło"
                          "social.register.confirm.info"            "Potwierdź znajomość "
                          "social.register.confirm.link"            "regulaminu"
+                         "social.register-details.header"          "Witaj, %s :)"
+                         "social.register-details.explanation"     "Twoje konta zostało założone, a na podany adres e-mail wiadomość z potwierdzeniem. Zanim jednak zaczniesz korzystać z serwisu, wybierz proszę swój avatar i podaj kilka danych, które pozwolą nam uwzględnić Twoje głosy w serwisowych rankingach:"
                          "social.login.welcome"                    "Witaj ponownie :)"
                          "social.login.explanation"                "Zaloguj się do swojego konta"
                          "social.error.status.401"                 "Nazwa konta lub hasło są nie poprawne"
@@ -44,8 +55,11 @@
                          "social.register.errors"                  "W formularzu wystąpiły błędy"})
 
 (defn message
-    [code]
-    (let [message (get messages code)]
-        (if (s/blank? message)
-            code
-            message)))
+    ([code]
+     (let [message (get messages code)]
+         (if (s/blank? message)
+             code
+             message)))
+    ([code & params]
+     (let [message (message code)]
+         (apply gstring/format message params))))
