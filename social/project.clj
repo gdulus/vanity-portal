@@ -33,7 +33,8 @@
                          {:id           "min"
                           :source-paths ["src/cljs"]
                           :compiler     {:main            social.core
-                                         :output-to       "resources/public/js/compiled/app.js"
+                                         :output-to       "../grails-app/assets/javascripts/social/compiled/app.js"
                                          :optimizations   :advanced
                                          :closure-defines {goog.DEBUG false}
-                                         :pretty-print    false}}]})
+                                         :pretty-print    false
+                                         :externs         ["../grails-app/assets/javascripts/libs/jquery-1.12.0.js"]}}]})

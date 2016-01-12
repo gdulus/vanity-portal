@@ -46,16 +46,16 @@
 
 ;; ----------------------------------------------------------------------------------------------
 
-(defn post
+(defn do-post
     ([url data token success error]
      (execute-request "POST" url json-converter data token success error))
     ([url data success error]
-     (post url data nil success error)))
+     (do-post url data nil success error)))
 
 ;; ----------------------------------------------------------------------------------------------
 
-(defn get
+(defn do-get
     ([url data token success error]
      (execute-request "GET" url null-converter data token success error))
     ([url data success error]
-     (get url data nil success error)))
+     (do-get url data nil success error)))

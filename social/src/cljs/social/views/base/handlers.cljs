@@ -15,7 +15,7 @@
         (let [token (:token @db/storage)
               id (:user-id @db/storage)]
             (if (not (str/blank? token))
-                (ajax/get "/api/user"
+                (ajax/do-get "/api/user"
                           {:id id}
                           token
                           #(re-frame/dispatch [:store-user (:data %)])

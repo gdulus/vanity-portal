@@ -29,7 +29,7 @@
                 (do
                     (log/info "H(:login-authenticate): Triggering login with data" data)
                     (re-frame/dispatch [:form-errors [:login] nil])
-                    (ajax/post "/api/auth"
+                    (ajax/do-post "/api/auth"
                                data
                                #(handle-authenticate-success %)
                                #(re-frame/dispatch [:ajax-errors [:login] %]))

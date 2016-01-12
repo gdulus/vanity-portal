@@ -31,7 +31,7 @@
                 (do
                     (log/info "Triggering account registration with data" data)
                     (re-frame/dispatch [:form-errors [:registeration] nil])
-                    (ajax/post "/api/user"
+                    (ajax/do-post "/api/user"
                                data
                                #(success-handler (:data %))
                                #(re-frame/dispatch [:ajax-errors [:registeration] %]))

@@ -22,7 +22,7 @@
 <g:render template="/commons/footer"/>
 
 %{-- JS assets --}%
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+<asset:javascript src="libs/jquery-1.12.0.js"/>
 <script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <asset:javascript src="vanity/results.js"/>
