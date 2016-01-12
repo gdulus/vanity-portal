@@ -1,10 +1,10 @@
-(ns social.base.views
+(ns social.views.base.views
     (:require [re-frame.core :as re-frame]
               [reagent-modals.modals :as reagent-modals]
-              [social.welcome.views :as welcome]
-              [social.registration.views :as registration]
-              [social.registration-details.views :as registration-details]
-              [social.login.views :as login]))
+              [social.views.welcome.views :as welcome]
+              [social.views.registration.views :as registration]
+              [social.views.registration-details.views :as registration-details]
+              [social.views.login.views :as login]))
 
 (defn- get-panel
     [panel-name]

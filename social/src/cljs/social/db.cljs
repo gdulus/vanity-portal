@@ -1,4 +1,4 @@
-(ns social.base.db
+(ns social.db
     (:require [alandipert.storage-atom :refer [local-storage]]))
 
 ;; ----------------------------------------------------------------------------------------------

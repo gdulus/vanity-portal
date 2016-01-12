@@ -1,4 +1,4 @@
-(ns social.base.subs
+(ns social.views.base.subs
     (:require-macros [reagent.ratom :refer [reaction]])
     (:require [re-frame.core :as re-frame]
               [social.logger :as log]))

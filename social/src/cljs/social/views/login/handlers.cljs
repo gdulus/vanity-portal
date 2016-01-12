@@ -1,4 +1,4 @@
-(ns social.login.handlers
+(ns social.views.login.handlers
     (:require [re-frame.core :as re-frame]
               [bouncer.validators :as v]
               [social.validation :as validation]

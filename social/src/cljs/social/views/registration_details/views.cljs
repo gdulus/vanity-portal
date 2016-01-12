@@ -1,11 +1,11 @@
-(ns social.registration-details.views
-    (:require [social.registration-details.subs]
-              [social.registration-details.handlers]
+(ns social.views.registration-details.views
+    (:require [social.views.registration-details.subs]
+              [social.views.registration-details.handlers]
               [social.logger :as log]
               [re-frame.core :as re-frame]
               [social.forms :as forms]
               [social.i18n :as i18n]
-              [social.base.routes :as routes]
+              [social.routes :as routes]
               [reagent.core :as r]))
 
 ;; ----------------------------------------------------------------------------------------------

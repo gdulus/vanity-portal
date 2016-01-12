@@ -1,11 +1,11 @@
-(ns social.base.handlers
+(ns social.views.base.handlers
     (:require [re-frame.core :as re-frame]
-              [social.base.db :as db]
+              [social.db :as db]
               [social.logger :as log]
               [social.i18n :as i18n]
               [clojure.string :as str]
               [social.ajax :as ajax]
-              [social.base.routes :as routes]))
+              [social.routes :as routes]))
 
 ;; ----------------------------------------------------------------------------------------------
 

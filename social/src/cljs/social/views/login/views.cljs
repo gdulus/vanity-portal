@@ -1,10 +1,10 @@
-(ns social.login.views
-    (:require [social.login.subs]
-              [social.login.handlers]
+(ns social.views.login.views
+    (:require [social.views.login.subs]
+              [social.views.login.handlers]
               [re-frame.core :as re-frame]
               [social.forms :as forms]
               [social.i18n :as i18n]
-              [social.base.routes :as routes]
+              [social.routes :as routes]
               [social.logger :as log]
               [reagent.core :as r]))
 

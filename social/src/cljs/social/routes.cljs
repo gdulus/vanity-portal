@@ -1,4 +1,4 @@
-(ns social.base.routes
+(ns social.routes
     (:require-macros [secretary.core :refer [defroute]])
     (:import goog.History)
     (:require [secretary.core :as secretary]

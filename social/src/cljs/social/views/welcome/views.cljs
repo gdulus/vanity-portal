@@ -1,8 +1,8 @@
-(ns social.welcome.views
-    (:require [social.welcome.subs]
-              [social.welcome.handlers]
+(ns social.views.welcome.views
+    (:require [social.views.welcome.subs]
+              [social.views.welcome.handlers]
               [social.i18n :as i18n]
-              [social.base.routes :as routes]))
+              [social.routes :as routes]))
 
 (defn main-panel []
     (let []

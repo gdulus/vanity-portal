@@ -1,4 +1,4 @@
-(ns social.registration.handlers
+(ns social.views.registration.handlers
     (:require [re-frame.core :as re-frame]
               [bouncer.validators :as v]
               [social.validation :as validation]
