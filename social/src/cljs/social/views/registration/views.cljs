@@ -2,7 +2,7 @@
     (:require [reagent.core :as r]
               [social.views.registration.subs]
               [social.views.registration.handlers]
-              [social.forms :as forms]
+              [social.commons.forms.views :as forms]
               [social.i18n :as i18n]
               [re-frame.core :as re-frame]
               [social.logger :as log]

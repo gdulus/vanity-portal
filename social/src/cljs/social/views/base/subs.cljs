@@ -40,13 +40,3 @@
     :user
     (fn [db _]
         (reaction (:user @db))))
-
-;; --------------------------------------------------------------------------------------------
-
-(re-frame/register-sub
-    :select
-    (fn [db [_ raw-path]]
-        (let [path (into [:select] raw-path)]
-            (log/info "Creatng reaction get select data for a path" path)
-            (reaction (get-in @db path)))))
-

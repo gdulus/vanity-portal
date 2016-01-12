@@ -1,7 +1,9 @@
-(ns social.forms
+(ns social.commons.forms.views
     (:require [re-frame.core :as re-frame]
               [clojure.string :as str]
               [social.i18n :as i18n]
+              [social.commons.forms.subs]
+              [social.commons.forms.handlers]
               [reagent.core :as r]))
 
 ;; ----------------------------------------------------------------------------------------------
@@ -64,7 +66,7 @@
              [:label {:for name :class (if (not-empty @errors) "error" "")} (i18n/message "social.form.country.label")]
              [:div.input
               [:select.form-control {:id name :on-change #(re-frame/dispatch-sync [:country-change (-> % .-target .-value)])}
-               [:option (i18n/message "social.form.country.placeholder")]
+               [:option {:value 0} (i18n/message "social.form.country.placeholder")]
                (for [country (:data @state)]
                    ^{:key country} [:option {:value (get country "id")} (get country "name")])]
               (if (not-empty @errors) [:div {:class "errors"} @errors])]])))
@@ -73,6 +75,8 @@
     []
     (r/create-class {:reagent-render      select-country-renderer
                      :component-did-mount select-country-component-did-mount-handeler}))
+
+;; ----------------------------------------------------------------------------------------------
 
 (defn select-voivodeship
     [context]
@@ -83,12 +87,15 @@
              [:label {:for name :class (if (not-empty @errors) "error" "")} (i18n/message "social.form.voivodeship.label")]
              [:div.input
               [:select.form-control {:id        name
-                                     :disabled  (if (nil? @state) "disabled" "")
+                                     :class     (if (and (not (nil? @state)) (:loader @state)) "loader" "")
+                                     :disabled  (if (or (nil? @state) (empty? (:data @state))) "disabled" "")
                                      :on-change #(re-frame/dispatch-sync [:voivodeship-change (-> % .-target .-value)])}
-               [:option (i18n/message "social.form.voivodeship.placeholder")]
+               [:option {:value 0} (i18n/message "social.form.voivodeship.placeholder")]
                (for [voivodeship (:data @state)]
                    ^{:key voivodeship} [:option {:value (get voivodeship "id")} (get voivodeship "name")])]
               (if (not-empty @errors) [:div {:class "errors"} @errors])]])))
+
+;; ----------------------------------------------------------------------------------------------
 
 (defn select-city
     [context]
@@ -99,9 +106,10 @@
              [:label {:for name :class (if (not-empty @errors) "error" "")} (i18n/message "social.form.city.label")]
              [:div.input
               [:select.form-control {:id        name
-                                     :disabled  (if (or (nil? @state) (:loader @state)) "disabled" "")
+                                     :class     (if (and (not (nil? @state)) (:loader @state)) "loader" "")
+                                     :disabled  (if (or (nil? @state) (empty? (:data @state))) "disabled" "")
                                      :on-change #()}
-               [:option (i18n/message "social.form.city.placeholder")]
+               [:option {:value 0} (i18n/message "social.form.city.placeholder")]
                (for [voivodeship (:data @state)]
                    ^{:key voivodeship} [:option {:value (get voivodeship "id")} (get voivodeship "name")])]
               (if (not-empty @errors) [:div {:class "errors"} @errors])]])))

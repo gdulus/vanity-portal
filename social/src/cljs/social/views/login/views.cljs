@@ -2,7 +2,7 @@
     (:require [social.views.login.subs]
               [social.views.login.handlers]
               [re-frame.core :as re-frame]
-              [social.forms :as forms]
+              [social.commons.forms.views :as forms]
               [social.i18n :as i18n]
               [social.routes :as routes]
               [social.logger :as log]

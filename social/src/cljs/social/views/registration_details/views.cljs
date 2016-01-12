@@ -3,7 +3,7 @@
               [social.views.registration-details.handlers]
               [social.logger :as log]
               [re-frame.core :as re-frame]
-              [social.forms :as forms]
+              [social.commons.forms.views :as forms]
               [social.i18n :as i18n]
               [social.routes :as routes]
               [reagent.core :as r]))
