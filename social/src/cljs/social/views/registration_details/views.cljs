@@ -31,7 +31,8 @@
     [:div
      [forms/select-country :registeration-details]
      [forms/select-voivodeship :registeration-details]
-     [forms/select-city :registeration-details]])
+     [forms/select-city :registeration-details]
+     [forms/avatars :registeration-details]])
 
 ;; ----------------------------------------------------------------------------------------------
 

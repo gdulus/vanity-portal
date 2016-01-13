@@ -8,6 +8,16 @@
 
 ;; ----------------------------------------------------------------------------------------------
 
+(defn response-errors
+    []
+    (let [status (re-frame/subscribe [:response-status])]
+        (fn []
+            (if @status
+                [:div.errors-header
+                 (i18n/message (str "social.error.status." @status))]))))
+
+;; ----------------------------------------------------------------------------------------------
+
 (defn input
     ([type context name label info]
      (let [errors (re-frame/subscribe [:form-errors [context name]])]
@@ -116,16 +126,12 @@
 
 ;; ----------------------------------------------------------------------------------------------
 
-(defn response-errors
-    []
-    (let [status (re-frame/subscribe [:response-status])]
-        (fn []
-            (if @status
-                [:div.errors-header
-                 (i18n/message (str "social.error.status." @status))]))))
-
-;; ----------------------------------------------------------------------------------------------
-
-
-
+(defn avatars
+    [context]
+    (let [errors (re-frame/subscribe [:form-errors [context :city]])]
+        (fn [context]
+            [:div
+             [:label {:for name :class (if (not-empty @errors) "error" "")} (i18n/message "social.form.avatar.label")]
+             [:div.input
+              (if (not-empty @errors) [:div {:class "errors"} @errors])]])))
 

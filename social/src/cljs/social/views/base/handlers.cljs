@@ -5,7 +5,12 @@
               [social.i18n :as i18n]
               [clojure.string :as str]
               [social.ajax :as ajax]
-              [social.routes :as routes]))
+              [social.routes :as routes]
+              [reagent-modals.modals :as reagent-modals]
+              [social.views.welcome.views :as welcome]
+              [social.views.registration.views :as registration]
+              [social.views.registration-details.views :as registration-details]
+              [social.views.login.views :as login]))
 
 ;; ----------------------------------------------------------------------------------------------
 
@@ -16,10 +21,10 @@
               id (:user-id @db/storage)]
             (if (not (str/blank? token))
                 (ajax/do-get "/api/user"
-                          {:id id}
-                          token
-                          #(re-frame/dispatch [:store-user (:data %)])
-                          #(re-frame/dispatch [:ajax-errors [:init] %])))
+                             {:id id}
+                             token
+                             #(re-frame/dispatch [:store-user (:data %)])
+                             #(re-frame/dispatch [:ajax-errors [:init] %])))
             (log/info "Got token" token)
             db/default-db)))
 
@@ -37,6 +42,15 @@
 
 ;; ----------------------------------------------------------------------------------------------
 
+(defn- get-panel
+    [panel-name]
+    (case panel-name
+        :welcome [welcome/main-panel]
+        :registration [registration/main-panel]
+        :registration-details [registration-details/main-panel]
+        :login [login/main-panel]
+        nil))
+
 (re-frame/register-handler
     :set-active-panel
     (fn [db [_ panel-name]]
@@ -46,7 +60,8 @@
             (if (some #{user-status} acl)
                 (do
                     (log/debug "User status" user-status "Current panel" panel-name "meet ACL" acl)
-                    (assoc db :active-panel panel-name))
+                    (reagent-modals/modal! (get-panel panel-name) {:size :lg})
+                    db)
                 (do
                     (log/info "User status" user-status "Current panel" panel-name "doesn't meet ACL" acl "Redirecting to" default-route)
                     (re-frame/dispatch [:redirect default-route])
@@ -125,4 +140,13 @@
     (fn [db [_ token]]
         (log/info "H(:store-token): Stroing token" token)
         (swap! db/storage assoc :token token)
+        db))
+
+;; --------------------------------------------------------------------------------------------
+
+(re-frame/register-handler
+    :store-user-id
+    (fn [db [_ user-id]]
+        (log/info "H(:store-token): Stroing user id" user-id)
+        (swap! db/storage assoc :user-id user-id)
         db))

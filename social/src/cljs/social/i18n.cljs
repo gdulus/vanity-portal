@@ -32,6 +32,7 @@
                          "social.form.voivodeship.placeholder"     "wybierz województwo"
                          "social.form.city.label"                  "Miasto"
                          "social.form.city.placeholder"            "wybierz miasto"
+                         "social.form.avatar.label"                "Wybierz swój awater"
                          "social.login.register.button"            "Kliknij i zarejestruj się za darmo"
                          "social.login.register.question"          "Nie masz jeszcze konta? "
                          "social.login.forgot-password.question"   "Nie pamiętasz hasła lub nazwy konta? "
