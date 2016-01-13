@@ -29,10 +29,11 @@
 (defn- form
     []
     [:div
+     [forms/avatars :registeration-details]
      [forms/select-country :registeration-details]
      [forms/select-voivodeship :registeration-details]
      [forms/select-city :registeration-details]
-     [forms/avatars :registeration-details]])
+     [forms/brithday :registeration-details]])
 
 ;; ----------------------------------------------------------------------------------------------
 

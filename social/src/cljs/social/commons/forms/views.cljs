@@ -4,7 +4,8 @@
               [social.i18n :as i18n]
               [social.commons.forms.subs]
               [social.commons.forms.handlers]
-              [reagent.core :as r]))
+              [reagent.core :as r]
+              [social.logger :as log]))
 
 ;; ----------------------------------------------------------------------------------------------
 
@@ -126,12 +127,42 @@
 
 ;; ----------------------------------------------------------------------------------------------
 
-(defn avatars
+(defn brithday
     [context]
-    (let [errors (re-frame/subscribe [:form-errors [context :city]])]
+    (let [errors (re-frame/subscribe [:form-errors [context :birthday]])]
+        (fn [context]
+            [:div.birthday
+             [:label {:for name :class (if (not-empty @errors) "error" "")} (i18n/message "social.form.birthday.label")]
+             [:input.form-control {:type        "text"
+                                   :id          "birthday"
+                                   :placeholder (i18n/message "social.form.birthday.birthday.placeholder")
+                                   :on-change   #(re-frame/dispatch-sync [:form-data [context name] (-> % .-target .-value)])}]])))
+
+;; ----------------------------------------------------------------------------------------------
+
+(defn- avatars-renderer
+    [context]
+    (let [errors (re-frame/subscribe [:form-errors [context :avatar]])]
         (fn [context]
             [:div
              [:label {:for name :class (if (not-empty @errors) "error" "")} (i18n/message "social.form.avatar.label")]
-             [:div.input
+             [:div.avatars
+              (for [index (range 1 26)]
+                  ^{:key index} [:img {:src (str "/assets/social/icons/monsters/" index ".svg")}])
               (if (not-empty @errors) [:div {:class "errors"} @errors])]])))
+
+(defn- avatars-renderer-did-mount-handler
+    []
+    (log/debug "Did mount avatars component")
+    (.slick (js/$ ".avatars") (clj->js {"dots"           false
+                                        "infinite"       true
+                                        "slidesToShow"   7
+                                        "slidesToScroll" 5
+                                        "focusOnSelect"  false
+                                        "speed"          500
+                                        "fade"           false})))
+(defn avatars
+    []
+    (r/create-class {:reagent-render      avatars-renderer
+                     :component-did-mount avatars-renderer-did-mount-handler}))
 
