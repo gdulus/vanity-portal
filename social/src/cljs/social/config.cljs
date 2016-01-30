@@ -10,20 +10,26 @@
 
 ;; ----------------------------------------------------------------------------------------------
 
-(def url-mapping {:routes   {:welcome              {:uri "/izba-przyjec"
-                                                    :acl [:not-logged-in]}
+(def url-mapping {:routes   {:welcome                   {:uri "/izba-przyjec"
+                                                         :acl [:not-logged-in]}
 
-                             :registration         {:uri "/porodowka"
-                                                    :acl [:not-logged-in]}
+                             :registration              {:uri "/porodowka"
+                                                         :acl [:not-logged-in]}
 
-                             :registration-details {:uri "/registration-details"
-                                                    :acl [:logged-in :first-time-logged-in]}
+                             :registration-confirmation {:uri "/i-po-porodzie"
+                                                         :acl [:not-logged-in]}
 
-                             :login                {:uri "/zaloguj-sie"
-                                                    :acl [:not-logged-in]}
+                             :registration-details      {:uri "/registration-details"
+                                                         :acl [:logged-in :first-time-logged-in]}
 
-                             :regulations          {:uri      "/regulamin"
-                                                    :external true}}
+                             :account-activation        {:uri "/aktywuj-konto"
+                                                         :acl [:not-logged-in]}
+
+                             :login                     {:uri "/zaloguj-sie"
+                                                         :acl [:not-logged-in]}
+
+                             :regulations               {:uri      "/regulamin"
+                                                         :external true}}
 
                   :defaults {:not-logged-in        :welcome
                              :first-time-logged-in :registration-details

@@ -1,6 +1,7 @@
 package vanity.portal.security
 
 import org.springframework.beans.factory.annotation.Autowired
+import vanity.portal.security.tokens.UserToken
 import vanity.portal.user.UserActivityService
 import vanity.portal.user.UserService
 import vanity.user.User
@@ -16,7 +17,7 @@ class AuthService {
     UserService userService
 
     @Autowired
-    UserTokenProvider userTokenProvider
+    TokenProvider tokenProvider
 
     def passwordEncoder
 
@@ -26,14 +27,14 @@ class AuthService {
         }
 
         try {
-            UserToken userToken = userTokenProvider.encode(token)
+            UserToken userToken = tokenProvider.encodeUserToken(token)
             User user = userService.read(userToken.id)
 
             if (!user.enabled || user.accountLocked) {
                 throw new SecurityException("User ${user} is disabled or password is locked")
             }
 
-            return AuthDto.build(userTokenProvider.decode(user), user)
+            return AuthDto.build(tokenProvider.decodeAsUserToken(user), user)
 
         } catch (IllegalStateException exp) {
             throw new SecurityException("Token ${token} is invalid")
@@ -56,7 +57,7 @@ class AuthService {
         }
 
         userActivityService.create(user, UserActivityType.LOG_IN)
-        return AuthDto.build(userTokenProvider.decode(user), user)
+        return AuthDto.build(tokenProvider.decodeAsUserToken(user), user)
 
     }
 

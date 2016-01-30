@@ -4,13 +4,15 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import sun.misc.BASE64Decoder
 import sun.misc.BASE64Encoder
+import vanity.portal.security.tokens.RegistrationToken
+import vanity.portal.security.tokens.UserToken
 import vanity.user.User
 
 import javax.crypto.Cipher
 import javax.crypto.spec.SecretKeySpec
 
 @Component
-class UserTokenProvider {
+class TokenProvider {
 
     @Value('${token.algorithm}')
     private String algorithm;
@@ -21,7 +23,7 @@ class UserTokenProvider {
     @Value('${token.timeToLive}')
     private Long timeToLive;
 
-    public UserToken encode(final String publicToken) throws Exception {
+    public UserToken encodeUserToken(final String publicToken) throws Exception {
         String serializedToken = decrypt(publicToken);
         UserToken userToken = UserToken.buildFromSerializedString(serializedToken);
 
@@ -32,9 +34,19 @@ class UserTokenProvider {
         return userToken
     }
 
-    public String decode(final User user) throws Exception {
+    public String decodeAsUserToken(final User user) throws Exception {
         UserToken userToken = UserToken.buildFromUser(user);
         return encrypt(userToken.serialize());
+    }
+
+    public RegistrationToken encodeRegistrationToken(final String publicToken) throws Exception {
+        String serializedToken = decrypt(publicToken);
+        return RegistrationToken.buildFromSerializedString(serializedToken);
+    }
+
+    public String decodeAsRegistrationToken(final User user) throws Exception {
+        RegistrationToken token = RegistrationToken.buildFromUser(user);
+        return encrypt(token.serialize());
     }
 
     private String encrypt(final String token) throws Exception {

@@ -36,7 +36,7 @@ grails.mime.types = [
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.cache.maxsize = 1000
 
-// The default codec used to encode data with ${}
+// The default codec used to encodeUserToken data with ${}
 grails.views.default.codec = "none" // none, html, base64
 grails.views.gsp.encoding = "UTF-8"
 grails.converters.encoding = "UTF-8"
@@ -62,11 +62,12 @@ grails.hibernate.cache.queries = false
 
 environments {
     development {
+        grails.serverURL = 'http://localhost:8080'
         grails.logging.jul.usebridge = true
     }
     production {
+        grails.serverURL = 'http://www.tanilans.pl'
         grails.logging.jul.usebridge = false
-        // TODO: grails.serverURL = "http://www.changeme.com"
     }
 }
 
@@ -171,4 +172,4 @@ grails.cache.config = {
 // ##########################
 token.algorithm = "Blowfish"
 token.secretKey = "1029384756qwerty"
-token.timeToLive = (60000 * 60) // 1h
+token.timeToLive = (1000 * 60 * 60) // 1h

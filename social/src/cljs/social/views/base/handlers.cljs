@@ -10,6 +10,8 @@
               [social.views.welcome.views :as welcome]
               [social.views.registration.views :as registration]
               [social.views.registration-details.views :as registration-details]
+              [social.views.registration-confirmation.views :as registration-confirmation]
+              [social.views.account-activation.views :as account-activation]
               [social.views.login.views :as login]))
 
 ;; ----------------------------------------------------------------------------------------------
@@ -47,19 +49,21 @@
     (case panel-name
         :welcome [welcome/main-panel]
         :registration [registration/main-panel]
+        :registration-confirmation [registration-confirmation/main-panel]
         :registration-details [registration-details/main-panel]
+        :account-activation [account-activation/main-panel]
         :login [login/main-panel]
         nil))
 
 (re-frame/register-handler
     :set-active-panel
-    (fn [db [_ panel-name]]
+    (fn [db [_ panel-name query-params]]
         (let [acl (routes/get-acl panel-name)
               user-status (db/get-user-status db)
               default-route (routes/get-default-route user-status)]
             (if (some #{user-status} acl)
                 (do
-                    (log/debug "User status" user-status "Current panel" panel-name "meet ACL" acl)
+                    (log/debug "User status" user-status "Current panel" panel-name "with params" query-params "meet ACL" acl)
                     (reagent-modals/modal! (get-panel panel-name) {:size :lg})
                     db)
                 (do

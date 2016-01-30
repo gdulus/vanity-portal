@@ -13,8 +13,9 @@
 
 (defn get-user-status
     [db]
-    (let [user (:user db)]
-        (if (nil? user)
+    (let [user (:user db)
+          token (:token @storage)]
+        (if (or (nil? user) (nil? token))
             :not-logged-in
             (if (get user "firstLogin")
                 :first-time-logged-in

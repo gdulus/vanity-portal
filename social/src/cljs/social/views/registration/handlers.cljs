@@ -20,7 +20,7 @@
     [user]
     (log/info "User created" user)
     (re-frame/dispatch [:store-user user])
-    (re-frame/dispatch [:redirect :registration-details]))
+    (re-frame/dispatch [:redirect :registration-confirmation]))
 
 (re-frame/register-handler
     :registeration-create-account

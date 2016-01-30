@@ -45,6 +45,16 @@
                          "social.register-details.explanation"       "Twoje konta zostało założone, a na podany adres e-mail wiadomość z potwierdzeniem. Zanim jednak zaczniesz korzystać z serwisu, wybierz proszę swój avatar i podaj kilka danych, które pozwolą nam uwzględnić Twoje głosy w serwisowych rankingach:"
                          "social.login.welcome"                      "Witaj ponownie :)"
                          "social.login.explanation"                  "Zaloguj się do swojego konta"
+                         "social.register-confirmation.header"       "Konto założone, %s :)"
+                         "social.register-confirmation.explanation"  "Twoje konta zostało założone, a na podany adres e-mail wiadomość z potwierdzeniem i linkiem do aktywacjo konta."
+                         "social.register-confirmation.back.1"       "Aby wrócić do strony głównej "
+                         "social.register-confirmation.back.2"       "kliknij ten link"
+
+                         "social.account-activation.header"          "Witaj :)"
+                         "social.account-activation.explanation"     "Aktywacja konta w toku, prosimy o cierpliwosc"
+                         "social.account-activation.back.1"          "Aby wrócić do strony głównej "
+                         "social.account-activation.back.2"          "kliknij ten link"
+
                          "social.error.status.401"                   "Nazwa konta lub hasło są nie poprawne"
                          "social.error.status.500"                   "Wystąpił błąd po stronie serwera - spróbuj jeszcze raz"
                          "email.bouncer.validators.required"         "Pole 'Email' jest polem wymaganym"

@@ -42,7 +42,7 @@
 (defn- register-route
     [route-name route-uri]
     (log/debug "Registering route" route-name "->" route-uri)
-    (defroute (str route-uri) [] (re-frame/dispatch [:set-active-panel route-name])))
+    (defroute (str route-uri) [query-params] (re-frame/dispatch [:set-active-panel route-name query-params])))
 
 (defn app-routes []
     (let [routes (filter #(not (:external (val %))) (:routes config/url-mapping))]

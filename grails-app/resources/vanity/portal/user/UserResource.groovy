@@ -35,6 +35,9 @@ class UserResource extends AbstractResource {
         } catch (ValidationException exp) {
             log.warn('Error while creating of the user: {}', exp.errors)
             return Response.status(Response.Status.BAD_REQUEST).entity(JSONUtils.convert(User, exp.errors)).build();
+        } catch (Throwable exp) {
+            log.warn('There was an error while creating an user {}', exp)
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(JSONUtils.EMPTY).build();
         }
     }
 

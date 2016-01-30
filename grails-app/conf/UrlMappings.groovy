@@ -63,7 +63,7 @@ class UrlMappings {
         /**
          * Social mapping
          */
-        "/social/$template"(controller: 'social')
+        "/social/registration"(controller: 'social', action: 'registration')
 
     }
 }
