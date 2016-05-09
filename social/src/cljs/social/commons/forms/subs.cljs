@@ -10,3 +10,10 @@
             (log/info "Creatng reaction get select data for a path" path)
             (reaction (get-in @db path)))))
 
+;; --------------------------------------------------------------------------------------------
+
+(re-frame/register-sub
+    :flash-message
+    (fn [db [_]]
+        (reaction (get-in @db [:flash-message :data]))))
+

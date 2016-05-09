@@ -18,8 +18,8 @@
 </head>
 
 <body>
-<div id="social"></div>
 <g:render template="/commons/navbar"/>
+<div id="social" class="container"></div>
 <div id="main" class="container"><g:layoutBody/></div>
 <g:render template="/commons/footer"/>
 

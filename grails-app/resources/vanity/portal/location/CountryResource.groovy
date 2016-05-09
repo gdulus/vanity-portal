@@ -14,7 +14,9 @@ class CountryResource extends AbstractResource {
 
     @GET
     public Response list() {
-        return Response.ok([[id: 1851073, name: 'Polska']] as JSON).build()
+        $ {
+            return Response.ok([[id: 1851073, name: 'Polska']] as JSON).build()
+        }
     }
 
 }

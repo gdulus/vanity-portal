@@ -19,7 +19,7 @@
                              :registration-confirmation {:uri "/i-po-porodzie"
                                                          :acl [:not-logged-in]}
 
-                             :registration-details      {:uri "/registration-details"
+                             :registration-details      {:uri "/karta-pacjenta"
                                                          :acl [:logged-in :first-time-logged-in]}
 
                              :account-activation        {:uri "/aktywuj-konto"

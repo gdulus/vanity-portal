@@ -55,6 +55,7 @@
                          "social.account-activation.back.1"          "Aby wrócić do strony głównej "
                          "social.account-activation.back.2"          "kliknij ten link"
 
+                         "social.user.activated"                     "Twoje konto zastało aktywowane pomyślnie. Zanim jednak zaczniesz korzystać z serwisu, wybierz proszę swój avatar i podaj kilka danych, które pozwolą nam uwzględnić Twoje głosy w serwisowych rankingach"
                          "social.error.status.401"                   "Nazwa konta lub hasło są nie poprawne"
                          "social.error.status.500"                   "Wystąpił błąd po stronie serwera - spróbuj jeszcze raz"
                          "email.bouncer.validators.required"         "Pole 'Email' jest polem wymaganym"

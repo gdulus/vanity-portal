@@ -166,3 +166,30 @@
     (r/create-class {:reagent-render      avatars-renderer
                      :component-did-mount avatars-renderer-did-mount-handler}))
 
+;; ----------------------------------------------------------------------------------------------
+
+(defn- flash-message-did-mount-handler
+    []
+    (log/info "Marking flash message as visible")
+    (re-frame/dispatch-sync [:mark-flash-message]))
+
+(defn- flash-message-will-unmount-handler
+    []
+    (log/info "Clearing flash message")
+    (re-frame/dispatch-sync [:clear-flash-message]))
+
+(defn- flash-message-renderer
+    []
+    (let [flash-message (re-frame/subscribe [:flash-message])]
+        (fn []
+            (if (not (nil? @flash-message))
+                (let [message (i18n/message (:message @flash-message))
+                      level (:level @flash-message)]
+                    [:div.flash.text-center.col-md-12 {:class level} message])))))
+
+(defn flash-message
+    []
+    (r/create-class {:reagent-render         flash-message-renderer
+                     :component-did-mount    flash-message-did-mount-handler
+                     :component-will-unmount flash-message-will-unmount-handler}))
+

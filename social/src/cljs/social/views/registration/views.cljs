@@ -55,6 +55,7 @@
               [:h1.text-center (i18n/message "social.register.header")]
               [:h2.text-center (i18n/message "social.register.explanation")]]
              [:div.col-md-12
+              [forms/response-errors]
               [:form {:on-submit #(submit-handler %)}
                [form]
                [:div.form-group

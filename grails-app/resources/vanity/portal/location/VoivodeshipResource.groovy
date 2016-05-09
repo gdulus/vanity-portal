@@ -18,8 +18,10 @@ class VoivodeshipResource extends AbstractResource {
 
     @GET
     public Response list(@QueryParam('countryId') final Long countryId) {
-        def result = voivodeshipService.findByCountry(countryId).collect { [id: it.id, name: it.name] }
-        return Response.ok(result as JSON).build()
+        $ {
+            def result = voivodeshipService.findByCountry(countryId).collect { [id: it.id, name: it.name] }
+            return Response.ok(result as JSON).build()
+        }
     }
 
 }

@@ -1,9 +1,11 @@
 package vanity.portal.rest
 
+import grails.validation.ValidationException
 import groovy.util.logging.Slf4j
 import vanity.portal.security.AuthDto
 import vanity.portal.security.AuthService
 import vanity.portal.utils.JSONUtils
+import vanity.user.User
 
 import javax.ws.rs.core.Response
 
@@ -12,15 +14,26 @@ class AbstractResource {
 
     AuthService authService
 
-    protected Response secured(final String token, final Closure<Response> worker) {
-        try {
+    protected Response $(final String token, final Closure<Response> worker) {
+        $ {
             AuthDto result = authService.auth(token)
             Response response = worker.call()
             return Response.status(response.status).header(RestConst.X_AUTH_TOKEN, result.token).entity(response.entity).build();
-        } catch (SecurityException exp) {
-            log.warn('User unauthorized: {}', exp.message)
-            return Response.status(Response.Status.UNAUTHORIZED).entity(JSONUtils.EMPTY).build();
         }
     }
 
+    protected Response $(final Closure<Response> worker) {
+        try {
+            return worker.call()
+        } catch (SecurityException exp) {
+            log.warn('User unauthorized: {}', exp.message)
+            return Response.status(Response.Status.UNAUTHORIZED).entity(JSONUtils.EMPTY).build();
+        } catch (ValidationException exp) {
+            log.warn('There was validation error while executing an action', exp.errors)
+            return Response.status(Response.Status.BAD_REQUEST).entity(JSONUtils.convert(User, exp.errors)).build();
+        } catch (Throwable exp) {
+            log.warn('There was an error while executing action', exp)
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(JSONUtils.EMPTY).build();
+        }
+    }
 }

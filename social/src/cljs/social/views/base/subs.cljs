@@ -40,3 +40,10 @@
     :user
     (fn [db _]
         (reaction (:user @db))))
+
+;; --------------------------------------------------------------------------------------------
+
+(re-frame/register-sub
+    :query-params
+    (fn [db [_ panel-name]]
+        (reaction (get-in @db [:query-params panel-name]))))

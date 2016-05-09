@@ -46,6 +46,14 @@
 
 ;; ----------------------------------------------------------------------------------------------
 
+(defn do-put
+    ([url data token success error]
+     (execute-request "PUT" url json-converter data token success error))
+    ([url data success error]
+     (do-put url data nil success error)))
+
+;; ----------------------------------------------------------------------------------------------
+
 (defn do-post
     ([url data token success error]
      (execute-request "POST" url json-converter data token success error))

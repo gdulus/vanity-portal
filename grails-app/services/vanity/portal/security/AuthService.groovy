@@ -30,6 +30,10 @@ class AuthService {
             UserToken userToken = tokenProvider.encodeUserToken(token)
             User user = userService.read(userToken.id)
 
+            if (!user) {
+                throw new SecurityException("User with id ${userToken.id} doesn't exists")
+            }
+
             if (!user.enabled || user.accountLocked) {
                 throw new SecurityException("User ${user} is disabled or password is locked")
             }
@@ -59,6 +63,10 @@ class AuthService {
         userActivityService.create(user, UserActivityType.LOG_IN)
         return AuthDto.build(tokenProvider.decodeAsUserToken(user), user)
 
+    }
+
+    public String buildToken(final User user) {
+        return tokenProvider.decodeAsUserToken(user)
     }
 
 }

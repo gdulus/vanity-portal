@@ -8,6 +8,7 @@
 
     h1 {
         font-size: 14px;
+        font-weight: normal;
     }
 
     p {
@@ -21,15 +22,14 @@
     Witaj ${user.username}!
 </h1>
 
-<a>
-    Twoje konto zostało uwtorzone pomyślnie. Aby je aktywować kliknij poniższy link:
-    <br/>
-    <a href="${g.createLink(absolute: true, controller: 'top', action: 'newestArticles')}#/aktywuj-konto/${token}">aktywuj konto!</a>
+<p>
+    Twoje konto zostało uwtorzone pomyślnie. Aby je aktywować kliknij poniższy link:<br/>
+    <a href="${g.createLink(absolute: true, controller: 'top', action: 'newestArticles')}#/aktywuj-konto?token=${token}">aktywuj konto!</a>
 </p>
 
-    <p>
-        Pozdrawiamy,<br/>
-        Zespół TaniLans
-    </p>
+<p>
+    Pozdrawiamy,<br/>
+    Zespół <g:link absolute="true" controller="home">TaniLans</g:link>
+</p>
 </body>
 </html>

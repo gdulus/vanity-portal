@@ -1,6 +1,12 @@
 (ns social.views.base.views
-    (:require [reagent-modals.modals :as reagent-modals]))
+    (:require [reagent-modals.modals :as reagent-modals]
+              [re-frame.core :as re-frame]))
+
+;(defn main-panel []
+;    (fn []
+;        [reagent-modals/modal-window]))
 
 (defn main-panel []
-    (fn []
-        [reagent-modals/modal-window]))
+    (let [panel (re-frame/subscribe [:active-panel])]
+        (fn []
+            [:div.content @panel])))

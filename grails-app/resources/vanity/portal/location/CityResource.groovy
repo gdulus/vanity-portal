@@ -18,8 +18,10 @@ class CityResource extends AbstractResource {
 
     @GET
     public Response list(@QueryParam('voivodeshipId') final Long voivodeshipId) {
-        def result = cityService.findByVoivodeship(voivodeshipId).collect { [id: it.id, name: it.name] }
-        return Response.ok(result as JSON).build()
+        $ {
+            def result = cityService.findByVoivodeship(voivodeshipId).collect { [id: it.id, name: it.name] }
+            return Response.ok(result as JSON).build()
+        }
     }
 
 }

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.transaction.support.TransactionSynchronizationAdapter
 import org.springframework.transaction.support.TransactionSynchronizationManager
 import vanity.portal.notification.EmailSender
+import vanity.portal.security.TokenProvider
+import vanity.portal.security.tokens.RegistrationToken
 import vanity.user.*
 
 class UserService {
@@ -16,6 +18,9 @@ class UserService {
 
     @Autowired
     EmailSender emailSender
+
+    @Autowired
+    TokenProvider tokenProvider
 
     @Transactional
     public User create(final String username, final String password, final @DelegatesTo(Profile) Closure profileBinder) {
@@ -34,9 +39,19 @@ class UserService {
         TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
             @Override
             public void afterCommit() {
-                emailSender.sendUserRegistrationEmail(user)
+                emailSender.sendUserRegistrationEmail(user, tokenProvider.decodeAsRegistrationToken(user))
             }
         })
+        return user
+    }
+
+    @Transactional
+    public User activate(final String registrationToken) {
+        RegistrationToken token = tokenProvider.encodeRegistrationToken(registrationToken)
+        User user = User.get(token.id)
+        user.enabled = true
+        user.save(failOnError: true)
+        userActivityService.create(user, UserActivityType.ACCOUNT_ENABLED)
         return user
     }
 

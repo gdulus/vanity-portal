@@ -55,6 +55,23 @@
         :login [login/main-panel]
         nil))
 
+;(re-frame/register-handler
+;    :set-active-panel
+;    (fn [db [_ panel-name query-params]]
+;        (let [acl (routes/get-acl panel-name)
+;              user-status (db/get-user-status db)
+;              default-route (routes/get-default-route user-status)]
+;            (if (some #{user-status} acl)
+;                (do
+;                    (log/info "User status" user-status "Current panel" panel-name "with params" query-params "meet ACL" acl)
+;                    (reagent-modals/modal! (get-panel panel-name) {:size :lg})
+;                    (log/info "H(:store-query-params): Storing request query-params" query-params "for panel" panel-name)
+;                    (assoc-in db [:query-params panel-name] query-params))
+;                (do
+;                    (log/info "User status" user-status "Current panel" panel-name "doesn't meet ACL" acl "Redirecting to" default-route)
+;                    (re-frame/dispatch [:redirect default-route])
+;                    db)))))
+
 (re-frame/register-handler
     :set-active-panel
     (fn [db [_ panel-name query-params]]
@@ -63,9 +80,11 @@
               default-route (routes/get-default-route user-status)]
             (if (some #{user-status} acl)
                 (do
-                    (log/debug "User status" user-status "Current panel" panel-name "with params" query-params "meet ACL" acl)
-                    (reagent-modals/modal! (get-panel panel-name) {:size :lg})
-                    db)
+                    (log/info "User status" user-status "Current panel" panel-name "with params" query-params "meet ACL" acl)
+                    (log/info "H(:store-query-params): Storing request query-params" query-params "for panel" panel-name)
+                    (-> db
+                        (assoc-in [:active-panel] (get-panel panel-name))
+                        (assoc-in [:query-params panel-name] query-params)))
                 (do
                     (log/info "User status" user-status "Current panel" panel-name "doesn't meet ACL" acl "Redirecting to" default-route)
                     (re-frame/dispatch [:redirect default-route])
@@ -130,16 +149,6 @@
 ;; --------------------------------------------------------------------------------------------
 
 (re-frame/register-handler
-    :delete-user
-    (fn [db _]
-        (log/info "H(:delete-user): Removing user")
-        (-> db
-            (assoc-in [:user] nil)
-            (assoc-in [:loader] false))))
-
-;; --------------------------------------------------------------------------------------------
-
-(re-frame/register-handler
     :store-token
     (fn [db [_ token]]
         (log/info "H(:store-token): Stroing token" token)
@@ -151,6 +160,6 @@
 (re-frame/register-handler
     :store-user-id
     (fn [db [_ user-id]]
-        (log/info "H(:store-token): Stroing user id" user-id)
+        (log/info "H(:store-user-id): Stroing user id" user-id)
         (swap! db/storage assoc :user-id user-id)
         db))

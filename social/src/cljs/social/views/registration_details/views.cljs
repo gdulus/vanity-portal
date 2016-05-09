@@ -45,7 +45,7 @@
             [:div.row {:id "register-details"}
              [:div.col-md-12
               [:h1.text-center (i18n/message "social.register-details.header" (get @user "username"))]
-              [:h2.text-center (i18n/message "social.register-details.explanation")]]
+              [forms/flash-message]]
              [:div.col-md-12
               [:form {:on-submit #(submit-handler %)}
                [form]

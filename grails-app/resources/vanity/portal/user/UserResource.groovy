@@ -1,7 +1,6 @@
 package vanity.portal.user
 
 import grails.converters.JSON
-import grails.validation.ValidationException
 import groovy.util.logging.Slf4j
 import vanity.portal.rest.AbstractResource
 import vanity.portal.rest.RestConst
@@ -24,7 +23,7 @@ class UserResource extends AbstractResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(final Map json) {
-        try {
+        $ {
             User user = userService.create(json.username, json.password) {
                 gender = Gender.parseStr(json.gender)
                 email = json.email
@@ -32,19 +31,12 @@ class UserResource extends AbstractResource {
             UserDto dto = UserDto.build(user, userActivityService.get(user))
             log.info('User created {}', user.id)
             return Response.ok(dto as JSON).build()
-        } catch (ValidationException exp) {
-            log.warn('Error while creating of the user: {}', exp.errors)
-            return Response.status(Response.Status.BAD_REQUEST).entity(JSONUtils.convert(User, exp.errors)).build();
-        } catch (Throwable exp) {
-            log.warn('There was an error while creating an user {}', exp)
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(JSONUtils.EMPTY).build();
         }
     }
 
-
     @GET
     public Response get(@HeaderParam(RestConst.X_AUTH_TOKEN) String token, @QueryParam('id') final Long id) {
-        secured(token) {
+        $(token) {
             User user = userService.read(id)
 
             if (!user) {
@@ -58,4 +50,15 @@ class UserResource extends AbstractResource {
         }
     }
 
+    @PUT
+    @Path('/active')
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response activate(final Map json) {
+        $ {
+            User user = userService.activate(json.token)
+            UserDto dto = UserDto.build(user, userActivityService.get(user))
+            log.info('User activated {}', user.id)
+            return Response.ok(dto as JSON).header(RestConst.X_AUTH_TOKEN, authService.buildToken(user)).build()
+        }
+    }
 }
