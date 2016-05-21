@@ -51,7 +51,7 @@
                [form]
                [:div.form-group
                 [:div.buttons
-                 [:a.link {:href (routes/get-route :welcome)} (i18n/message "social.button.later")]
+                 [:a.link {:href (routes/get-route :empty)} (i18n/message "social.button.later")]
                  (if @loading
                      [:button.btn.btn-default.pull-right.loader {:disabled "disabled"} (i18n/message "social.button.save")]
                      [:button.btn.btn-default.pull-right (i18n/message "social.button.save")])]]]]])))

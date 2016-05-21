@@ -3,17 +3,23 @@
               [bouncer.validators :as v]
               [social.validation :as validation]
               [social.logger :as log]
-              [social.ajax :as ajax]))
+              [social.ajax :as ajax]
+              [cljs-time.format :as f]
+              [bouncer.core :as b]))
 
 ;; ----------------------------------------------------------------------------------------------
 
 (defn- validate
     [form-data]
     (validation/validate form-data
+                         :avatar [v/required]
                          :country [v/required]
                          :voivodeship [v/required]
                          :city [v/required]
-                         :birthday [v/datetime]))
+                         :birthday [v/required]))
+
+;; [v/datetime (:date f/formatters)]
+
 (defn- success-handler
     [user]
     (log/info "User created" user)

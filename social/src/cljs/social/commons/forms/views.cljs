@@ -151,29 +151,32 @@
     [event]
     (let [target (.-target event)
           img (js/$ target)
-          index (.attr img "index")
           type (.attr img "type")]
-        [:index index :type type]))
+        {:index (js/parseInt type) :category "monster"}))
 
 (defn- avatars-renderer
     [context]
-    (let [errors (re-frame/subscribe [:form-errors [context :avatar]])]
+    (let [name :avatar
+          data (re-frame/subscribe [:form-data [context :avatar]])
+          errors (re-frame/subscribe [:form-errors [context :avatar]])]
         (fn [context]
             [:div
              [:label {:for name :class (if (not-empty @errors) "error" "")} (i18n/message "social.form.avatar.label")]
              [:div.avatars
-              (for [index (range 1 26)]
-                  ^{:key index} [:img
-                                 {:src      (str "/assets/social/icons/monsters/" index ".svg")
-                                  :on-click #(log/info (get-image-data %))}])
-              (if (not-empty @errors) [:div {:class "errors"} @errors])]])))
+              (doall (for [index (range 1 25)]
+                         ^{:key index} [:img.picture
+                                        {:src      (str "/assets/social/icons/monsters/" index ".svg")
+                                         :type     index
+                                         :class    (if (== (:index @data) index) "selected")
+                                         :on-click #(re-frame/dispatch-sync [:form-data [context name] (get-image-data %)])}]))]
+             (if (not-empty @errors) [:div {:class "errors"} @errors])])))
 
 (defn- avatars-renderer-did-mount-handler
     []
     (log/debug "Did mount avatars component")
     (.slick (js/$ ".avatars") (clj->js {"dots"           false
                                         "infinite"       true
-                                        "slidesToShow"   7
+                                        "slidesToShow"   5
                                         "slidesToScroll" 5
                                         "focusOnSelect"  false
                                         "speed"          500

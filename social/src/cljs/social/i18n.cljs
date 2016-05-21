@@ -67,7 +67,13 @@
                          "regulations.bouncer.validators.member"     "Musisz zaakceptować regulamin"
                          "vanity.user.user.email.unique"             "Email jest już zajęty"
                          "vanity.user.user.username.unique"          "Nazwa użytkownika jest już zajęta"
-                         "social.register.errors"                    "W formularzu wystąpiły błędy"})
+                         "social.register.errors"                    "W formularzu wystąpiły błędy"
+                         "country.bouncer.validators.required"       "Kraj jest polem wymaganym"
+                         "voivodeship.bouncer.validators.required"   "Województwo jest polem wymaganym"
+                         "city.bouncer.validators.required"          "Miasto jest polem wymaganym"
+                         "birthday.bouncer.validators.required"      "Data urdzin jest polem wymaganym"
+                         "avatar.bouncer.validators.required"        "Awatar jest wymagany"
+                         "birthday.bouncer.validators.datetime"      "Nie poprawny format. Poprawny data to np.: 06-12-1980"})
 
 (defn message
     ([code]

@@ -20,6 +20,16 @@
 ;; --------------------------------------------------------------------------------------------
 
 (re-frame/register-sub
+    :form-data
+    (fn [db [_ data-path]]
+        (let [path (into [:data] data-path)]
+            (do
+                (log/debug "Creating form data reaction under the path" path)
+                (reaction (get-in @db path))))))
+
+;; --------------------------------------------------------------------------------------------
+
+(re-frame/register-sub
     :form-errors
     (fn [db [_ errors-path]]
         (let [path (into [:errors] errors-path)]

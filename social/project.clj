@@ -2,11 +2,12 @@
     :dependencies [[org.clojure/clojure "1.7.0"]
                    [org.clojure/clojurescript "1.7.170"]
                    [reagent "0.5.1"]
-                   [re-frame "0.6.0"]
+                   [re-frame "0.7.0"]
                    [secretary "1.2.3"]
                    [org.clojars.frozenlock/reagent-modals "0.2.3"]
                    [bouncer "1.0.0"]
-                   [alandipert/storage-atom "1.2.4"]]
+                   [alandipert/storage-atom "1.2.4"]
+                   [com.andrewmcveigh/cljs-time "0.4.0"]]
 
     :jvm-opts []
 
