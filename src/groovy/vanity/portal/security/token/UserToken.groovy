@@ -1,4 +1,4 @@
-package vanity.portal.security.tokens
+package vanity.portal.security.token
 
 import vanity.user.User
 

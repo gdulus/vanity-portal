@@ -6,7 +6,7 @@
               [clojure.string :as str]
               [social.ajax :as ajax]
               [social.routes :as routes]
-              [reagent-modals.modals :as reagent-modals]
+              [secretary.core :as secretary]
               [social.views.welcome.views :as welcome]
               [social.views.registration.views :as registration]
               [social.views.registration-details.views :as registration-details]
@@ -29,6 +29,21 @@
                              #(re-frame/dispatch [:ajax-errors [:init] %])))
             (log/info "Got token" token)
             db/default-db)))
+
+;; ----------------------------------------------------------------------------------------------
+
+(re-frame/register-handler
+    :toggle-main-view
+    (fn [db _]
+        (let [active? (:window-active db)]
+            (if (not active?)
+                (do
+                    (set! (.-location js/window) "#/izba-przyjec")
+                    (secretary/dispatch! "/izba-przyjec"))
+                (do
+                    (set! (.-location js/window) "#/")
+                    (secretary/dispatch! "/")))
+            db)))
 
 ;; ----------------------------------------------------------------------------------------------
 
@@ -84,7 +99,8 @@
                     (log/info "H(:store-query-params): Storing request query-params" query-params "for panel" panel-name)
                     (-> db
                         (assoc-in [:active-panel] (get-panel panel-name))
-                        (assoc-in [:query-params panel-name] query-params)))
+                        (assoc-in [:query-params panel-name] query-params)
+                        (assoc-in [:window-active] (not= panel-name :empty))))
                 (do
                     (log/info "User status" user-status "Current panel" panel-name "doesn't meet ACL" acl "Redirecting to" default-route)
                     (re-frame/dispatch [:redirect default-route])

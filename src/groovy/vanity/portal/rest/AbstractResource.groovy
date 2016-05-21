@@ -4,6 +4,7 @@ import grails.validation.ValidationException
 import groovy.util.logging.Slf4j
 import vanity.portal.security.AuthDto
 import vanity.portal.security.AuthService
+import vanity.portal.security.exceptions.AccountLockedSecurityException
 import vanity.portal.utils.JSONUtils
 import vanity.user.User
 
@@ -25,6 +26,9 @@ class AbstractResource {
     protected Response $(final Closure<Response> worker) {
         try {
             return worker.call()
+        } catch (AccountLockedSecurityException exp) {
+            log.warn('Account locked / disabled: {}', exp.message)
+            return Response.status(Response.Status.FORBIDDEN).entity(JSONUtils.EMPTY).build();
         } catch (SecurityException exp) {
             log.warn('User unauthorized: {}', exp.message)
             return Response.status(Response.Status.UNAUTHORIZED).entity(JSONUtils.EMPTY).build();

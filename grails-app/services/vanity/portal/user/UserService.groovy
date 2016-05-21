@@ -7,7 +7,7 @@ import org.springframework.transaction.support.TransactionSynchronizationAdapter
 import org.springframework.transaction.support.TransactionSynchronizationManager
 import vanity.portal.notification.EmailSender
 import vanity.portal.security.TokenProvider
-import vanity.portal.security.tokens.RegistrationToken
+import vanity.portal.security.token.RegistrationToken
 import vanity.user.*
 
 class UserService {

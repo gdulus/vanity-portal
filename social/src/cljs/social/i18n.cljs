@@ -58,6 +58,7 @@
                          "social.user.activated"                     "Twoje konto zastało aktywowane pomyślnie. Zanim jednak zaczniesz korzystać z serwisu, wybierz proszę swój avatar i podaj kilka danych, które pozwolą nam uwzględnić Twoje głosy w serwisowych rankingach"
                          "social.error.status.401"                   "Nazwa konta lub hasło są nie poprawne"
                          "social.error.status.500"                   "Wystąpił błąd po stronie serwera - spróbuj jeszcze raz"
+                         "social.error.status.403"                   "Twoje konto wymaga aktywacji. Sprawdź email :)"
                          "email.bouncer.validators.required"         "Pole 'Email' jest polem wymaganym"
                          "gender.bouncer.validators.required"        "Proszę wybrać płeć"
                          "username.bouncer.validators.required"      "Pole 'Nazwa twojego konta' jest wymagane"

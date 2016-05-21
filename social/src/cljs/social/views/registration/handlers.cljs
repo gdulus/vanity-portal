@@ -15,7 +15,6 @@
                          :email [v/required v/email]
                          :gender v/required
                          :regulations [v/required [v/member `(true)]]))
-
 (defn- success-handler
     [user]
     (log/info "User created" user)

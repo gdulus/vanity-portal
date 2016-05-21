@@ -27,7 +27,7 @@
                           :compiler     {:main                 social.core
                                          :output-to            "../grails-app/assets/javascripts/social/compiled/app.js"
                                          :output-dir           "../grails-app/assets/javascripts/social/compiled/out"
-                                         :asset-path           "assets/social/compiled/out"
+                                         :asset-path           "/assets/social/compiled/out"
                                          :source-map-timestamp true}}
 
                          {:id           "min"

@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import sun.misc.BASE64Decoder
 import sun.misc.BASE64Encoder
-import vanity.portal.security.tokens.RegistrationToken
-import vanity.portal.security.tokens.UserToken
+import vanity.portal.security.token.RegistrationToken
+import vanity.portal.security.token.UserToken
 import vanity.user.User
 
 import javax.crypto.Cipher

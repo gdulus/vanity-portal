@@ -3,6 +3,9 @@
               [social.logger :as log]
               [social.ajax :as ajax]))
 
+;; --------------------------------------------------------------------------------------------
+;; COUNTRY SELECT
+;; --------------------------------------------------------------------------------------------
 
 (re-frame/register-handler
     :select-country-init
@@ -21,16 +24,6 @@
                     (assoc-in [:select :country :loader] false)
                     (assoc-in [:select :country :data] data))))))
 
-;; --------------------------------------------------------------------------------------------
-
-(re-frame/register-handler
-    :select-voivodeship-init
-    (fn [db [_ data]]
-        (log/info "H(:select-voivodeship-init): Storing country data" data)
-        (-> db
-            (assoc-in [:select :voivodeship :loader] false)
-            (assoc-in [:select :voivodeship :data] data))))
-
 (re-frame/register-handler
     :country-change
     (fn [db [_ country-id]]
@@ -45,14 +38,16 @@
             (assoc-in [:select :city :data] nil))))
 
 ;; --------------------------------------------------------------------------------------------
+;; VOIVODSHIP SELECT
+;; --------------------------------------------------------------------------------------------
 
 (re-frame/register-handler
-    :select-city-init
+    :select-voivodeship-init
     (fn [db [_ data]]
-        (log/info "H(:select-city-init): Storing city data" (count data))
+        (log/info "H(:select-voivodeship-init): Storing country data" data)
         (-> db
-            (assoc-in [:select :city :loader] false)
-            (assoc-in [:select :city :data] data))))
+            (assoc-in [:select :voivodeship :loader] false)
+            (assoc-in [:select :voivodeship :data] data))))
 
 (re-frame/register-handler
     :voivodeship-change
@@ -67,9 +62,20 @@
             (assoc-in [:select :city :data] nil))))
 
 ;; --------------------------------------------------------------------------------------------
-;; FLASH MESSAGE HANDLERS
+;; CITY SELECT
 ;; --------------------------------------------------------------------------------------------
 
+(re-frame/register-handler
+    :select-city-init
+    (fn [db [_ data]]
+        (log/info "H(:select-city-init): Storing city data" (count data))
+        (-> db
+            (assoc-in [:select :city :loader] false)
+            (assoc-in [:select :city :data] data))))
+
+;; --------------------------------------------------------------------------------------------
+;; FLASH MESSAGE HANDLERS
+;; --------------------------------------------------------------------------------------------
 
 (re-frame/register-handler
     :store-flash-message
@@ -94,4 +100,3 @@
                 (do
                     (log/info "H(:clear-flash-message): Flash message wasn't shown yet, skip clearing")
                     db)))))
-

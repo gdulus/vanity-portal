@@ -5,16 +5,13 @@
               [social.views.base.subs]
               [social.routes :as routes]
               [social.views.base.views :as base]
-              [secretary.core :as secretary]
               [goog.events.EventType :as EventType]
               [social.events :as events]))
 
 (defn init-start-button []
     (events/add-listener "user-button"
                          EventType/CLICK
-                         #(do
-                             (set! (.-location js/window) "#/izba-przyjec")
-                             (secretary/dispatch! "/izba-przyjec"))))
+                         #(re-frame/dispatch-sync [:toggle-main-view])))
 (defn mount-root []
     (reagent/render [base/main-panel]
                     (.getElementById js/document "social")))

@@ -1,4 +1,4 @@
-package vanity.portal.security.tokens
+package vanity.portal.security.token
 
 import org.apache.commons.lang.Validate
 import vanity.user.User

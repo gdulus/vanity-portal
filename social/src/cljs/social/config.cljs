@@ -10,7 +10,10 @@
 
 ;; ----------------------------------------------------------------------------------------------
 
-(def url-mapping {:routes   {:welcome                   {:uri "/izba-przyjec"
+(def url-mapping {:routes   {:empty                     {:uri "/"
+                                                         :acl [:not-logged-in :logged-in :first-time-logged-in]}
+
+                             :welcome                   {:uri "/izba-przyjec"
                                                          :acl [:not-logged-in]}
 
                              :registration              {:uri "/porodowka"

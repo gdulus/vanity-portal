@@ -9,4 +9,5 @@
 (defn main-panel []
     (let [panel (re-frame/subscribe [:active-panel])]
         (fn []
-            [:div.content @panel])))
+            (if @panel
+                [:div.content @panel]))))

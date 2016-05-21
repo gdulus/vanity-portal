@@ -70,13 +70,15 @@
 
 (defn- select-country-renderer
     [context]
-    (let [state (re-frame/subscribe [:select [:country]])
-          errors (re-frame/subscribe [:form-errors [context :country]])]
+    (let [name :country
+          state (re-frame/subscribe [:select [:country]])
+          errors (re-frame/subscribe [:form-errors [context name]])]
         (fn [context]
             [:div
              [:label {:for name :class (if (not-empty @errors) "error" "")} (i18n/message "social.form.country.label")]
              [:div.input
-              [:select.form-control {:id name :on-change #(re-frame/dispatch-sync [:country-change (-> % .-target .-value)])}
+              [:select.form-control {:id name :on-change #(do (re-frame/dispatch-sync [:form-data [context name] (-> % .-target .-value)])
+                                                              (re-frame/dispatch-sync [:country-change (-> % .-target .-value)]))}
                [:option {:value 0} (i18n/message "social.form.country.placeholder")]
                (for [country (:data @state)]
                    ^{:key country} [:option {:value (get country "id")} (get country "name")])]
@@ -91,8 +93,9 @@
 
 (defn select-voivodeship
     [context]
-    (let [state (re-frame/subscribe [:select [:voivodeship]])
-          errors (re-frame/subscribe [:form-errors [context :voivodeship]])]
+    (let [name :voivodeship
+          state (re-frame/subscribe [:select [:voivodeship]])
+          errors (re-frame/subscribe [:form-errors [context name]])]
         (fn [context]
             [:div
              [:label {:for name :class (if (not-empty @errors) "error" "")} (i18n/message "social.form.voivodeship.label")]
@@ -100,7 +103,8 @@
               [:select.form-control {:id        name
                                      :class     (if (and (not (nil? @state)) (:loader @state)) "loader" "")
                                      :disabled  (if (or (nil? @state) (empty? (:data @state))) "disabled" "")
-                                     :on-change #(re-frame/dispatch-sync [:voivodeship-change (-> % .-target .-value)])}
+                                     :on-change #(do (re-frame/dispatch-sync [:form-data [context name] (-> % .-target .-value)])
+                                                     (re-frame/dispatch-sync [:voivodeship-change (-> % .-target .-value)]))}
                [:option {:value 0} (i18n/message "social.form.voivodeship.placeholder")]
                (for [voivodeship (:data @state)]
                    ^{:key voivodeship} [:option {:value (get voivodeship "id")} (get voivodeship "name")])]
@@ -110,8 +114,9 @@
 
 (defn select-city
     [context]
-    (let [state (re-frame/subscribe [:select [:city]])
-          errors (re-frame/subscribe [:form-errors [context :city]])]
+    (let [name :city
+          state (re-frame/subscribe [:select [:city]])
+          errors (re-frame/subscribe [:form-errors [context name]])]
         (fn [context]
             [:div
              [:label {:for name :class (if (not-empty @errors) "error" "")} (i18n/message "social.form.city.label")]
@@ -119,7 +124,7 @@
               [:select.form-control {:id        name
                                      :class     (if (and (not (nil? @state)) (:loader @state)) "loader" "")
                                      :disabled  (if (or (nil? @state) (empty? (:data @state))) "disabled" "")
-                                     :on-change #()}
+                                     :on-change #(re-frame/dispatch-sync [:form-data [context name] (-> % .-target .-value)])}
                [:option {:value 0} (i18n/message "social.form.city.placeholder")]
                (for [voivodeship (:data @state)]
                    ^{:key voivodeship} [:option {:value (get voivodeship "id")} (get voivodeship "name")])]
@@ -129,16 +134,26 @@
 
 (defn brithday
     [context]
-    (let [errors (re-frame/subscribe [:form-errors [context :birthday]])]
+    (let [name :birthday
+          errors (re-frame/subscribe [:form-errors [context name]])]
         (fn [context]
             [:div.birthday
              [:label {:for name :class (if (not-empty @errors) "error" "")} (i18n/message "social.form.birthday.label")]
              [:input.form-control {:type        "text"
                                    :id          "birthday"
                                    :placeholder (i18n/message "social.form.birthday.birthday.placeholder")
-                                   :on-change   #(re-frame/dispatch-sync [:form-data [context name] (-> % .-target .-value)])}]])))
+                                   :on-change   #(re-frame/dispatch-sync [:form-data [context name] (-> % .-target .-value)])}]
+             (if (not-empty @errors) [:div {:class "errors"} @errors])])))
 
 ;; ----------------------------------------------------------------------------------------------
+
+(defn- get-image-data
+    [event]
+    (let [target (.-target event)
+          img (js/$ target)
+          index (.attr img "index")
+          type (.attr img "type")]
+        [:index index :type type]))
 
 (defn- avatars-renderer
     [context]
@@ -148,7 +163,9 @@
              [:label {:for name :class (if (not-empty @errors) "error" "")} (i18n/message "social.form.avatar.label")]
              [:div.avatars
               (for [index (range 1 26)]
-                  ^{:key index} [:img {:src (str "/assets/social/icons/monsters/" index ".svg")}])
+                  ^{:key index} [:img
+                                 {:src      (str "/assets/social/icons/monsters/" index ".svg")
+                                  :on-click #(log/info (get-image-data %))}])
               (if (not-empty @errors) [:div {:class "errors"} @errors])]])))
 
 (defn- avatars-renderer-did-mount-handler

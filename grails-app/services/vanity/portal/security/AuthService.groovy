@@ -1,7 +1,10 @@
 package vanity.portal.security
 
 import org.springframework.beans.factory.annotation.Autowired
-import vanity.portal.security.tokens.UserToken
+import vanity.portal.security.exceptions.AccountLockedSecurityException
+import vanity.portal.security.exceptions.PasswordInvalidSecurityException
+import vanity.portal.security.exceptions.UserNotExistsSecurityException
+import vanity.portal.security.token.UserToken
 import vanity.portal.user.UserActivityService
 import vanity.portal.user.UserService
 import vanity.user.User
@@ -49,15 +52,15 @@ class AuthService {
         User user = userService.findByUsername(username)
 
         if (!user) {
-            throw new SecurityException("User ${username} doesn't exits")
+            throw new UserNotExistsSecurityException("User ${username} doesn't exits")
         }
 
         if (!passwordEncoder.isPasswordValid(user.password, password, null)) {
-            throw new SecurityException("Invalid password for user ${user}")
+            throw new PasswordInvalidSecurityException("Invalid password for user ${user}")
         }
 
         if (!user.enabled || user.accountLocked) {
-            throw new SecurityException("User ${user} is disabled or password is locked")
+            throw new AccountLockedSecurityException("User ${user} is disabled or password is locked")
         }
 
         userActivityService.create(user, UserActivityType.LOG_IN)
