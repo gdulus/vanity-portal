@@ -38,5 +38,6 @@
                                          :optimizations   :advanced
                                          :closure-defines {goog.DEBUG false}
                                          :pretty-print    false
-                                         :externs         ["../grails-app/assets/javascripts/libs/jquery-1.12.0.js"
+                                         :externs         ["../grails-app/assets/javascripts/libs/bootstrap.min.js"
+                                                           "../grails-app/assets/javascripts/libs/jquery-1.12.0.js"
                                                            "../grails-app/assets/javascripts/libs/slick.js"]}}]})
