@@ -7,6 +7,7 @@ import org.springframework.transaction.support.TransactionSynchronizationAdapter
 import org.springframework.transaction.support.TransactionSynchronizationManager
 import vanity.portal.notification.EmailSender
 import vanity.portal.security.TokenProvider
+import vanity.portal.security.exceptions.UserNotExistsSecurityException
 import vanity.portal.security.token.RegistrationToken
 import vanity.user.*
 
@@ -56,8 +57,13 @@ class UserService {
     }
 
     @Transactional
-    public User update(final Long id, final @DelegatesTo(Profile) Closure profileBinder) {
-        User user = User.get(id)
+    public User update(final Long userId, final @DelegatesTo(Profile) Closure profileBinder) {
+        User user = User.get(userId)
+
+        if (!user) {
+            throw new UserNotExistsSecurityException(userId)
+        }
+
         user.profile.with profileBinder
         user.save(failOnError: true)
         // track an action on the user

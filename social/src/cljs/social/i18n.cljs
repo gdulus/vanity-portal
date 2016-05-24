@@ -34,7 +34,7 @@
                          "social.form.city.placeholder"              "wybierz miasto"
                          "social.form.avatar.label"                  "Wybierz swój awater"
                          "social.form.birthday.label"                "Data urodzin"
-                         "social.form.birthday.birthday.placeholder" "DD-MM-RRRR"
+                         "social.form.birthday.birthday.placeholder" "RRRR-MM-DD"
                          "social.login.register.button"              "Kliknij i zarejestruj się za darmo"
                          "social.login.register.question"            "Nie masz jeszcze konta? "
                          "social.login.forgot-password.question"     "Nie pamiętasz hasła lub nazwy konta? "
@@ -56,6 +56,7 @@
                          "social.account-activation.back.2"          "kliknij ten link"
 
                          "social.user.activated"                     "Twoje konto zastało aktywowane pomyślnie. Zanim jednak zaczniesz korzystać z serwisu, wybierz proszę swój avatar i podaj kilka danych, które pozwolą nam uwzględnić Twoje głosy w serwisowych rankingach"
+                         "social.error.status.400"                   "Sprawdź poprawność danych"
                          "social.error.status.401"                   "Nazwa konta lub hasło są nie poprawne"
                          "social.error.status.500"                   "Wystąpił błąd po stronie serwera - spróbuj jeszcze raz"
                          "social.error.status.403"                   "Twoje konto wymaga aktywacji. Sprawdź email :)"
@@ -73,7 +74,7 @@
                          "city.bouncer.validators.required"          "Miasto jest polem wymaganym"
                          "birthday.bouncer.validators.required"      "Data urdzin jest polem wymaganym"
                          "avatar.bouncer.validators.required"        "Awatar jest wymagany"
-                         "birthday.bouncer.validators.datetime"      "Nie poprawny format. Poprawny data to np.: 06-12-1980"})
+                         "vanity.user.profile.birthday.format.error" "Nie poprawny format. Poprawny data to np.: 06-12-1980"})
 
 (defn message
     ([code]

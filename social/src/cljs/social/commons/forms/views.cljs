@@ -151,8 +151,8 @@
     [event]
     (let [target (.-target event)
           img (js/$ target)
-          type (.attr img "type")]
-        {:index (js/parseInt type) :category "monster"}))
+          src (.attr img "src")]
+        src))
 
 (defn- avatars-renderer
     [context]
@@ -164,11 +164,11 @@
              [:label {:for name :class (if (not-empty @errors) "error" "")} (i18n/message "social.form.avatar.label")]
              [:div.avatars
               (doall (for [index (range 1 25)]
-                         ^{:key index} [:img.picture
-                                        {:src      (str "/assets/social/icons/monsters/" index ".svg")
-                                         :type     index
-                                         :class    (if (== (:index @data) index) "selected")
-                                         :on-click #(re-frame/dispatch-sync [:form-data [context name] (get-image-data %)])}]))]
+                         (let [src (str "/assets/social/icons/monsters/" index ".svg")]
+                             ^{:key index} [:img.picture
+                                            {:src      src
+                                             :class    (if (== src @data) "selected")
+                                             :on-click #(re-frame/dispatch-sync [:form-data [context name] (get-image-data %)])}])))]
              (if (not-empty @errors) [:div {:class "errors"} @errors])])))
 
 (defn- avatars-renderer-did-mount-handler

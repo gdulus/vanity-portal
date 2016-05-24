@@ -18,9 +18,9 @@
 
 (re-frame/register-handler
     :initialize-db
-    (fn [_ _]
-        (let [token (:token @db/storage)
-              id (:user-id @db/storage)]
+    (fn [db _]
+        (let [token (db/get-token)
+              id (db/get-user-id db)]
             (if (not (str/blank? token))
                 (ajax/do-get "/api/user"
                              {:id id}
@@ -69,23 +69,6 @@
         :account-activation [account-activation/main-panel]
         :login [login/main-panel]
         nil))
-
-;(re-frame/register-handler
-;    :set-active-panel
-;    (fn [db [_ panel-name query-params]]
-;        (let [acl (routes/get-acl panel-name)
-;              user-status (db/get-user-status db)
-;              default-route (routes/get-default-route user-status)]
-;            (if (some #{user-status} acl)
-;                (do
-;                    (log/info "User status" user-status "Current panel" panel-name "with params" query-params "meet ACL" acl)
-;                    (reagent-modals/modal! (get-panel panel-name) {:size :lg})
-;                    (log/info "H(:store-query-params): Storing request query-params" query-params "for panel" panel-name)
-;                    (assoc-in db [:query-params panel-name] query-params))
-;                (do
-;                    (log/info "User status" user-status "Current panel" panel-name "doesn't meet ACL" acl "Redirecting to" default-route)
-;                    (re-frame/dispatch [:redirect default-route])
-;                    db)))))
 
 (re-frame/register-handler
     :set-active-panel
@@ -168,7 +151,7 @@
     :store-token
     (fn [db [_ token]]
         (log/info "H(:store-token): Stroing token" token)
-        (swap! db/storage assoc :token token)
+        (db/save-token token)
         db))
 
 ;; --------------------------------------------------------------------------------------------
@@ -177,5 +160,5 @@
     :store-user-id
     (fn [db [_ user-id]]
         (log/info "H(:store-user-id): Stroing user id" user-id)
-        (swap! db/storage assoc :user-id user-id)
+        (db/save-user-id user-id)
         db))
