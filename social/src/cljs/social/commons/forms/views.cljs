@@ -239,15 +239,18 @@
              (if (not-empty @errors) [:div {:class "errors"} @errors])])))
 
 (defn- avatars-renderer-did-mount-handler
-    []
-    (log/debug "Did mount avatars component")
-    (.slick (js/$ ".avatars") (clj->js {"dots"           false
-                                        "infinite"       true
-                                        "slidesToShow"   5
-                                        "slidesToScroll" 5
-                                        "focusOnSelect"  false
-                                        "speed"          500
-                                        "fade"           false})))
+    [this]
+    (let [name :avatar
+          user (re-frame/subscribe [:user])
+          context (last (r/argv this))]
+        (re-frame/dispatch-sync [:form-data [context name] (@user "avatar")])
+        (.slick (js/$ ".avatars") (clj->js {"dots"           false
+                                            "infinite"       true
+                                            "slidesToShow"   5
+                                            "slidesToScroll" 5
+                                            "focusOnSelect"  false
+                                            "speed"          500
+                                            "fade"           false}))))
 (defn avatars
     []
     (r/create-class {:reagent-render      avatars-renderer
