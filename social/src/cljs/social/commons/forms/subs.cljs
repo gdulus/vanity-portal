@@ -16,4 +16,3 @@
     :flash-message
     (fn [db [_]]
         (reaction (get-in @db [:flash-message :data]))))
-
