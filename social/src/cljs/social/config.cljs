@@ -13,6 +13,12 @@
 (def url-mapping {:routes   {:empty                     {:uri "/"
                                                          :acl [:not-logged-in :logged-in :first-time-logged-in]}
 
+                             :vip-photo-upload          {:uri "/szklarnia"
+                                                         :acl [:logged-in :first-time-logged-in]}
+
+                             :registration-details      {:uri "/karta-pacjenta"
+                                                         :acl [:logged-in :first-time-logged-in]}
+
                              :welcome                   {:uri "/izba-przyjec"
                                                          :acl [:not-logged-in]}
 
@@ -21,9 +27,6 @@
 
                              :registration-confirmation {:uri "/i-po-porodzie"
                                                          :acl [:not-logged-in]}
-
-                             :registration-details      {:uri "/karta-pacjenta"
-                                                         :acl [:logged-in :first-time-logged-in]}
 
                              :account-activation        {:uri "/aktywuj-konto"
                                                          :acl [:not-logged-in]}

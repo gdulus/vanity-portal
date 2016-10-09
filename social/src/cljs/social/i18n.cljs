@@ -74,7 +74,7 @@
                          "city.bouncer.validators.required"          "Miasto jest polem wymaganym"
                          "birthday.bouncer.validators.required"      "Data urdzin jest polem wymaganym"
                          "avatar.bouncer.validators.required"        "Awatar jest wymagany"
-                         "vanity.user.profile.birthday.format.error" "Nie poprawny format. Poprawny data to np.: 06-12-1980"})
+                         "vanity.user.profile.birthday.format.error" "Nie poprawny format. Poprawny data to np.: 2000-01-01"})
 
 (defn message
     ([code]

@@ -12,7 +12,8 @@
               [social.views.registration-details.views :as registration-details]
               [social.views.registration-confirmation.views :as registration-confirmation]
               [social.views.account-activation.views :as account-activation]
-              [social.views.login.views :as login]))
+              [social.views.login.views :as login]
+              [social.views.vip-photos-upload.views :as vpu]))
 
 ;; ----------------------------------------------------------------------------------------------
 
@@ -68,6 +69,7 @@
         :registration-details [registration-details/main-panel]
         :account-activation [account-activation/main-panel]
         :login [login/main-panel]
+        :vip-photo-upload [vpu/main-panel]
         nil))
 
 (re-frame/register-handler
@@ -141,6 +143,7 @@
     :store-user
     (fn [db [_ user]]
         (log/info "H(:store-user): Storing user" user)
+        (re-frame/dispatch [:activate-social-features])
         (-> db
             (assoc-in [:user] user)
             (assoc-in [:loader] false))))
@@ -150,7 +153,7 @@
 (re-frame/register-handler
     :store-token
     (fn [db [_ token]]
-        (log/info "H(:store-token): Stroing token" token)
+        (log/info "H(:store-token): Storing token" token)
         (db/save-token token)
         db))
 
@@ -159,6 +162,15 @@
 (re-frame/register-handler
     :store-user-id
     (fn [db [_ user-id]]
-        (log/info "H(:store-user-id): Stroing user id" user-id)
+        (log/info "H(:store-user-id): Storing user id" user-id)
         (db/save-user-id user-id)
+        db))
+
+;; --------------------------------------------------------------------------------------------
+
+(re-frame/register-handler
+    :activate-social-features
+    (fn [db [_]]
+        (log/info "H(:activate-social-features): Activating user features")
+        (.show (js/$ ".user-action-button"))
         db))
