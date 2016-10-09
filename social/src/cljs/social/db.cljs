@@ -5,7 +5,7 @@
 
 (def storage (local-storage (atom {}) :token))
 
-(def default-db {})
+(def default-db {:vip {:name (.text (js/$ "#vip-name"))}})
 
 ;; ----------------------------------------------------------------------------------------------
 ;; USER

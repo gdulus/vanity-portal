@@ -36,6 +36,23 @@
 
 ;; ----------------------------------------------------------------------------------------------
 
+(defn file
+    ([type context name label info]
+     (let [errors (re-frame/subscribe [:form-errors [context name]])]
+         (fn [type context name label info]
+             [:div
+              [:label {:for name :class (if (not-empty @errors) "error" "")} (i18n/message label)]
+              [:div {:class (if (not (str/blank? info)) "input-group" "input")}
+               [:input.form-control {:type type :id name :on-change #(re-frame/dispatch-sync [:form-data [context name] (-> % .-target .-value)])}]
+               (if (not-empty @errors) [:div {:class "errors"} @errors])
+               (if (not (str/blank? info))
+                   [:div.input-group-addon
+                    [:span.glyphicon.glyphicon-info-sign {:data-content (i18n/message info) :data-placement :left}]])]])))
+    ([type context name label]
+     (input type context name label nil)))
+
+;; ----------------------------------------------------------------------------------------------
+
 (defn radio
     [context name label elements]
     (let [errors (re-frame/subscribe [:form-errors [context name]])]
@@ -282,4 +299,3 @@
     (r/create-class {:reagent-render         flash-message-renderer
                      :component-did-mount    flash-message-did-mount-handler
                      :component-will-unmount flash-message-will-unmount-handler}))
-

@@ -12,7 +12,9 @@
 <div id="summary" class="row">
     <div class="col-md-12">
         <h1>
-            <g:message code="portal.searchResult.foundTag.h1" args="[viewModel.tag.name]"/>
+            <span id="vip-name">
+                <g:message code="portal.searchResult.foundTag.h1" args="[viewModel.tag.name]"/>
+            </span>
             <a href="#/szklarnia" id="user-button" type="button" class="user-action-button pull-right">
                 <span class="glyphicon glyphicon-cloud-upload"></span>
             </a>

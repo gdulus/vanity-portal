@@ -54,6 +54,13 @@
 ;; --------------------------------------------------------------------------------------------
 
 (re-frame/register-sub
+    :vip
+    (fn [db _]
+        (reaction (:vip @db))))
+
+;; --------------------------------------------------------------------------------------------
+
+(re-frame/register-sub
     :query-params
     (fn [db [_ panel-name]]
         (reaction (get-in @db [:query-params panel-name]))))

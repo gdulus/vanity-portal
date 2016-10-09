@@ -19,6 +19,7 @@
                          "social.form.gender.label"                  "Płec"
                          "social.form.man"                           "Mężczyzna"
                          "social.form.woman"                         "Kobieta"
+                         "social.form.vip-image.label"               "Zdjęcie VIP'a"
                          "social.register.header"                    "Powiedz nam coś o sobie"
                          "social.register.explanation"               "Podaj kilka informacji, aby korzystać ze wszystkich funkcji portalu"
                          "social.button.cancel"                      "Anuluj"
@@ -54,6 +55,8 @@
                          "social.account-activation.explanation"     "Aktywacja konta w toku, prosimy o cierpliwosc"
                          "social.account-activation.back.1"          "Aby wrócić do strony głównej "
                          "social.account-activation.back.2"          "kliknij ten link"
+
+                         "social.vip-photos-upload.header"           "Dodaj zdjęcia dla naszego VIP'a: %s"
 
                          "social.user.activated"                     "Twoje konto zastało aktywowane pomyślnie. Zanim jednak zaczniesz korzystać z serwisu, wybierz proszę swój avatar i podaj kilka danych, które pozwolą nam uwzględnić Twoje głosy w serwisowych rankingach"
                          "social.error.status.400"                   "Sprawdź poprawność danych"
