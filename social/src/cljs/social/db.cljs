@@ -1,11 +1,11 @@
 (ns social.db
-    (:require [alandipert.storage-atom :refer [local-storage]]))
+    (:require [alandipert.storage-atom :refer [local-storage]]
+              [social.logger :as log]))
 
 ;; ----------------------------------------------------------------------------------------------
 
 (def storage (local-storage (atom {}) :token))
-
-(def default-db {:vip {:name (.text (js/$ "#vip-name"))}})
+(def default-db {:vip (js->clj js/VIP_DATA)})
 
 ;; ----------------------------------------------------------------------------------------------
 ;; USER
@@ -32,6 +32,17 @@
     [user-id]
     (swap! storage assoc :user-id user-id))
 
+;; ----------------------------------------------------------------------------------------------
+;; VIP
+;; ----------------------------------------------------------------------------------------------
+
+(defn get-vip-id
+    [db]
+    (get-in db [:vip "id"]))
+
+(defn get-vip-name
+    [db]
+    (get-in db [:vip "name"]))
 
 ;; ----------------------------------------------------------------------------------------------
 ;; LOADER

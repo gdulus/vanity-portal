@@ -6,21 +6,38 @@
               [social.i18n :as i18n]
               [social.routes :as routes]
               [social.logger :as log]
-              [reagent.core :as r]))
+              [reagent.core :as r]
+              [social.db :as db]))
+
 
 ;; ----------------------------------------------------------------------------------------------
 
 (defn- submit-handler
-    []
-    (let [form-data (js/FormData. (.getElementById js/document "vip-photo-upload"))]
-        (social.ajax/do-post "/api/auth" form-data #(log/info %) #(log/info %))))
+    [event]
+    (let [files (-> (.getElementById js/document "vip-image") .-files)
+          file (.item files 0)
+          form-data (new js/FormData)]
+        (.preventDefault event)
+        (.append form-data "image" file)
+        (re-frame/dispatch-sync [:upload-image form-data])))
+
+;;; ----------------------------------------------------------------------------------------------
+;
+;(defn- submit-handler
+;    []
+;    (let [files (-> (.getElementById js/document "vip-image") .-files)
+;          file (.item files 0)
+;          form-data (js/FormData. file)]
+;        (log/info "file" file)
+;        (log/info "form-data" form-data)
+;        (social.ajax/do-file-upload "test" form-data #(log/info %) #(log/info %))))
 
 ;; ----------------------------------------------------------------------------------------------
 
 (defn- form
     []
     [:div
-     [forms/input :file :vip-photo-upload :image "social.form.vip-image.label"]])
+     [forms/input :file :vip-photo-upload :vip-image "social.form.vip-image.label"]])
 
 ;; ----------------------------------------------------------------------------------------------
 
@@ -31,11 +48,11 @@
         (fn []
             [:div.row {:id "photo-upload"}
              [:div.col-md-12
-              [:h1.text-center (i18n/message "social.vip-photos-upload.header" (get @vip :name))]
+              [:h1.text-center (i18n/message "social.vip-photos-upload.header" (db/get-vip-name @vip))]
               [forms/flash-message]]
              [:div.col-md-12
               [forms/response-errors]
-              [:form {:on-submit #(submit-handler)}
+              [:form {:id "vip-photo" :on-submit #(submit-handler %) :enctype "multipart/form-data"}
                [form]
                [:div.form-group
                 [:div.buttons

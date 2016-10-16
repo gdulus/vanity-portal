@@ -12,6 +12,12 @@
 <div id="summary" class="row">
     <div class="col-md-12">
         <h1>
+            <g:javascript>
+                VIP_DATA = {
+                    id: ${viewModel.tag.id},
+                    name: "${viewModel.tag.name}"
+                };
+            </g:javascript>
             <span id="vip-name">
                 <g:message code="portal.searchResult.foundTag.h1" args="[viewModel.tag.name]"/>
             </span>
@@ -33,6 +39,7 @@
                 <div class="col-md-3 picture">
                     <v:celebrityImg bean="${viewModel.celebrity}" class="img-responsive"/>
                 </div>
+
                 <div class="col-md-9 description">
                     <ul>
                         <g:each in="${viewModel.celebrity.quotations}" var="quotation">
@@ -53,6 +60,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h2><g:message code="vanity.biography"/></h2>
+
                 <div id="biography">
                     <div class="col-sm-6 col-md-4">
                         <h3><g:message code="vanity.biography.fullName"/></h3>

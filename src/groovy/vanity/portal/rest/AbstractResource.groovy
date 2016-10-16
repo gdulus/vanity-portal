@@ -19,7 +19,7 @@ class AbstractResource {
     protected Response $(final String token, final Closure<Response> worker) {
         $ {
             AuthDto result = authService.auth(token)
-            Response response = worker.call()
+            Response response = worker.call(result)
             return Response.status(response.status).header(RestConst.X_AUTH_TOKEN, result.token).entity(response.entity).build();
         }
     }
