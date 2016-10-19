@@ -69,10 +69,29 @@
 
 ;; ----------------------------------------------------------------------------------------------
 
+(defn- progress-handler
+    [event]
+    (if (.-lengthComputable event)
+        (let [m (.-total event)
+              c (.-loaded event)
+              p (-> (* 100 c) (/ m) (Math/floor))]
+            (re-frame/dispatch [:loader-progress p]))))
+
+(defn- xhr-callback
+    []
+    (let [settings (.-ajaxSettings js/$)
+          xhr (.xhr settings)
+          xhr-upload (.-upload xhr)]
+        (.addEventListener xhr-upload "progress" progress-handler false)
+        xhr))
+
 (defn do-file-upload
     ([url data token success error]
      (execute-request "POST" url null-converter data token success error
-                      {:cache false :contentType false :processData false}))
+                      {:cache       false
+                       :contentType false
+                       :processData false
+                       :xhr         xhr-callback}))
     ([url data success error]
      (do-file-upload url data nil success error)))
 

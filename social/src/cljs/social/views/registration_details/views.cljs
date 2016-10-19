@@ -47,7 +47,7 @@
               [:h1.text-center (i18n/message "social.register-details.header" (get @user "username"))]
               [forms/flash-message]]
              [:div.col-md-12
-              [forms/response-errors]
+              [forms/response-info]
               [:form {:on-submit #(submit-handler %)}
                [form]
                [:div.form-group

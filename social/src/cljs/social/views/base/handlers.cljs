@@ -56,7 +56,20 @@
         (re-frame/dispatch [:form-data path nil])
         (-> db
             (assoc-in [:response-status] nil)
-            (assoc-in [:loader] false))))
+            (assoc-in [:loader] false)
+            (assoc-in [:loader-progress] 0))))
+
+;; ----------------------------------------------------------------------------------------------
+
+(re-frame/register-handler
+    :action-successful
+    (fn [db [_ path]]
+        (re-frame/dispatch [:form-errors path nil])
+        (re-frame/dispatch [:form-data path nil])
+        (-> db
+            (assoc-in [:response-status] 200)
+            (assoc-in [:loader] false)
+            (assoc-in [:loader-progress] 0))))
 
 ;; ----------------------------------------------------------------------------------------------
 
@@ -135,7 +148,8 @@
             (re-frame/dispatch [:form-errors path comverted-errors])
             (-> db
                 (assoc-in [:response-status] status)
-                (assoc-in [:loader] false)))))
+                (assoc-in [:loader] false)
+                (assoc-in [:loader-progress] 0)))))
 
 ;; --------------------------------------------------------------------------------------------
 
@@ -174,3 +188,11 @@
         (log/info "H(:activate-social-features): Activating user features")
         (.show (js/$ ".user-action-button"))
         db))
+
+;; --------------------------------------------------------------------------------------------
+
+(re-frame/register-handler
+    :loader-progress
+    (fn [db [_ progress]]
+        (log/info "H(:loader-progress): Storing loader progress =" progress)
+        (assoc-in db [:loader-progress] progress)))

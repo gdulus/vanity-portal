@@ -43,7 +43,7 @@
               [:h1.text-center (i18n/message "social.login.welcome")]
               [:h2.text-center (i18n/message "social.login.explanation")]]
              [:div.col-md-12
-              [forms/response-errors]
+              [forms/response-info]
               [:form {:on-submit #(submit-handler %)}
                [form]
                [:div.input

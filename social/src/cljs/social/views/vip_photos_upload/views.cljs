@@ -9,35 +9,39 @@
               [reagent.core :as r]
               [social.db :as db]))
 
+;; ----------------------------------------------------------------------------------------------
+
+(defn- component-will-unmount-handeler
+    []
+    (do
+        (log/info "Will unmount vip-photo-upload component")
+        (re-frame/dispatch-sync [:clear-component-data [:vip-photo-upload]])))
 
 ;; ----------------------------------------------------------------------------------------------
 
 (defn- submit-handler
     [event]
-    (let [files (-> (.getElementById js/document "vip-image") .-files)
+    (.preventDefault event)
+    (let [files (-> (.getElementById js/document "image") .-files)
           file (.item files 0)
           form-data (new js/FormData)]
-        (.preventDefault event)
         (.append form-data "image" file)
         (re-frame/dispatch-sync [:upload-image form-data])))
-
-;;; ----------------------------------------------------------------------------------------------
-;
-;(defn- submit-handler
-;    []
-;    (let [files (-> (.getElementById js/document "vip-image") .-files)
-;          file (.item files 0)
-;          form-data (js/FormData. file)]
-;        (log/info "file" file)
-;        (log/info "form-data" form-data)
-;        (social.ajax/do-file-upload "test" form-data #(log/info %) #(log/info %))))
 
 ;; ----------------------------------------------------------------------------------------------
 
 (defn- form
     []
     [:div
-     [forms/input :file :vip-photo-upload :vip-image "social.form.vip-image.label"]])
+     [forms/input :file :vip-photo-upload :image "social.form.vip-image.label"]])
+
+;; ----------------------------------------------------------------------------------------------
+
+(defn- loader
+    []
+    (let [loader-progress (re-frame/subscribe [:loader-progress])]
+        [:div {:class "progress"}
+         [:div {:class "progress-bar progress-bar-warning" :style {:width (str @loader-progress "%")}}]]))
 
 ;; ----------------------------------------------------------------------------------------------
 
@@ -51,9 +55,9 @@
               [:h1.text-center (i18n/message "social.vip-photos-upload.header" (db/get-vip-name @vip))]
               [forms/flash-message]]
              [:div.col-md-12
-              [forms/response-errors]
+              [forms/response-info]
               [:form {:id "vip-photo" :on-submit #(submit-handler %) :enctype "multipart/form-data"}
-               [form]
+               (if @loading [loader] [form])
                [:div.form-group
                 [:div.buttons
                  [:a.link {:href (routes/get-route :empty)} (i18n/message "social.button.cancel")]
@@ -63,5 +67,6 @@
 
 (defn main-panel
     []
-    (r/create-class {:reagent-render main-panel-renderer}))
+    (r/create-class {:reagent-render         main-panel-renderer
+                     :component-will-unmount component-will-unmount-handeler}))
 

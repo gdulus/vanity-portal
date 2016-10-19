@@ -9,13 +9,13 @@
 
 ;; ----------------------------------------------------------------------------------------------
 
-(defn response-errors
+(defn response-info
     []
     (let [status (re-frame/subscribe [:response-status])]
         (fn []
             (if @status
-                [:div.errors-header
-                 (i18n/message (str "social.error.status." @status))]))))
+                [:div {:class (str "http-status status-" @status)}
+                 (i18n/message (str "social.status." @status))]))))
 
 ;; ----------------------------------------------------------------------------------------------
 

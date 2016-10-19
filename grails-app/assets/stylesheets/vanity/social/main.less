@@ -101,12 +101,19 @@
     }
   }
 
-  div.errors-header {
+  .http-status {
     padding: 0 20px;
     font-weight: bold;
     font-size: 14px;
-    color: @main-color;
     text-align: center;
+  }
+
+  .status-400, .status-401, .status-403, .status-500 {
+    color: @main-color;
+  }
+
+  .status-200 {
+    color: #00a100;
   }
 
   .footer {

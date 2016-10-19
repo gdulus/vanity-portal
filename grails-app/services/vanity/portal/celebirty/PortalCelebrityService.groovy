@@ -8,6 +8,8 @@ import vanity.celebrity.Celebrity
 import vanity.celebrity.CelebrityImage
 import vanity.celebrity.CelebrityImageStatus
 import vanity.celebrity.CelebrityService
+import vanity.media.ImageInvalidFormatException
+import vanity.media.ImageInvalidSizeException
 import vanity.media.ImageService
 import vanity.portal.user.UserActivityService
 import vanity.portal.utils.ValidationUtils
@@ -51,9 +53,13 @@ class PortalCelebrityService {
     private String storeImage(final Celebrity celebrity, final MultipartFile image) {
         try {
             return imageService.store(celebrity, image)
-        } catch (Throwable exception) {
+        } catch (ImageInvalidFormatException exception) {
             log.warn('There was an error while saving image: {}', exception)
-            throw new CustomValidationException(CelebrityImage, [image: 'invalid'])
+            throw new CustomValidationException(CelebrityImage, [image: 'invalid.format'])
+        } catch (ImageInvalidSizeException exception) {
+            log.warn('There was an error while saving image: {}', exception)
+            throw new CustomValidationException(CelebrityImage, [image: 'invalid.size'])
         }
+
     }
 }

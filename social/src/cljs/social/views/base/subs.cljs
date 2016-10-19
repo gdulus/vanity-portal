@@ -64,3 +64,10 @@
     :query-params
     (fn [db [_ panel-name]]
         (reaction (get-in @db [:query-params panel-name]))))
+
+;; --------------------------------------------------------------------------------------------
+
+(re-frame/register-sub
+    :loader-progress
+    (fn [db [_]]
+        (reaction (get-in @db [:loader-progress]))))
