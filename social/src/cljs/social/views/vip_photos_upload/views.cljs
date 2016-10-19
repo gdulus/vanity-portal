@@ -33,15 +33,15 @@
 (defn- form
     []
     [:div
-     [forms/input :file :vip-photo-upload :image "social.form.vip-image.label"]])
+     [forms/file :vip-photo-upload :image "social.form.vip-image.label"]])
 
-;; ----------------------------------------------------------------------------------------------
-
-(defn- loader
-    []
-    (let [loader-progress (re-frame/subscribe [:loader-progress])]
-        [:div {:class "progress"}
-         [:div {:class "progress-bar progress-bar-warning" :style {:width (str @loader-progress "%")}}]]))
+;;; ----------------------------------------------------------------------------------------------
+;
+;(defn- loader
+;    []
+;    (let [loader-progress (re-frame/subscribe [:loader-progress])]
+;        [:div {:class "progress"}
+;         [:div {:class "progress-bar progress-bar-warning" :style {:width (str @loader-progress "%")}}]]))
 
 ;; ----------------------------------------------------------------------------------------------
 
@@ -57,7 +57,7 @@
              [:div.col-md-12
               [forms/response-info]
               [:form {:id "vip-photo" :on-submit #(submit-handler %) :enctype "multipart/form-data"}
-               (if @loading [loader] [form])
+               [form]
                [:div.form-group
                 [:div.buttons
                  [:a.link {:href (routes/get-route :empty)} (i18n/message "social.button.cancel")]
