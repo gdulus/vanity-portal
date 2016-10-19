@@ -63,3 +63,7 @@
 (defn get-token
     []
     (:token @storage))
+
+(defn clear-token
+    []
+    (save-token nil))

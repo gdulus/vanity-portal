@@ -65,11 +65,20 @@
     :action-successful
     (fn [db [_ path]]
         (re-frame/dispatch [:form-errors path nil])
-        (re-frame/dispatch [:form-data path nil])
         (-> db
-            (assoc-in [:response-status] 200)
+            (assoc-in [:response-status] {:message (str/join "." (map name (conj path "ok"))) :status 200})
             (assoc-in [:loader] false)
             (assoc-in [:loader-progress] 0))))
+
+;; ----------------------------------------------------------------------------------------------
+
+(re-frame/register-handler
+    :unauthorized
+    (fn [db [_]]
+        (db/clear-token)
+        (re-frame/dispatch [:hide-social-features])
+        (re-frame/dispatch [:redirect :welcome])
+        db))
 
 ;; ----------------------------------------------------------------------------------------------
 
@@ -147,7 +156,7 @@
             (log/info "H(:ajax-errors): Storing ajax error" comverted-errors "with status" status "under path" path)
             (re-frame/dispatch [:form-errors path comverted-errors])
             (-> db
-                (assoc-in [:response-status] status)
+                (assoc-in [:response-status] {:message status :status status})
                 (assoc-in [:loader] false)
                 (assoc-in [:loader-progress] 0)))))
 
@@ -187,6 +196,15 @@
     (fn [db [_]]
         (log/info "H(:activate-social-features): Activating user features")
         (.show (js/$ ".user-action-button"))
+        db))
+
+;; --------------------------------------------------------------------------------------------
+
+(re-frame/register-handler
+    :hide-social-features
+    (fn [db [_]]
+        (log/info "H(:hide-social-features): Activating user features")
+        (.hide (js/$ ".user-action-button"))
         db))
 
 ;; --------------------------------------------------------------------------------------------

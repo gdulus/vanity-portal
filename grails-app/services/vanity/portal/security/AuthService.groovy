@@ -45,6 +45,8 @@ class AuthService {
 
         } catch (IllegalStateException exp) {
             throw new SecurityException("Token ${token} is invalid")
+        } catch (Throwable exp) {
+            throw new SecurityException("There was security exception: ${exp.message}")
         }
     }
 

@@ -23,7 +23,7 @@
     [user]
     (log/info "User updated" user)
     (re-frame/dispatch [:store-user user])
-    (re-frame/dispatch [:redirect :registeration-details]))
+    (re-frame/dispatch [:action-successful [:registeration-details]]))
 
 (re-frame/register-handler
     :registeration-update-details

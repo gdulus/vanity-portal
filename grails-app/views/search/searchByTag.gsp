@@ -21,9 +21,7 @@
             <span id="vip-name">
                 <g:message code="portal.searchResult.foundTag.h1" args="[viewModel.tag.name]"/>
             </span>
-            <a href="#/szklarnia" id="user-button" type="button" class="user-action-button pull-right">
-                <span class="glyphicon glyphicon-cloud-upload"></span>
-            </a>
+            <a href="#/szklarnia" id="user-button" type="button" class="upload-images user-action-button pull-right"></a>
         </h1>
     </div>
 </div>

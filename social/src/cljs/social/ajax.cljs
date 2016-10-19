@@ -11,6 +11,8 @@
           response (js->clj (.parse js/JSON (.-responseText jqXHR)))]
         (if (not (str/blank? token))
             (re-frame/dispatch [:store-token token]))
+        (if (== status 401)
+            (re-frame/dispatch [:unauthorized]))
         {:status status :data response}))
 
 ;; ----------------------------------------------------------------------------------------------

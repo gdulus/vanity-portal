@@ -14,8 +14,8 @@
     (let [status (re-frame/subscribe [:response-status])]
         (fn []
             (if @status
-                [:div {:class (str "http-status status-" @status)}
-                 (i18n/message (str "social.status." @status))]))))
+                [:div {:class (str "http-status status-" (@status :status))}
+                 (i18n/message (str "social.status." (@status :message)))]))))
 
 ;; ----------------------------------------------------------------------------------------------
 
