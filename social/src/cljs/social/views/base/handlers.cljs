@@ -99,8 +99,9 @@
     (fn [db [_ panel-name query-params]]
         (let [acl (routes/get-acl panel-name)
               user-status (db/get-user-status db)
-              default-route (routes/get-default-route user-status)]
-            (if (some #{user-status} acl)
+              default-route (routes/get-default-route user-status)
+              bouncer-value ((routes/get-bouncer panel-name) db)]
+            (if (and (some #{user-status} acl) bouncer-value)
                 (do
                     (log/info "User status" user-status "Current panel" panel-name "with params" query-params "meet ACL" acl)
                     (log/info "H(:store-query-params): Storing request query-params" query-params "for panel" panel-name)
@@ -109,7 +110,7 @@
                         (assoc-in [:query-params panel-name] query-params)
                         (assoc-in [:window-active] (not= panel-name :empty))))
                 (do
-                    (log/info "User status" user-status "Current panel" panel-name "doesn't meet ACL" acl "Redirecting to" default-route)
+                    (log/info "User status" user-status "Current panel" panel-name "doesn't meet ACL =" acl "bouncer value =" bouncer-value "Redirecting to" default-route)
                     (re-frame/dispatch [:redirect default-route])
                     db)))))
 

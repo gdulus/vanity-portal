@@ -7,7 +7,6 @@ import org.springframework.web.multipart.MultipartFile
 import vanity.celebrity.Celebrity
 import vanity.celebrity.CelebrityImage
 import vanity.celebrity.CelebrityImageStatus
-import vanity.celebrity.CelebrityService
 import vanity.media.ImageInvalidFormatException
 import vanity.media.ImageInvalidSizeException
 import vanity.media.ImageService
@@ -26,16 +25,13 @@ class PortalCelebrityService {
     @Autowired
     UserActivityService userActivityService
 
-    @Autowired
-    CelebrityService celebrityService
-
     @Transactional
     public CelebrityImage saveImage(final Long userId, final Long celebrityId, final MultipartFile image) {
         ValidationUtils.notNull(image, 'image', CelebrityImage)
         ValidationUtils.notNull(celebrityId, 'vipId', CelebrityImage)
 
         User user = User.read(userId)
-        Celebrity celebrity = celebrityService.findByTag(celebrityId)
+        Celebrity celebrity = Celebrity.read(celebrityId)
 
         ValidationUtils.notNull(user, 'user', CelebrityImage)
         ValidationUtils.notNull(celebrity, 'celebrity', CelebrityImage)

@@ -12,16 +12,17 @@
 <div id="summary" class="row">
     <div class="col-md-12">
         <h1>
-            <g:javascript>
-                VIP_DATA = {
-                    id: ${viewModel.tag.id},
-                    name: "${viewModel.tag.name}"
-                };
-            </g:javascript>
             <span id="vip-name">
                 <g:message code="portal.searchResult.foundTag.h1" args="[viewModel.tag.name]"/>
             </span>
-            <a href="#/szklarnia" id="user-button" type="button" class="upload-images user-action-button pull-right"></a>
+            <g:if test="${viewModel.celebrity}">
+                <g:javascript>VIP_DATA = {id: ${viewModel.celebrity.id}, name: "${viewModel.celebrity.fullName}"};</g:javascript>
+                <a href="#/szklarnia" id="user-button" type="button" class="upload-images user-action-button pull-right"></a>
+            </g:if>
+            <g:else>
+                <g:javascript>VIP_DATA = {}</g:javascript>
+                <a href="#/szklarnia" id="user-button" type="button" class="upload-images user-action-button pull-right"></a>
+            </g:else>
         </h1>
     </div>
 </div>

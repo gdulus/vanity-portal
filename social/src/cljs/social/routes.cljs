@@ -31,6 +31,12 @@
 
 ;; ----------------------------------------------------------------------------------------------
 
+(defn get-bouncer
+    [name]
+    (get-in config/url-mapping [:routes name :bouncer] (fn [db] true)))
+
+;; ----------------------------------------------------------------------------------------------
+
 (defn- hook-browser-navigation []
     (doto (History.)
         (events/listen

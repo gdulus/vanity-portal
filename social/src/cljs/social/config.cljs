@@ -13,8 +13,9 @@
 (def url-mapping {:routes   {:empty                     {:uri "/"
                                                          :acl [:not-logged-in :logged-in :first-time-logged-in]}
 
-                             :vip-photo-upload          {:uri "/szklarnia"
-                                                         :acl [:logged-in :first-time-logged-in]}
+                             :vip-photo-upload          {:uri     "/szklarnia"
+                                                         :acl     [:logged-in :first-time-logged-in]
+                                                         :bouncer #(not (nil? (get-in % [:vip "id"])))}
 
                              :registration-details      {:uri "/karta-pacjenta"
                                                          :acl [:logged-in :first-time-logged-in]}

@@ -6,8 +6,7 @@
               [social.i18n :as i18n]
               [social.routes :as routes]
               [social.logger :as log]
-              [reagent.core :as r]
-              [social.db :as db]))
+              [reagent.core :as r]))
 
 ;; ----------------------------------------------------------------------------------------------
 
