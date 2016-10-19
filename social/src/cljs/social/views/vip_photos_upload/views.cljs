@@ -35,14 +35,6 @@
     [:div
      [forms/file :vip-photo-upload :image "social.form.vip-image.label"]])
 
-;;; ----------------------------------------------------------------------------------------------
-;
-;(defn- loader
-;    []
-;    (let [loader-progress (re-frame/subscribe [:loader-progress])]
-;        [:div {:class "progress"}
-;         [:div {:class "progress-bar progress-bar-warning" :style {:width (str @loader-progress "%")}}]]))
-
 ;; ----------------------------------------------------------------------------------------------
 
 (defn main-panel-renderer
@@ -52,7 +44,7 @@
         (fn []
             [:div.row {:id "photo-upload"}
              [:div.col-md-12
-              [:h1.text-center (i18n/message "social.vip-photos-upload.header" (db/get-vip-name @vip))]
+              [:h1.text-center (i18n/message "social.vip-photos-upload.header" (@vip "name"))]
               [forms/flash-message]]
              [:div.col-md-12
               [forms/response-info]
