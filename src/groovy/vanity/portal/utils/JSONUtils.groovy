@@ -13,7 +13,7 @@ class JSONUtils {
     }
 
     public static JSON convert(final CustomValidationException exp) {
-        exp.reject.collectEntries { [(it.key): "${exp.context.name}.${it.key}.${it.value}".toLowerCase()] }
+        exp.reject.collectEntries { [(it.key): "${exp.context.name}.${it.key}.${it.value}".toLowerCase()] } as JSON
     }
 
 }
