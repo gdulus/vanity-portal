@@ -11,7 +11,19 @@
 
 <div id="summary" class="row">
     <div class="col-md-12">
-        <h1><g:message code="portal.searchResult.foundTag.h1" args="[viewModel.tag.name]"/></h1>
+        <h1>
+            <span id="vip-name">
+                <g:message code="portal.searchResult.foundTag.h1" args="[viewModel.tag.name]"/>
+            </span>
+            <g:if test="${viewModel.celebrity}">
+                <g:javascript>VIP_DATA = {id: ${viewModel.celebrity.id}, name: "${viewModel.celebrity.fullName}"};</g:javascript>
+                <a href="#/szklarnia" id="user-button" type="button" class="upload-images user-action-button pull-right"></a>
+            </g:if>
+            <g:else>
+                <g:javascript>VIP_DATA = {}</g:javascript>
+                <a href="#/szklarnia" id="user-button" type="button" class="upload-images user-action-button pull-right"></a>
+            </g:else>
+        </h1>
     </div>
 </div>
 
@@ -26,6 +38,7 @@
                 <div class="col-md-3 picture">
                     <v:celebrityImg bean="${viewModel.celebrity}" class="img-responsive"/>
                 </div>
+
                 <div class="col-md-9 description">
                     <ul>
                         <g:each in="${viewModel.celebrity.quotations}" var="quotation">
@@ -46,6 +59,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h2><g:message code="vanity.biography"/></h2>
+
                 <div id="biography">
                     <div class="col-sm-6 col-md-4">
                         <h3><g:message code="vanity.biography.fullName"/></h3>
@@ -168,15 +182,6 @@
 </div>
 
 <content tag="javascript">
-    <v:withFeature name="social">
-        <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.11.2/react.js"></script>
-        <asset:javascript src="social/out/goog/base.js"/>
-        <asset:javascript src="social/app.js"/>
-        <g:javascript>
-            goog.require("social_app.dev");
-        </g:javascript>
-    </v:withFeature>
-
     <v:outsideFeatureRequest>
         <g:javascript>
             V.Tracking.tag(${viewModel.tag.id});

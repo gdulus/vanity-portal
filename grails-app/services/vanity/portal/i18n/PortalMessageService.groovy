@@ -14,6 +14,11 @@ class PortalMessageService {
     @Value('${grails.cache.message.ttl}')
     private int ttl
 
+    public List<Message> findAllByPrefix(final String prefix, final Locale locale) {
+        log.info('Searching for all by prefix {} and locale {}', prefix, locale)
+        return Message.findAllByCodeIlikeAndLocale(prefix, locale)
+    }
+
     @Cacheable(value = 'message', key = '#code + #locale.language + #locale.country')
     public MessageDto findByCodeAndLocale(final String code, final Locale locale) {
         log.info('Searching for message {} and locale {}', code, locale)

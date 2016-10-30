@@ -61,9 +61,9 @@ class UrlMappings {
         "/robots.txt"(view: 'robots-txt')
 
         /**
-         * Social mapping
+         * REST (or "Don't know how to do that with jaxrs")
          */
-        "/social/$template"(controller: 'social')
+        "/api/vip/${vipId}/image"(controller: 'vipImageResource', action: 'upload', method: 'POST')
 
     }
 }
