@@ -24,8 +24,8 @@ class TopTagsService {
 
     @Transactional(readOnly = true)
     public List<PopularTagDTO> getHottestTags() {
-        Date fromDate = (new Date() - ConfigUtils.$as(grailsApplication.config.portal.mainPage.hottestTags.dateWindow, Integer))
-        Integer max = ConfigUtils.$as(grailsApplication.config.portal.mainPage.hottestTags.max, Integer)
+        Date fromDate = (new Date() - ConfigUtils.$as(grailsApplication.config.portal.mainPage.popularTags.dateWindow, Integer))
+        Integer max = ConfigUtils.$as(grailsApplication.config.portal.mainPage.popularTags.max, Integer)
         List<PopularityDTO> popularTags = popularityService.findTopTagsFromDate(fromDate, max)
         Integer maxRank = popularTags*.rank.max()
         popularTags.collect { new PopularTagDTO(Tag.read(it.elementId), it.rank, maxRank) } sort { it.tag.name }

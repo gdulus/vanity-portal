@@ -4,9 +4,10 @@ import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import vanity.article.Article
+import vanity.portal.AbstractController
 
 @Slf4j
-class ResultController {
+class ResultController extends AbstractController {
 
     def resultService
 
@@ -29,24 +30,12 @@ class ResultController {
 
     def showPreview(final Long id) {
         def model = resultService.buildShowPreview(id, "${serverURL}${request.forwardURI}")
-
-        if (!model) {
-            response.sendError(HttpStatus.NOT_FOUND.value())
-            return
-        }
-
-        return [viewModel: model]
+        return getModelOrNotFound(model, response)
     }
 
     def showArticle(final Long id) {
         def model = resultService.buildShowArticleModel(id)
-
-        if (!model) {
-            response.sendError(HttpStatus.NOT_FOUND.value())
-            return
-        }
-
-        return [viewModel: model]
+        return getModelOrNotFound(model, response)
     }
 
 }

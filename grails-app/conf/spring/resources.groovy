@@ -1,4 +1,5 @@
 import grails.util.Environment
+import vanity.portal.i18n.DatabaseMessageSource
 import vanity.portal.request.DefaultRequestWorker
 import vanity.portal.request.DevelopmentRequestWorker
 
@@ -15,5 +16,7 @@ beans = {
     } else {
         requestWorker(DefaultRequestWorker)
     }
+
+    messageSource(DatabaseMessageSource)
 
 }

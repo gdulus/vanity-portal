@@ -1,32 +1,24 @@
 package vanity.portal.search
 
 import grails.web.RequestParameter
-import org.springframework.http.HttpStatus
+import vanity.portal.AbstractController
 
-class SearchController {
+class SearchController extends AbstractController {
 
     def searchService
 
     def searchByTag(final String tagName, final Integer offset) {
-        def model = searchService.buildSearchByTagModel(tagName, offset)
-
-        if (!model) {
-            response.sendError(HttpStatus.NOT_FOUND.value())
-            return
+        try {
+            def model = searchService.buildSearchByTagModel(tagName, offset)
+            return getModelOrNotFound(model, response)
+        } catch (NotARootTagException exp) {
+            redirect(action: 'searchByTag', params: [tagName: exp.relatedRoot.normalizedName])
         }
-
-        return [viewModel: model]
     }
 
     def searchByTerm(@RequestParameter('q') final String term, final Integer offset) {
         def model = searchService.buildSearchByTermModel(term, offset)
-
-        if (!model) {
-            response.sendError(HttpStatus.NOT_FOUND.value())
-            return
-        }
-
-        return [viewModel: model]
+        return getModelOrNotFound(model, response)
     }
 
 }

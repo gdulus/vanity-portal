@@ -99,5 +99,11 @@
     </div>
 </g:if>
 
+<content tag="javascript">
+    <g:javascript>
+    V.Tracking.article(${viewModel.article.id});
+    </g:javascript>
+</content>
+
 </body>
 </html>

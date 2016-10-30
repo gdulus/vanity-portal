@@ -14,6 +14,7 @@ ConfigUtils.externalConfig(grails) {
 /**
  * Basic setup
  */
+grails.app.context = "/"
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
@@ -117,3 +118,43 @@ grails {
     }
 }
 remove this line */
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.rejectIfNoRule = false
+grails.plugin.springsecurity.fii.rejectPublicInvocations = false
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'vanity.user.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'vanity.user.UserRole'
+grails.plugin.springsecurity.authority.className = 'vanity.user.Role'
+grails.plugin.springsecurity.securityConfigType = "Annotation"
+grails.plugin.springsecurity.logout.postOnly = false
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+    '/': ['permitAll'],
+    '/index': ['permitAll'],
+    '/index.gsp': ['permitAll'],
+    '/**/js/**': ['permitAll'],
+    '/**/css/**': ['permitAll'],
+    '/**/images/**': ['permitAll'],
+    '/**/favicon.ico': ['permitAll']
+]
+
+// ##########################
+// features
+// ##########################
+features.biography = true
+features.social = false
+
+// ##########################
+// caches
+// ##########################
+grails.cache.message.ttl = 1000 * 60 * 5
+grails.cache.config = {
+    enabled = true
+    cache {
+        name 'message'
+        eternal false
+        overflowToDisk false
+        maxElementsInMemory 10000
+        maxElementsOnDisk 10000000
+    }
+}
+

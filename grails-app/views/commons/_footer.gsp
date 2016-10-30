@@ -1,6 +1,6 @@
 <div id="footer" role="navigation">
     <div class="container">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12">
             <ul>
                 %{--<li>
                     <g:link controller="info" action="aboutUs" class="muted">

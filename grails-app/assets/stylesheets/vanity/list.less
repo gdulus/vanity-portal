@@ -2,24 +2,33 @@
 @import "commons/searchWidget.less";
 @import "commons/tags.less";
 @import "commons/articles.less";
+@import "social/main";
 
 #summary {
 
   margin-bottom: 25px;
 
-  h2 {
+  h1 {
     .reset;
-    border-top: 1px solid #c6c6c6;
-    font-size: 26px;
+    font-size: 36px;
     font-weight: bold;
     color: @main-color;
-    padding-top: 24px;
+    padding-top:24px;
 
     span {
       color: #535353;
     }
+
+
   }
+
 }
+
+#main{
+  margin-top:50px;
+}
+
+
 
 #cellebrity {
 
@@ -47,6 +56,13 @@
     text-align: justify;
   }
 
+}
+
+#biography {
+ background: #fff;
+  overflow:auto;
+  margin-bottom:40px;
+  padding-bottom:10px;
 }
 
 #pagination {

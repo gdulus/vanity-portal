@@ -3,11 +3,6 @@ class UrlMappings {
     static mappings = {
 
         /**
-         * API
-         */
-        "/api/search/byTerm"(controller: 'api', action: 'searchByTerm')
-
-        /**
          * Portal main page
          */
         "/"(controller: 'home', action: 'main')
@@ -28,6 +23,9 @@ class UrlMappings {
             }
         }
 
+        /**
+         * Search api
+         */
         "/szukaj/$offset?/$max?"(controller: 'search', action: 'searchByTerm')
 
         /**
@@ -46,6 +44,12 @@ class UrlMappings {
         "/kontakt/wyslij"(controller: 'info', action: 'contactSend')
 
         /**
+         * Biography
+         */
+        "/biografie"(controller: 'biography')
+        "/biografie/${letter}"(controller: 'biography', action: 'details')
+
+        /**
          * Error pages
          */
         "500"(controller: 'error', action: 'serverError')
@@ -55,6 +59,11 @@ class UrlMappings {
          * Robots
          */
         "/robots.txt"(view: 'robots-txt')
+
+        /**
+         * Social mapping
+         */
+        "/social/$template"(controller: 'social')
 
     }
 }

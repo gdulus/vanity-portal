@@ -6,13 +6,7 @@ grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
-// uncomment (and adjust settings) to fork the JVM to isolate classpaths
-//grails.project.fork = [
-//   run: [maxMemory:1024, minMemory:64, debug:false, maxPerm:256]
-//]
-
 grails.project.dependency.resolution = {
-
     inherits("global") {}
     log "error"          // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true       // Whether to verify checksums on resolve
@@ -26,7 +20,9 @@ grails.project.dependency.resolution = {
         grailsCentral()
         mavenLocal()
         mavenCentral()
-        mavenRepo 'http://maven.restlet.org'
+        mavenRepo "http://repo.grails.org/grails/core"
+        mavenRepo "http://repo.grails.org/grails/plugins"
+        mavenRepo "http://repo.spring.io/milestone/"
     }
 
     dependencies {
@@ -44,6 +40,7 @@ grails.project.dependency.resolution = {
         compile ":less-asset-pipeline:1.7.0"
         compile ':jaxrs:0.10'
         compile ":mail:1.0.4"
+        compile ":spring-security-core:2.0-RC2"
     }
 }
 

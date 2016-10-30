@@ -10,5 +10,8 @@
 
 <body>
 <iframe id="result" frameborder="0" src="${viewModel.article.url}"></iframe>
+<content tag="javascript">
+    <tracking:article bean="${viewModel.article}"/>
+</content>
 </body>
 </html>

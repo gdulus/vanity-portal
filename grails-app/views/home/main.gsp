@@ -18,9 +18,7 @@
                     <g:link controller="search"
                             action="searchByTag"
                             params="[tagName: hottestTag.tag.normalizedName]"
-                            class="tag${hottestTag.rank}">
-                        ${hottestTag.tag.name}
-                    </g:link>
+                            class="tag${hottestTag.rank}">${hottestTag.tag.name}</g:link>
                 </g:each>
             </p>
         </div>
@@ -51,9 +49,7 @@
                                 <g:link controller="search"
                                         action="searchByTag"
                                         params="[tagName: tag.normalizedName]"
-                                        title="${tag.name}">
-                                    ${tag.name}
-                                </g:link>
+                                        title="${tag.name}">${tag.name}</g:link>
                             </g:each>
                         </ul>
                     </div>
@@ -76,9 +72,7 @@
                                 <li>
                                     <g:link controller="result"
                                             action="showPreview"
-                                            params="${[id: article.id, title: article.title.encodeAsPrettyUrl()]}">
-                                        ${article.title}
-                                    </g:link>
+                                            params="${[id: article.id, title: article.title.encodeAsPrettyUrl()]}">${article.title}</g:link>
                                 </li>
                             </g:each>
                         </ol>
@@ -95,9 +89,7 @@
                                 <li>
                                     <g:link controller="result"
                                             action="showPreview"
-                                            params="${[id: article.id, title: article.title.encodeAsPrettyUrl()]}">
-                                        ${article.title}
-                                    </g:link>
+                                            params="${[id: article.id, title: article.title.encodeAsPrettyUrl()]}">${article.title}</g:link>
                                 </li>
                             </g:each>
                         </ol>

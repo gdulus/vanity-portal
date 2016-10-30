@@ -7,6 +7,7 @@
 .reset {
   padding: 0px;
   margin: 0px;
+  list-style: none;
 }
 
 .block {
@@ -29,7 +30,14 @@ html {
 body {
   margin-bottom: @footer-height;
   background-color: @body-bg;
-  font-family: 'Archivo Narrow', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  //font-family: 'Archivo Narrow', sans-serif;
+  font-weight:300;
+}
+
+h1, h2, h3{
+  font-family: 'Oswald', sans-serif;
+  font-weight:400;
 }
 
 #footer {
@@ -61,4 +69,27 @@ body {
 
 .navbar.navbar-default {
   z-index: 1000;
+}
+
+.btn,
+.form-control {
+  border-radius: 0px;
+}
+
+.button-main {
+  border: none;
+  background-color: @main-color;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 5px 10x;
+}
+
+.link {
+  color: #000000;
+}
+
+.link:hover {
+  text-decoration: underline;
 }
