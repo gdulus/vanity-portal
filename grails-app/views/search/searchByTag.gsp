@@ -34,26 +34,11 @@
 <v:withFeature name="biography">
     <g:if test="${viewModel.celebrity}">
         <div id="quotations" class="row desktop">
-            <g:if test="${viewModel.celebrity.hasImage()}">
-                <div class="col-md-3 picture">
-                    <v:celebrityImg bean="${viewModel.celebrity}" class="img-responsive"/>
-                </div>
-
-                <div class="col-md-9 description">
-                    <ul>
-                        <g:each in="${viewModel.celebrity.quotations}" var="quotation">
-                            <li><p>${quotation.content}</p></li>
-                        </g:each>
-                    </ul>
-                </div>
-            </g:if>
-            <g:else>
-                <ul>
-                    <g:each in="${viewModel.celebrity.quotations}" var="quotation">
-                        <li><p>${quotation.content}</p></li>
-                    </g:each>
-                </ul>
-            </g:else>
+            <ul>
+                <g:each in="${viewModel.celebrity.quotations}" var="quotation">
+                    <li><p>${quotation.content}</p></li>
+                </g:each>
+            </ul>
         </div>
 
         <div class="row">
