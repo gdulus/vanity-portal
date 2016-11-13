@@ -43,7 +43,7 @@
                 <g:if test="${FeatureUtils.isEnabled('social') && viewModel.celebrityImage}">
                     <div id="biography">
                         <div class="col-md-4 col-sm-4">
-                            <image:celebrity src="${viewModel.celebrityImage}" size="300" class="img-responsive"/>
+                            <image:celebrity src="${viewModel.celebrityImage}" size="350" class="img-responsive"/>
                         </div>
 
                         <div class="col-md-8 col-sm-8">
