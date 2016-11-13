@@ -8,6 +8,8 @@ import vanity.article.ArticleService
 import vanity.article.Tag
 import vanity.article.TagService
 import vanity.celebrity.Celebrity
+import vanity.celebrity.CelebrityImage
+import vanity.celebrity.CelebrityImageService
 import vanity.celebrity.CelebrityService
 import vanity.search.SearchEngineQueryExecutor
 import vanity.search.SearchResult
@@ -22,6 +24,8 @@ class SearchService {
     TagService tagService
 
     CelebrityService celebrityService
+
+    CelebrityImageService celebrityImageService
 
     SearchEngineQueryExecutor searchEngineQueryExecutor
 
@@ -55,7 +59,16 @@ class SearchService {
 
         List<Article> articles = articleService.findAllByIds(searchResult.items*.id)
         Celebrity celebrity = celebrityService.findByTag(tag)
-        return new SearchByTagViewModel(tag: tag, articles: articles, celebrity: celebrity, start: searchResult.start, numFound: searchResult.numFound)
+        CelebrityImage celebrityImage = celebrityImageService.getMain(celebrity)
+
+        return new SearchByTagViewModel(
+                tag: tag,
+                articles: articles,
+                celebrity: celebrity,
+                celebrityImage: celebrityImage,
+                start: searchResult.start,
+                numFound: searchResult.numFound
+        )
     }
 
     public SearchByTermViewModel buildSearchByTermModel(final String term, final Integer startElement) {

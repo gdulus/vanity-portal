@@ -1,21 +1,25 @@
 package vanity.portal
 
 import org.apache.commons.lang.Validate
-import org.springframework.beans.factory.annotation.Value
-import vanity.celebrity.Celebrity
+import vanity.celebrity.CelebrityImage
+import vanity.media.ImageService
 
 class ImageTagLib {
 
-    static namespace = 'v'
+    static namespace = 'image'
 
-    @Value('${files.celebrity.uri}')
-    public String celebrityImageURI
+    ImageService imageService
 
-    def celebrityImg = { attrs ->
-        Celebrity celebrity = attrs.remove('bean')
+    def celebrity = { attrs, body ->
+        CelebrityImage image = attrs.remove('src')
+        Integer size = attrs.remove('size').toString().toInteger()
         String cssClass = attrs.remove('class')
-        Validate.notNull(celebrity)
-        out << g.img(uri: (celebrityImageURI + celebrity.avatar.name), class: cssClass)
+        Validate.notNull(image)
+        Validate.notNull(size)
+
+        cssClass = cssClass ? """ class="${cssClass}" """ : null
+        String path = imageService.getPath(image, size)
+        out << """<img src="${path}" title="${image.celebrity.fullName}" alt="${image.celebrity.fullName}" ${cssClass}/>"""
     }
 
 }
