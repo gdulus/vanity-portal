@@ -12,7 +12,7 @@ class IPProvider {
     public String get() {
         GrailsWebRequest webUtils = WebUtils.retrieveGrailsWebRequest()
         HttpServletRequest request = webUtils.getCurrentRequest()
-        return request.getRemoteAddr() ?: request.getHeader("X-Forwarded-For") ?: request.getHeader("Client-IP")
+        return request.getHeader("X-Real-IP") ?: request.getRemoteAddr() ?: request.getHeader("X-Forwarded-For") ?: request.getHeader("Client-IP")
     }
 
 }
