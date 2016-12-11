@@ -33,7 +33,7 @@ class UserActivityService {
     }
 
     public UserActivityDto get(final User user) {
-        int emailConfirmedCount = UserActivity.countByUserAndActionType(user, UserActivityType.EMAIL_CONFIRMED)
+        int emailConfirmedCount = UserActivity.countByUserAndActionType(user, UserActivityType.ACCOUNT_ENABLED)
         int logInCount = UserActivity.countByUserAndActionType(user, UserActivityType.LOG_IN)
         return new UserActivityDto(emailConfirmedCount: emailConfirmedCount, logInCount: logInCount)
     }

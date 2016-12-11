@@ -195,8 +195,12 @@
 (re-frame/register-handler
     :activate-social-features
     (fn [db [_]]
-        (log/info "H(:activate-social-features): Activating user features")
-        (.show (js/$ ".user-action-button"))
+        (if (db/user-activated? db)
+            (do
+                (log/info "H(:activate-social-features): Activating user features")
+                (.show (js/$ ".user-action-button")))
+            (do
+                (log/info "H(:activate-social-features): User not active yet, skip activations")))
         db))
 
 ;; --------------------------------------------------------------------------------------------
