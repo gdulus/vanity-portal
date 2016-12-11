@@ -7,8 +7,12 @@
     }
 
     h1 {
-        font-size: 14px;
+        font-size: 16px;
         font-weight: normal;
+    }
+
+    h1 span {
+        font-weight: bold;
     }
 
     p {
@@ -19,12 +23,19 @@
 
 <body>
 <h1>
-    Witaj ${user.username}!
+    Witaj <span>${user.username}</span>!
 </h1>
 
 <p>
     Twoje konto zostało uwtorzone pomyślnie. Aby je aktywować kliknij poniższy link:<br/>
-    <a href="${g.createLink(absolute: true, controller: 'top', action: 'newestArticles')}#/aktywuj-konto?token=${token}">aktywuj konto!</a>
+    <g:if test="${vanity.portal.utils.FeatureUtils.isEnabled('social')}">
+        <a href="${g.createLink(absolute: true, controller: 'top', action: 'newestArticles')}#/aktywuj-konto?token=${token}">
+    </g:if>
+    <g:else>
+        <a href="${g.createLink(absolute: true, controller: 'top', action: 'newestArticles', params: ['features.social': true])}#/aktywuj-konto?token=${token}">
+    </g:else>
+    aktywuj konto!
+</a>
 </p>
 
 <p>

@@ -9,6 +9,8 @@
 
 <body>
 
+<g:javascript>VIP_DATA = {};</g:javascript>
+
 <div id="summary" class="row">
     <div class="col-md-12">
         <h2><g:message code="portal.top.topArticles"/></h2>
