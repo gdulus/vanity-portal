@@ -195,7 +195,7 @@
 (re-frame/register-handler
     :activate-social-features
     (fn [db [_]]
-        (if (db/user-activated? db)
+        (if (and (db/user-activated? db) (db/vip-present? db))
             (do
                 (log/info "H(:activate-social-features): Activating user features")
                 (.show (js/$ ".user-action-button")))

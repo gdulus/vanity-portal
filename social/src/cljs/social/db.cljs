@@ -44,6 +44,10 @@
     [db]
     (get-in db [:vip "id"]))
 
+(defn vip-present?
+    [db]
+    (not (nil? (get-in db [:vip "id"]))))
+
 (defn get-vip-name
     [db]
     (get-in db [:vip "name"]))
