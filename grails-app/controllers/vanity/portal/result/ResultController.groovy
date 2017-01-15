@@ -33,9 +33,4 @@ class ResultController extends AbstractController {
         return getModelOrNotFound(model, response)
     }
 
-    def showArticle(final Long id) {
-        def model = resultService.buildShowArticleModel(id)
-        return getModelOrNotFound(model, response)
-    }
-
 }

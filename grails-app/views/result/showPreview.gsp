@@ -16,13 +16,7 @@
         <ul>
             <li class="article">
                 <h4>
-                    <g:link controller="result"
-                            action="showArticle"
-                            target="_blank"
-                            params="${[id: viewModel.article.id, title: viewModel.article.title.encodeAsPrettyUrl()]}">
-                        ${viewModel.article.title}
-                    </g:link>
-
+                    <a href="${viewModel.article.url}" target="_blank">${viewModel.article.title}</a>
                 </h4>
 
                 <div class="date"><g:formatDate format="yyyy-MM-dd" date="${viewModel.article.publicationDate}"/></div>
