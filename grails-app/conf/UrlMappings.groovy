@@ -39,7 +39,7 @@ class UrlMappings {
          * Info page
          */
         // "/o-nas"(controller: 'info', action: 'aboutUs')
-        // "/regulamin"(controller: 'info', action: 'regulations')
+        "/regulamin"(controller: 'info', action: 'regulations')
         "/kontakt"(controller: 'info', action: 'contact')
         "/kontakt/wyslij"(controller: 'info', action: 'contactSend')
 
