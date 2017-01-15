@@ -30,10 +30,7 @@
 <script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 <asset:javascript src="vanity/results.js"/>
-<v:withFeature name="social">
-    <asset:javascript src="social/compiled/app.js"/>
-    <script>social.core.init();</script>
-</v:withFeature>
+<g:render template="/commons/social" model="${[viewModel: viewModel]}"/>
 <g:pageProperty name="page.javascript"/>
 </body>
 </html>

@@ -15,14 +15,7 @@
             <span id="vip-name">
                 <g:message code="portal.searchResult.foundTag.h1" args="[viewModel.tag.name]"/>
             </span>
-            <g:if test="${viewModel.celebrity}">
-                <g:javascript>VIP_DATA = {id: ${viewModel.celebrity.id}, name: "${viewModel.celebrity.fullName}"};</g:javascript>
-                <a href="#/szklarnia" id="user-button" type="button" class="upload-images user-action-button pull-right"></a>
-            </g:if>
-            <g:else>
-                <g:javascript>VIP_DATA = {}</g:javascript>
-                <a href="#/szklarnia" id="user-button" type="button" class="upload-images user-action-button pull-right"></a>
-            </g:else>
+            <a href="#/szklarnia" id="user-button" type="button" class="upload-images user-action-button pull-right"></a>
         </h1>
     </div>
 </div>

@@ -14,9 +14,10 @@ class PortalMessageService {
     @Value('${grails.cache.message.ttl}')
     private int ttl
 
-    public List<Message> findAllByPrefix(final String prefix, final Locale locale) {
+    @Cacheable(value = 'prefix.messages', key = '#prefix + #locale.language + #locale.country')
+    public List<MessageDto> findAllByPrefix(final String prefix, final Locale locale) {
         log.info('Searching for all by prefix {} and locale {}', prefix, locale)
-        return Message.findAllByCodeIlikeAndLocale(prefix, locale)
+        return Message.findAllByCodeIlikeAndLocale("${prefix}%", locale).collect { new MessageDto(it.code, it.text) }
     }
 
     @Cacheable(value = 'message', key = '#code + #locale.language + #locale.country')
@@ -28,7 +29,7 @@ class PortalMessageService {
             return null
         }
 
-        return new MessageDto(message: message.text, foundDate: new Date().time)
+        return new MessageDto(message.code, message.text)
     }
 
     @CacheEvict(value = 'message', key = '#code + #locale.language + #locale.country')

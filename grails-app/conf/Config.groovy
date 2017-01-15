@@ -150,6 +150,7 @@ features.social = true
 grails.cache.message.ttl = 1000 * 60 * 5
 grails.cache.config = {
     enabled = true
+
     cache {
         name 'message'
         eternal false
@@ -165,6 +166,15 @@ grails.cache.config = {
         maxElementsInMemory 10000
         maxElementsOnDisk 10000000
     }
+
+    cache {
+        name 'prefix.messages'
+        eternal false
+        overflowToDisk false
+        maxElementsInMemory 10000
+        maxElementsOnDisk 10000000
+    }
+
 }
 
 // ##########################

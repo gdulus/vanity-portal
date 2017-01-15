@@ -2,8 +2,15 @@ package vanity.portal.i18n
 
 class MessageDto {
 
-    String message
+    final String code
 
-    Long foundDate
+    final String message
 
+    final Long foundDate
+
+    MessageDto(String code, String message) {
+        this.code = code
+        this.message = message
+        this.foundDate = new Date().time
+    }
 }

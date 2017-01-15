@@ -26,7 +26,7 @@
                 </button>
 
                 <button id="fb-button" type="button" class="pull-right facebook icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="22" height="23.105263052224473" xml:space="preserve">
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="22" height="23.105263052224473" xml:space="preserve">
                         <rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none" class=""/>
                         <g class="currentLayer">
                             <title>
@@ -106,8 +106,6 @@
         </div>
         </div>
         </div>
-
-
 
 
 <div id="sub-menu" class="mobile navigation hidden">
